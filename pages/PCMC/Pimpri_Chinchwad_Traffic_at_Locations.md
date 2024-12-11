@@ -1,11 +1,76 @@
-# Table Analysis
+# Vehicular Traffic across different points in 
 [Download CSV file](Pimpri%20Chinchwad%20Traffic%20at%20Locations.csv)
 
-1. A brief description of what this table contains:
+## Key Findings
+The 2008 traffic survey across Pimpri Chinchwad revealed significant variations in traffic patterns across 15 key locations. Here are the main insights:
+### High Traffic Corridors
 
-This table appears to contain data on the total passenger traffic volume at various locations in and around Pune, India. The locations are identified by a code (e.g., V1, V2) and a brief description of the location (e.g., Dapodi Bridge, Aundh Bridge).
+Dapodi Bridge emerged as the busiest corridor with 120,527 vehicles daily, also handling the highest passenger volume (466,672 passengers)
+Aundh Bridge recorded the second-highest traffic with 87,087 vehicles and 413,078 passengers
+Between Pimpri Junction & Kasarwadi Junction saw 79,216 vehicles, highlighting its importance as a major transit point
 
-2. Two key insights or findings from this data:
+### Moderate Traffic Areas
 
-a. The location with the highest passenger traffic volume is Dapodi Bridge (on NH-4 going to Pune) with 466,672 passengers.
-b. The locations with the lowest passenger traffic volumes are Dehu-Alandi Rd (11,700 passengers) and Nigdi Jn to Dehu-Alandi Rd (18,415 passengers).
+The Mumbai-Pune Expressway point recorded 28,935 vehicles
+Nashik Highway before the toll plaza showed moderate vehicle count (41,495) but significant passenger movement (149,451)
+The corridor Between Nigdi Junction & Chinchwad Junction handled 66,439 vehicles
+
+### Lower Traffic Zones
+
+Dehu-Alandi Road showed the lowest traffic volumes with 9,228 vehicles
+The connection from Nigdi Junction to Dehu-Alandi Road recorded 12,595 vehicles
+These areas primarily serve local traffic rather than major transit routes
+
+### Passenger-to-Vehicle Ratio Analysis
+
+Major highways and bridges show higher passenger-to-vehicle ratios, indicating greater use of public transport and shared vehicles
+Dapodi Bridge shows approximately 3.87 passengers per vehicle
+Local roads show lower ratios, suggesting more private vehicle usage
+
+
+
+```sql traffic_locations
+select 
+    location_detail as pointName,
+    latitude as lat,
+    longitude as long,
+    total_passengers as passengers,
+    total_vehicles as vehicles,
+    -- Category aggregations
+    four_wheelers as cars,
+    (two_wheelers + cycles) as motorcycles,
+    auto_rickshaws as autos,
+    (minibuses + local_buses + intercity_buses) as total_buses
+from Pimpri_Chinchwad_Traffic_at_Locations
+```
+
+
+
+
+<PointMap
+data={traffic_locations}
+basemap={`https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}`}
+attribution= '&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+lat=lat
+long=long
+value=vehicles
+pointName=pointName
+valueFmt="#,##0"
+title="Vehicle Traffic Volume at Key Locations in 2008"
+tooltipType=hover
+tooltip={[
+{id: 'pointName', showColumnName: false, valueClass: 'text-xl font-semibold'},
+{id: 'cars', title: '4-Wheelers', fmt: 'num0'},
+{id: 'motorcycles', title: '2-Wheelers', fmt: 'num0'},
+{id: 'autos', title: 'Auto Rickshaws', fmt: 'num0'},
+{id: 'total_buses', title: 'Buses', fmt: 'num0'},
+{id: 'vehicles', title: 'Total Vehicles', fmt: 'num0'},
+{id: 'passengers', title: 'Total Passengers', fmt: 'num0'}
+]}
+colorPalette={['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']}
+size=15
+opacity=0.7
+height=900
+legendPosition=topLeft
+startingZoom=13
+/>

@@ -1,6 +1,41 @@
 ---
 title: What Vehicles are being registered
 ---
+<script>
+    let myColors = [
+        // Warm oranges and peaches
+        '#de988a', // Pastel peach
+        '#fae9c3', // Pale gold
+
+        // Pinks and roses
+        '#e0a8b5', // Light rose
+        '#eba0c0', // Baby pink
+        '#e3bcd9', // Lavender pink
+
+        // Purples and lavenders
+        '#D4B5FA', // Soft purple
+        '#E2C6FA', // Pale violet
+        '#FAF0FA', // Soft periwinkle
+
+        // Blues and periwinkles
+        '#B5D1FA', // Light sky blue
+        '#C4DDFA', // Pale blue
+        '#D1E5FA', // Soft azure
+        '#E9F5FA', // Pale cerulean
+
+        // Yellow tones
+        '#faeaa7', // Soft butter
+        '#f0e6c5', // Pale vanilla
+
+        // Transitional hues
+        '#FAD1E5', // Soft salmon pink
+        '#FAE0EB', // Light coral pink
+        '#FAEEF5', // Pale rose pink
+        '#F5E6FA', // Soft lavender
+        '#E6F0FA', // Pale sky blue
+        '#F0F7FA'  // Light air blue
+    ]
+</script>
 
 
 ```sql view_options
@@ -114,11 +149,12 @@ ORDER BY Year ASC, subcategory
      title="Vehicle Registrations"
      subtitle="Distribution across major vehicle categories"
      xAxisTitle="Year"
-     fillOpacity=0.8
+     fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
      yGridLines=true
      sort=false
+    colorPalette={myColors}
  />
 <AreaChart
      data={all_categories}
@@ -129,13 +165,13 @@ ORDER BY Year ASC, subcategory
      title="Vehicle Registrations"
      subtitle="As a share of all Vehicles on Road"
      xAxisTitle="Year"
-     fillOpacity=0.8
+     fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
      yGridLines=true
      sort=false
+    colorPalette={myColors}    
  />
-
 
  {:else if inputs.selected_view === "Two Wheelers"}
 ### Two Wheeler Registration Distribution
@@ -148,11 +184,12 @@ ORDER BY Year ASC, subcategory
      title="Two Wheeler Registrations"
      subtitle="Distribution of motorcycles, scooters, and mopeds"
      xAxisTitle="Year"
-     fillOpacity=0.8
+     fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
      yGridLines=true
       sort=false
+    colorPalette={myColors}
  />
 
  <AreaChart
@@ -164,11 +201,12 @@ ORDER BY Year ASC, subcategory
      title="Two Wheeler Registrations"
      subtitle="As a share of other Two Wheelers on Road"
      xAxisTitle="Year"
-     fillOpacity=0.8
+     fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
      yGridLines=true
       sort=false
+    colorPalette={myColors}
  />
 
  {:else if inputs.selected_view === "Personal Vehicles"}
@@ -182,10 +220,12 @@ ORDER BY Year ASC, subcategory
      title="Personal Vehicle Registrations"
      subtitle="Distribution of cars, jeeps, and station wagons"
      xAxisTitle="Year"
-     fillOpacity=0.8
+     fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
      yGridLines=true
+    sort=false
+    colorPalette={myColors}
  />
 <AreaChart
      data={detailed_personal}
@@ -196,10 +236,12 @@ ORDER BY Year ASC, subcategory
      title="Personal Vehicle Registrations"
      subtitle="As a share of other Personal Vehicles on the Road"
      xAxisTitle="Year"
-     fillOpacity=0.8
+     fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
      yGridLines=true
+    sort=false
+    colorPalette={myColors}
  />
 
 {:else}
@@ -213,11 +255,12 @@ ORDER BY Year ASC, subcategory
      title="Commercial Vehicle Registrations"
      subtitle="Distribution across transport and goods vehicles"
      xAxisTitle="Year"
-     fillOpacity=0.8
+     fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
      yGridLines=true
      sort=false
+    colorPalette={myColors}
  />
  <AreaChart
      data={detailed_commercial}
@@ -228,11 +271,12 @@ ORDER BY Year ASC, subcategory
      title="Commercial Vehicle Registrations"
      subtitle="As a share of other commercial vehicles on the road"
      xAxisTitle="Year"
-     fillOpacity=0.8
+     fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
      yGridLines=true
      sort=false
+    colorPalette={myColors}
  />
  {/if}
 
