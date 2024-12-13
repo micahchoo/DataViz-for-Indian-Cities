@@ -1,7 +1,7 @@
 ---
 title: The Story of Pimpri-Chinchwad's Bus Fleet Before PMPML
 ---
-The Comprehensive Mobility Plan (CMP) from 2008 gives us a fascinating glimpse into Pimpri Chinchwad Municipal Transport's (PCMT) operations right before a major transition. Looking at the data visualization above, we can trace PCMT's journey from 1995 to 2007 - a period marked by both challenges and resilience.
+The Comprehensive Mobility Plan (CMP) from 2008 gives us a fascinating glimpse into Pimpri Chinchwad Municipal Transport's (PCMT) operations right during a major transition. Looking at the data visualization above, we can trace PCMT's journey from 1995 to 2007.
 
 The most striking aspect is how PCMT managed its fleet efficiency. In 1995-96, with 248 buses in total, they kept 158 on the road daily serving about 130,000 passengers. Fast forward to 2006-07, they were operating with a smaller fleet of 212 buses but maintained 160 buses on the road - a notable improvement in fleet utilization from 63.7% to 75.5%.
 
@@ -61,7 +61,8 @@ The transformation of PMPML's fleet size over the years tells an interesting sto
 ## Gaps in Understanding
 
 What's particularly intriguing is the gap in data between 2008 and 2010. The CMP captured PCMT's final years, but we don't have granular data about the immediate post-merger period. This leaves several questions unanswered about how the transition was managed and how quickly the integrated service scaled up.
-Recently, there is more data about daily bus breakdown rates but that is also patchy
+Recently, there is more data about daily bus breakdown rates but that is also patchy. We would need year-by-year data between 2008-2024 to truly understand how the merged entity evolved and whether it achieved its goals of better coordination and improved service delivery. The available snapshots show growth in fleet size, but the full story of service quality, route optimization, and operational efficiency remains to be told.
+PMPML has been publishing statistical reports every month but the historical data is not available
 
 ## Sources
 - [PCMC CMP 2008](https://www.pcmcindia.gov.in/admin/cms_upload/submission/2388046091386320509.pdf)
@@ -72,5 +73,3 @@ Recently, there is more data about daily bus breakdown rates but that is also pa
 - [Team PMPML gets specific tasks](https://timesofindia.indiatimes.com/city/pune/team-pmpml-gets-specific-tasks/articleshow/45846248.cms)
 - [PMPML website](https://pmpml.org/statistics)
 
-We would need year-by-year data between 2008-2024 to truly understand how the merged entity evolved and whether it achieved its goals of better coordination and improved service delivery. The available snapshots show growth in fleet size, but the full story of service quality, route optimization, and operational efficiency remains to be told.
-PMPML has been publishing statistical reports every month but the historical data is not available
