@@ -2,7 +2,6 @@
   "name": "my-evidence-project",
   "version": "0.0.1",
   "scripts": {
-    "build": "evidence build",
     "build:strict": "evidence build:strict",
     "build": "EVIDENCE_BUILD_DIR=./build/DataViz-for-Indian-Cities",
     "dev": "evidence dev --open /",
