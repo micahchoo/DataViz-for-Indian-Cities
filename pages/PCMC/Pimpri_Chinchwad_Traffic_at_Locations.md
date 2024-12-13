@@ -1,8 +1,7 @@
 ---
-title: Traffice Chokepoints across PCMC 2008
+title: Traffic Chokepoints across PCMC 2008
 ---
 
-[Download CSV file](Pimpri%20Chinchwad%20Traffic%20at%20Locations.csv)
 
 ## Key Findings
 The 2008 traffic survey across Pimpri Chinchwad revealed significant variations in traffic patterns across 15 key locations. Here are the main insights:
