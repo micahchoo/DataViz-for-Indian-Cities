@@ -51,8 +51,8 @@ from Pimpri_Chinchwad_Traffic_at_Locations
 
 <PointMap
 data={traffic_locations}
-basemap={`https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}`}
-attribution= '&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+basemap={`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png`}
+attribution= '© OpenStreetMap © OpenStreetMap contributors © Carto '
 lat=lat
 long=long
 value=vehicles
@@ -61,7 +61,7 @@ valueFmt="#,##0"
 title="Vehicle Traffic Volume at Key Locations in 2008"
 tooltipType=hover
 tooltip={[
-{id: 'pointName', showColumnName: false, valueClass: 'text-xl font-semibold'},
+{id: 'pointName', showColumnName: false, valueClass: 'text-l font-semibold'},
 {id: 'cars', title: '4-Wheelers', fmt: 'num0'},
 {id: 'motorcycles', title: '2-Wheelers', fmt: 'num0'},
 {id: 'autos', title: 'Auto Rickshaws', fmt: 'num0'},
@@ -69,12 +69,14 @@ tooltip={[
 {id: 'vehicles', title: 'Total Vehicles', fmt: 'num0'},
 {id: 'passengers', title: 'Total Passengers', fmt: 'num0'}
 ]}
-colorPalette={['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']}
 size=15
-opacity=0.7
+opacity=0.6
 height=900
 legendPosition=topLeft
-startingZoom=13
+startingZoom=12
+borderColor=#00000000
+selectedBorderColor=#00ffff
+legend=true
 />
 
 

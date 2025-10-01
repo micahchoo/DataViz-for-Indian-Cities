@@ -28,8 +28,8 @@ from Pimpri_Chinchwad_Traffic_at_Locations_2021
 
 <PointMap
 data={traffic_locations}
-basemap={`https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}`}
-attribution='© CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | © <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> © <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+basemap={`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png`}
+attribution= '© OpenStreetMap © OpenStreetMap contributors © Carto '
 lat=lat
 long=long
 startingLat=18.6142011464405
@@ -40,18 +40,20 @@ valueFmt="#,##0"
 title="Vehicle Traffic Volume at Key Locations in 2021"
 tooltipType=hover
 tooltip={[
-{id: 'pointName', showColumnName: false, valueClass: 'text-xl font-semibold'},
+{id: 'pointName', showColumnName: false, valueClass: 'text-l font-semibold'},
 {id: 'vehicles', title: 'Total Vehicles', fmt: 'num0'},
 {id: 'PCUs', title: 'Passenger Car Units', fmt: 'num0'},
 {id: 'ratio', title: 'PCU/Vehicle Ratio', fmt: '0.00'},
 {id: 'ratio_interpretation', title: 'Vehicle Mix', showColumnName: false, valueClass: 'text-sm text-gray-600 italic'}
 ]}
-colorPalette={['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']}
 size=15
 opacity=0.7
 height=900
 legendPosition=topLeft
 startingZoom=12
+borderColor=#00000000
+selectedBorderColor=#00ffff
+legend=true
 />
 
 
