@@ -6,36 +6,70 @@ theme:
   colorPalettes:
     default:
       light:
-        - "#236aa4"
-        - "#45a1bf"
-        - "#a5cdee"
-        - "#8dacbf"
-        - "#85c7c6"
-        - "#d2c6ac"
-        - "#f4b548"
-        - "#8f3d56"
-        - "#71b9f4"
-        - "#46a485"
+        - "#de988a"  # Pastel peach
+        - "#fae9c3"  # Pale gold
+        - "#e0a8b5"  # Light rose
+        - "#eba0c0"  # Baby pink
+        - "#e3bcd9"  # Lavender pink
+        - "#D4B5FA"  # Soft purple
+        - "#E2C6FA"  # Pale violet
+        - "#FAF0FA"  # Soft periwinkle
+        - "#B5D1FA"  # Light sky blue
+        - "#C4DDFA"  # Pale blue
+        - "#D1E5FA"  # Soft azure
+        - "#E9F5FA"  # Pale cerulean
+        - "#faeaa7"  # Soft butter
+        - "#f0e6c5"  # Pale vanilla
+        - "#FAD1E5"  # Soft salmon pink
+        - "#FAE0EB"  # Light coral pink
+        - "#FAEEF5"  # Pale rose pink
+        - "#F5E6FA"  # Soft lavender
+        - "#E6F0FA"  # Pale sky blue
+        - "#F0F7FA"  # Light air blue
       dark:
-        - "#236aa4"
-        - "#45a1bf"
-        - "#a5cdee"
-        - "#8dacbf"
-        - "#85c7c6"
-        - "#d2c6ac"
-        - "#f4b548"
-        - "#8f3d56"
-        - "#71b9f4"
-        - "#46a485"
-  colorScales:
+        - "#a86b5e"  # Deep peach
+        - "#b8a576"  # Muted gold
+        - "#a67682"  # Deep rose
+        - "#b5708f"  # Rich pink
+        - "#a88bab"  # Dusky lavender pink
+        - "#9d7fc9"  # Medium purple
+        - "#b095d4"  # Soft violet
+        - "#c4b0c9"  # Muted periwinkle
+        - "#7a9fcc"  # Medium sky blue
+        - "#8eadd4"  # Soft blue
+        - "#9db9d4"  # Medium azure
+        - "#b3c9db"  # Pale cerulean
+        - "#c4b879"  # Deep butter
+        - "#b8a885"  # Muted vanilla
+        - "#c99aaf"  # Deep salmon pink
+        - "#d4a8ba"  # Medium coral pink
+        - "#d9b8c9"  # Soft rose pink
+        - "#c4aed9"  # Medium lavender
+        - "#a8bad4"  # Medium sky blue
+        - "#b8c7d9"  # Soft air blue
+colorScales:
     default:
       light:
-        - "#ADD8E6"
-        - "#00008B"
+        - "#FAF0FA"  # Lightest (soft periwinkle)
+        - "#E2C6FA"  # Light (pale violet)
+        - "#D4B5FA"  # Medium-light (soft purple)
+        - "#B5D1FA"  # Medium (light sky blue)
+        - "#C4DDFA"  # Medium-light blue (pale blue)
+        - "#de988a"  # Medium-warm (pastel peach)
+        - "#e0a8b5"  # Medium-warm (light rose)
+        - "#eba0c0"  # Deep-warm (baby pink)
+        - "#8f6b7e"  # Dark (deepest tone)
       dark:
-        - "#ADD8E6"
-        - "#00008B"
-  colors:
+        - "#e8d4f2"  # Lightest (bright periwinkle for contrast)
+        - "#d4b8e6"  # Light (bright violet)
+        - "#b89ed9"  # Medium-light (medium purple)
+        - "#9db9d4"  # Medium (medium blue)
+        - "#8eadd4"  # Medium-dark blue
+        - "#b5807a"  # Medium-warm (deep peach)
+        - "#a67682"  # Deep-warm (deep rose)
+        - "#9d6a85"  # Deeper-warm (rich pink)
+        - "#6b4d5e"  # Darkest (deepest tone)
+colors:
     primary:
       light: "#2563eb"
       dark: "#3b82f6"

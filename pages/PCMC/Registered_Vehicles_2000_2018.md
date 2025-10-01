@@ -1,83 +1,60 @@
 ---
 title: What Vehicles are being registered - 2000 to 2018
 ---
-<script>
-    let myColors = [
-        // Warm oranges and peaches
-        '#de988a', // Pastel peach
-        '#fae9c3', // Pale gold
 
-        // Pinks and roses
-        '#e0a8b5', // Light rose
-        '#eba0c0', // Baby pink
-        '#e3bcd9', // Lavender pink
 
-        // Purples and lavenders
-        '#D4B5FA', // Soft purple
-        '#E2C6FA', // Pale violet
-        '#FAF0FA', // Soft periwinkle
 
-        // Blues and periwinkles
-        '#B5D1FA', // Light sky blue
-        '#C4DDFA', // Pale blue
-        '#D1E5FA', // Soft azure
-        '#E9F5FA', // Pale cerulean
 
-        // Yellow tones
-        '#faeaa7', // Soft butter
-        '#f0e6c5', // Pale vanilla
-
-        // Transitional hues
-        '#FAD1E5', // Soft salmon pink
-        '#FAE0EB', // Light coral pink
-        '#FAEEF5', // Pale rose pink
-        '#F5E6FA', // Soft lavender
-        '#E6F0FA', // Pale sky blue
-        '#F0F7FA'  // Light air blue
-    ]
-</script>
 
 
 ```sql view_options
-select 'Overall' as view union all
-select 'Two Wheelers' as view union all 
-select 'Personal Vehicles' as view union all
-select 'Commercial Vehicles' as view
+SELECT 'Overall' as view 
+UNION ALL SELECT 'Two Wheelers' as view 
+UNION ALL SELECT 'Personal Vehicles' as view 
+UNION ALL SELECT 'Commercial Vehicles' as view
 ```
 ```sql all_categories
 WITH base_categories AS (
-    SELECT Year,
-    CASE 
-        WHEN Vehicle_Type IN ('Motor_Cycles', 'Scooters', 'Moped') THEN 'Two Wheelers'
-        WHEN Vehicle_Type IN ('Cars') THEN 'Cars'
-        WHEN Vehicle_Type IN ('Jeeps', 'Stn_Wagons') THEN 'SUVs & Wagons'
-        WHEN Vehicle_Type IN ('Taxi_w_meter', 'Luxury_Tourist_Cabs') THEN 'Taxi Services'
-        WHEN Vehicle_Type IN ('Auto_rickshaw') THEN 'Auto Rickshaws'
-        WHEN Vehicle_Type IN ('Stage_carriages', 'Mini_Bus') THEN 'Public Transport'
-        WHEN Vehicle_Type IN ('School_Buses') THEN 'School Transport'
-        WHEN Vehicle_Type IN ('Private Service Vehicles', 'Ambulances') THEN 'Service Vehicles'
-        WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated/Multi.') THEN 'Heavy Transport'
-        WHEN Vehicle_Type IN ('Tanker') THEN 'Tankers'
-        WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers_', 'Delivery_Van_3_wheelers_') THEN 'Delivery Vehicles'
-        WHEN Vehicle_Type IN ('Tractors', 'Trailers') THEN 'Agricultural Vehicles'
-        ELSE 'Others'
-    END as category,
-    SUM(Count) as Count
+    SELECT
+        SPLIT_PART(Year, '-', 1) as display_year,
+        Year as original_year,
+        Vehicle_Type,
+        Count as vehicle_count
     FROM vehicle_registrations_by_type_and_year
-    GROUP BY Year, Vehicle_Type
+),
+categorized AS (
+    SELECT
+        display_year,
+        CASE
+            WHEN Vehicle_Type IN ('Motor_Cycles', 'Scooters', 'Moped') THEN 'Two Wheelers'
+            WHEN Vehicle_Type IN ('Cars') THEN 'Cars'
+            WHEN Vehicle_Type IN ('Jeeps', 'Stn_Wagons') THEN 'SUVs & Wagons'
+            WHEN Vehicle_Type IN ('Taxi_w_meter', 'Luxury_Tourist_Cabs') THEN 'Taxi Services'
+            WHEN Vehicle_Type IN ('Auto_rickshaw') THEN 'Auto Rickshaws'
+            WHEN Vehicle_Type IN ('Stage_carriages', 'Mini_Bus') THEN 'Public Transport'
+            WHEN Vehicle_Type IN ('School_Buses') THEN 'School Transport'
+            WHEN Vehicle_Type IN ('Private Service Vehicles', 'Ambulances') THEN 'Service Vehicles'
+            WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated/Multi.') THEN 'Heavy Transport'
+            WHEN Vehicle_Type IN ('Tanker') THEN 'Tankers'
+            WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers_', 'Delivery_Van_3_wheelers_') THEN 'Delivery Vehicles'
+            WHEN Vehicle_Type IN ('Tractors', 'Trailers') THEN 'Agricultural Vehicles'
+            ELSE 'Others'
+        END as category,
+        vehicle_count
+    FROM base_categories
 )
-SELECT 
-    Year,
+SELECT
+    display_year,
     category,
-    SUM(Count) as Count
-FROM base_categories
-GROUP BY Year, category
-ORDER BY Year ASC, category
+    SUM(vehicle_count) as count
+FROM categorized
+GROUP BY display_year, category
+ORDER BY display_year ASC, category
 ```
 
 ```sql detailed_two_wheelers
 SELECT
-    Year,
+    SPLIT_PART(Year, '-', 1) as display_year,
     CASE 
         WHEN Vehicle_Type = 'Motor_Cycles' THEN 'Motorcycles'
         WHEN Vehicle_Type = 'Scooters' THEN 'Scooters'
@@ -86,12 +63,12 @@ SELECT
     Count
 FROM vehicle_registrations_by_type_and_year
 WHERE Vehicle_Type IN ('Motor_Cycles', 'Scooters', 'Moped')
-ORDER BY Year ASC, subcategory
+ORDER BY display_year ASC, subcategory
 ```
 
 ```sql detailed_personal
 SELECT
-    Year,
+    SPLIT_PART(Year, '-', 1) as display_year,
     CASE 
         WHEN Vehicle_Type = 'Cars' THEN 'Cars'
         WHEN Vehicle_Type = 'Jeeps' THEN 'Jeeps'
@@ -100,12 +77,12 @@ SELECT
     Count
 FROM vehicle_registrations_by_type_and_year
 WHERE Vehicle_Type IN ('Cars', 'Jeeps', 'Stn_Wagons')
-ORDER BY Year ASC, subcategory
+ORDER BY display_year ASC, subcategory
 ```
 
 ```sql detailed_commercial
 SELECT
-    Year,
+    SPLIT_PART(Year, '-', 1) as display_year,
     CASE 
         WHEN Vehicle_Type = 'Auto_rickshaw' THEN 'Auto Rickshaw'
         WHEN Vehicle_Type = 'Taxi_w_meter' THEN 'Metered Taxis'
@@ -121,9 +98,9 @@ SELECT
     END as subcategory,
     Count
 FROM vehicle_registrations_by_type_and_year
-WHERE Vehicle_Type IN ('Auto_rickshaw', 'Taxi_w_meter', 'Luxury_Tourist_Cabs', 
+WHERE Vehicle_Type IN ('Auto_rickshaw', 'Taxi_w_meter', 'Luxury_Tourist_Cabs',
                       'Trucks/Lorries', 'Tanker', 'Delivery_Van_4_wheelers_', 'Delivery_Van_3_wheelers_')
-ORDER BY Year ASC, subcategory
+ORDER BY display_year ASC, subcategory
 ```
 
 
@@ -142,8 +119,8 @@ ORDER BY Year ASC, subcategory
 ### Overall Vehicle Registration Distribution
 <AreaChart
      data={all_categories}
-     x=Year
-     y=Count
+     x=display_year
+     y=count
      series=category
      type=stacked
      title="Vehicle Registrations"
@@ -152,14 +129,16 @@ ORDER BY Year ASC, subcategory
      fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
-     yGridLines=true
      sort=false
-    colorPalette={myColors}
+     handleMissing=gap
+    xLabelWrap=true
+    xGridlines=true
+    xTickMarks=true
  />
 <AreaChart
      data={all_categories}
-     x=Year
-     y=Count
+     x=display_year
+     y=count
      series=category
      type=stacked100
      title="Vehicle Registrations"
@@ -170,14 +149,16 @@ ORDER BY Year ASC, subcategory
      chartAreaHeight=300
      yGridLines=true
      sort=false
-    colorPalette={myColors}    
+    xLabelWrap=true
+    xGridlines=true
+    xTickMarks=true
  />
 
  {:else if inputs.selected_view === "Two Wheelers"}
 ### Two Wheeler Registration Distribution
 <AreaChart
      data={detailed_two_wheelers}
-     x=Year
+     x=display_year
      y=Count
      series=subcategory
      type=stacked
@@ -189,12 +170,14 @@ ORDER BY Year ASC, subcategory
      chartAreaHeight=300
      yGridLines=true
       sort=false
-    colorPalette={myColors}
+        xLabelWrap=true
+    xGridlines=true
+    xTickMarks=true
  />
 
  <AreaChart
      data={detailed_two_wheelers}
-     x=Year
+     x=display_year
      y=Count
      series=subcategory
      type=stacked100
@@ -206,14 +189,16 @@ ORDER BY Year ASC, subcategory
      chartAreaHeight=300
      yGridLines=true
       sort=false
-    colorPalette={myColors}
+        xLabelWrap=true
+    xGridlines=true
+    xTickMarks=true
  />
 
  {:else if inputs.selected_view === "Personal Vehicles"}
 ### Personal Vehicle Registration Distribution
 <AreaChart
      data={detailed_personal}
-     x=Year
+     x=display_year
      y=Count
      series=subcategory
      type=stacked
@@ -225,11 +210,13 @@ ORDER BY Year ASC, subcategory
      chartAreaHeight=300
      yGridLines=true
     sort=false
-    colorPalette={myColors}
+        xLabelWrap=true
+    xGridlines=true
+    xTickMarks=true
  />
 <AreaChart
      data={detailed_personal}
-     x=Year
+     x=display_year
      y=Count
      series=subcategory
      type=stacked100
@@ -241,14 +228,16 @@ ORDER BY Year ASC, subcategory
      chartAreaHeight=300
      yGridLines=true
     sort=false
-    colorPalette={myColors}
+        xLabelWrap=true
+    xGridlines=true
+    xTickMarks=true
  />
 
 {:else}
 ### Commercial Vehicle Registration Distribution
 <AreaChart
      data={detailed_commercial}
-     x=Year
+     x=display_year
      y=Count
      series=subcategory
      type=stacked
@@ -260,11 +249,13 @@ ORDER BY Year ASC, subcategory
      chartAreaHeight=300
      yGridLines=true
      sort=false
-    colorPalette={myColors}
+        xLabelWrap=true
+    xGridlines=true
+    xTickMarks=true
  />
  <AreaChart
      data={detailed_commercial}
-     x=Year
+     x=display_year
      y=Count
      series=subcategory
      type=stacked100
@@ -276,7 +267,9 @@ ORDER BY Year ASC, subcategory
      chartAreaHeight=300
      yGridLines=true
      sort=false
-    colorPalette={myColors}
+        xLabelWrap=true
+    xGridlines=true
+    xTickMarks=true
  />
  {/if}
 
