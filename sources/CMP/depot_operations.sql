@@ -1,6 +1,6 @@
 -- PMPML Data Transformation Script
 -- This script converts the wide-format extracted.csv into normalized depot_operations table
--- Run this as a source query in Evidence: sources/extracted/transform_depot_data.sql
+-- Run this as a source query in Evidence: sources/CMP/transform_depot_data.sql
 
 WITH normalized_data AS (
     SELECT 
@@ -73,6 +73,7 @@ WITH normalized_data AS (
         AND TRY_CAST(Date AS DATE) IS NOT NULL
 )
 
-SELECT * FROM normalized_data
+SELECT *
+FROM normalized_data
 WHERE depot IS NOT NULL
-ORDER BY date DESC, depot
+ORDER BY date DESC, depot;
