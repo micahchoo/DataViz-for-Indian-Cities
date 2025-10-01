@@ -2,7 +2,7 @@
   "name": "dataviz-for-indian-cities",
   "version": "0.0.1",
   "scripts": {
-    "build": "evidence build",
+    "build": "EVIDENCE_BUILD_DIR=./build/DataViz-for-Indian-Cities evidence build",
     "build:strict": "evidence build:strict",
     "dev": "evidence dev --open /",
     "test": "evidence build",
