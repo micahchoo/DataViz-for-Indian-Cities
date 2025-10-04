@@ -27,11 +27,8 @@ order by wardnum
 ]}
 />
 
-<Image 
-    url="/wordmark-gray-800.png"
-    description="Sample placeholder image"
-    height=80
-/>
+
+![Image](/wordmark-gray-800.png)
 
 # Legend Bug
 <AreaMap 
