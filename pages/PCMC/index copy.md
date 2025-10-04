@@ -1,3 +1,7 @@
+---
+title: Test
+---
+
 ```sql wards_list
 select * from pcmc
 order by wardnum
@@ -9,7 +13,7 @@ order by wardnum
 <AreaMap 
  data={wards_list}
  areaCol=name
- geoJsonUrl=https://raw.githubusercontent.com/micahchoo/DataViz-for-Indian-Cities/refs/heads/master/static/pcmcg.geojson
+ geoJsonUrl="/pcmcg.geojson"
  geoId=name
  value=wardnum
  title="PCMC Wards by Zone"
