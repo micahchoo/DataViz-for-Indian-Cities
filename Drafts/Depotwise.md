@@ -23,7 +23,7 @@ FROM (
     SELECT DISTINCT 
         depot,
         depot as value
-    FROM CMP.depot_operations
+    FROM depot_operations
     WHERE depot IS NOT NULL
 
     UNION ALL
@@ -57,7 +57,7 @@ SELECT
     accidents_hired,
     diesel_efficiency_kmpl,
     cancelled_kms
-FROM CMP.depot_operations
+FROM depot_operations
 WHERE date IS NOT NULL
   AND depot IS NOT NULL
   ${inputs.date_range.start ? "AND date >= '" + inputs.date_range.start + "'" : ''}
