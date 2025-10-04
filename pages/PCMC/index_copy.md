@@ -9,7 +9,7 @@ order by wardnum
 
 <DataTable data={wards_list} rows=20/>
 
-# geojsonurl bug
+# Static Files bug
 <AreaMap 
  data={wards_list}
  areaCol=name
@@ -28,7 +28,7 @@ order by wardnum
 />
 
 <Image 
-    url='/wordmark-gray-800.png'
+    url="/wordmark-gray-800.png"
     description="Sample placeholder image"
     height=80
 />
