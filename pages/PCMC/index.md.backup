@@ -18,6 +18,7 @@ title: Welcome to Evidence
     <DropdownOption value="%" valueLabel="All Categories"/>
 </Dropdown>
 
+
 <Dropdown name=year>
     <DropdownOption value=% valueLabel="All Years"/>
     <DropdownOption value=2019/>

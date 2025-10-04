@@ -4,37 +4,6 @@ title: PMPML Depot Operations Dashboard
 
 # PMPML Operations Overview
 
-<DateRange 
-    name=date_range 
-    title="Select Date Range"
-/>
-
-<Dropdown 
-    name=depot_filter 
-    title="Filter by Depot" 
-    data={depot_list} 
-    value=depot
-    defaultValue="All Depots"
-/>
-
-```sql depot_list
-SELECT depot, value
-FROM (
-    SELECT DISTINCT 
-        depot,
-        depot as value
-    FROM depot_operations
-    WHERE depot IS NOT NULL
-
-    UNION ALL
-
-    SELECT 
-        'All Depots' as depot,
-        'All Depots' as value
-) AS combined
-ORDER BY depot
-```
-
 ```sql base_data
 SELECT 
     date,
@@ -570,6 +539,3 @@ ORDER BY date DESC, depot
 
 ---
 
-**Last Updated:** {latest_period[0].latest_date}
-
-**Data Quality:** {data_quality_check[0].total_records - data_quality_issues[0].total_issues} of {data_quality_check[0].total_records} records validated
