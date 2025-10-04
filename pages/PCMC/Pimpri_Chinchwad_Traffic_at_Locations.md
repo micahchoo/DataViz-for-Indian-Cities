@@ -72,11 +72,11 @@ tooltip={[
 size=15
 opacity=0.6
 height=900
+legend=false
 legendPosition=topLeft
 startingZoom=12
 borderColor=#00000000
 selectedBorderColor=#00ffff
-legend=true
 />
 
 

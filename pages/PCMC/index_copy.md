@@ -27,6 +27,12 @@ order by wardnum
 ]}
 />
 
+<Image 
+    url='/wordmark-gray-800.png'
+    description="Sample placeholder image"
+    height=80
+/>
+
 # Legend Bug
 <AreaMap 
  data={wards_list}
@@ -44,6 +50,7 @@ order by wardnum
     {id: 'wardnum', title: 'Ward Number'}
 ]}
 />
+
 <AreaMap 
  data={wards_list}
  areaCol=name
