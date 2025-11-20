@@ -9,49 +9,19 @@ theme:
   colorPalettes:
     default:
       light:
-        - "#de988a"  # Pastel peach
-        - "#fae9c3"  # Pale gold
-        - "#e0a8b5"  # Light rose
-        - "#eba0c0"  # Baby pink
-        - "#e3bcd9"  # Lavender pink
-        - "#D4B5FA"  # Soft purple
-        - "#E2C6FA"  # Pale violet
-        - "#FAF0FA"  # Soft periwinkle
-        - "#B5D1FA"  # Light sky blue
-        - "#C4DDFA"  # Pale blue
-        - "#D1E5FA"  # Soft azure
-        - "#E9F5FA"  # Pale cerulean
-        - "#faeaa7"  # Soft butter
-        - "#f0e6c5"  # Pale vanilla
-        - "#FAD1E5"  # Soft salmon pink
-        - "#FAE0EB"  # Light coral pink
-        - "#FAEEF5"  # Pale rose pink
-        - "#F5E6FA"  # Soft lavender
-        - "#E6F0FA"  # Pale sky blue
-        - "#F0F7FA"  # Light air blue
+        - "#00dc54" 
+        - "#ffe256" 
+        - "#8dcbe1" 
+        - "#892481"
+        - "#cd4063" 
       dark:
-        - "#a86b5e"  # Deep peach
-        - "#b8a576"  # Muted gold
-        - "#a67682"  # Deep rose
-        - "#b5708f"  # Rich pink
-        - "#a88bab"  # Dusky lavender pink
-        - "#9d7fc9"  # Medium purple
-        - "#b095d4"  # Soft violet
-        - "#c4b0c9"  # Muted periwinkle
-        - "#7a9fcc"  # Medium sky blue
-        - "#8eadd4"  # Soft blue
-        - "#9db9d4"  # Medium azure
-        - "#b3c9db"  # Pale cerulean
-        - "#c4b879"  # Deep butter
-        - "#b8a885"  # Muted vanilla
-        - "#c99aaf"  # Deep salmon pink
-        - "#d4a8ba"  # Medium coral pink
-        - "#d9b8c9"  # Soft rose pink
-        - "#c4aed9"  # Medium lavender
-        - "#a8bad4"  # Medium sky blue
-        - "#b8c7d9"  # Soft air blue
+        - "#24ff78" 
+        - "#a88c00" 
+        - "#1e5b71" 
+        - "#db76d2"
+        - "#bf3154" 
 colorScales:
-    default:
+    custom:
       light:
         - "#FAF0FA"  # Lightest (soft periwinkle)
         - "#E2C6FA"  # Light (pale violet)
@@ -116,3 +86,15 @@ plugins:
     "@evidence-dev/sqlite": { }
     "@evidence-dev/trino": { }
     "@evidence-dev/motherduck": { }
+      # light:
+      #   - "${textL}" 
+      #   - "${bgL}" 
+      #   - "${primaryL}" 
+      #   - "${secondaryL}"
+      #   - "${accentL}" 
+      # dark:
+      #   - "${textD}" 
+      #   - "${bgD}" 
+      #   - "${primaryD}" 
+      #   - "${secondaryD}"
+      #   - "${accentD}" 

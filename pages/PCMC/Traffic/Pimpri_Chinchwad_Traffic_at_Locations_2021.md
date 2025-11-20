@@ -1,5 +1,6 @@
 ---
 title: Traffic Chokepoints across Pune 2021
+description: Traffic intensity mapped accross different spots in the PCMC region
 ---
 
 

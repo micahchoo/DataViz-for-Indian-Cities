@@ -1,5 +1,6 @@
+
 ---
-title: Test
+title: Map Component Test Page
 ---
 
 ```sql wards_list

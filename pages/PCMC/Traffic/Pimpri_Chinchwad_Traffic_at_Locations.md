@@ -1,30 +1,25 @@
 ---
 title: Traffic Chokepoints across PCMC 2008
+description: The 2008 traffic survey across Pimpri Chinchwad revealed significant variations in traffic patterns across 15 key locations. Here are the main insights
 ---
-
-
-## Key Findings
 The 2008 traffic survey across Pimpri Chinchwad revealed significant variations in traffic patterns across 15 key locations. Here are the main insights:
-### High Traffic Corridors
 
+### High Traffic Corridors
 Dapodi Bridge emerged as the busiest corridor with 120,527 vehicles daily, also handling the highest passenger volume (466,672 passengers)
 Aundh Bridge recorded the second-highest traffic with 87,087 vehicles and 413,078 passengers
 Between Pimpri Junction & Kasarwadi Junction saw 79,216 vehicles, highlighting its importance as a major transit point
 
 ### Moderate Traffic Areas
-
 The Mumbai-Pune Expressway point recorded 28,935 vehicles
 Nashik Highway before the toll plaza showed moderate vehicle count (41,495) but significant passenger movement (149,451)
 The corridor Between Nigdi Junction & Chinchwad Junction handled 66,439 vehicles
 
 ### Lower Traffic Zones
-
 Dehu-Alandi Road showed the lowest traffic volumes with 9,228 vehicles
 The connection from Nigdi Junction to Dehu-Alandi Road recorded 12,595 vehicles
 These areas primarily serve local traffic rather than major transit routes
 
 ### Passenger-to-Vehicle Ratio Analysis
-
 Major highways and bridges show higher passenger-to-vehicle ratios, indicating greater use of public transport and shared vehicles
 Dapodi Bridge shows approximately 3.87 passengers per vehicle
 Local roads show lower ratios, suggesting more private vehicle usage

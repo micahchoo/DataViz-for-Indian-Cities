@@ -1,11 +1,11 @@
-# PMPML Fleet Operations Dashboard
-
-*Historical fleet operations analytics from January 2023 to January 2025*
-
+---
+title: PMPML Fleet Monthly Depotwise reports
+description: Historical fleet data per depot per month from January 2023 to January 2025
+sidebar: show
 ---
 
-## Executive Summary
-
+## PMPML Fleet Monthly Depotwise reports
+Historical fleet data per depot per month from January 2023 to January 2025
 ```sql summary_metrics
 -- Each row is MONTHLY data for ONE DEPOT
 -- To get system-wide metrics, we aggregate across ALL depots and months
@@ -597,4 +597,4 @@ WHERE Date IS NOT NULL
 ---
 
 *Dashboard last updated: October 2025*  
-*Data structure: Monthly aggregated reports per depot (22 months × ~15-17 depots = 335 records)*  
+*Data structure: Monthly aggregated reports per depot (22 months × ~15-17 depots = 335 records)*

@@ -1,7 +1,8 @@
 ---
 title: The Story of Pimpri-Chinchwad's Bus Fleet Before PMPML
+description: The Comprehensive Mobility Plan (CMP) from 2008 gives us a fascinating glimpse into Pimpri Chinchwad Municipal Transport's (PCMT) operations right during a major transition.
 ---
-The Comprehensive Mobility Plan (CMP) from 2008 gives us a fascinating glimpse into Pimpri Chinchwad Municipal Transport's (PCMT) operations right during a major transition. Looking at the data visualization above, we can trace PCMT's journey from 1995 to 2007.
+ Looking at the data visualization above, we can trace PCMT's journey from 1995 to 2007.
 
 The most striking aspect is how PCMT managed its fleet efficiency. In 1995-96, with 248 buses in total, they kept 158 on the road daily serving about 130,000 passengers. Fast forward to 2006-07, they were operating with a smaller fleet of 212 buses but maintained 160 buses on the road - a notable improvement in fleet utilization from 63.7% to 75.5%.
 
@@ -72,4 +73,3 @@ PMPML has been publishing statistical reports every month but the historical dat
 - [PMC okays PMPML de-merger](https://punemirror.com/pune/cover-story/pmc-okays-pmpml-de-merger/cid5102540.htm)
 - [Team PMPML gets specific tasks](https://timesofindia.indiatimes.com/city/pune/team-pmpml-gets-specific-tasks/articleshow/45846248.cms)
 - [PMPML website](https://pmpml.org/statistics)
-

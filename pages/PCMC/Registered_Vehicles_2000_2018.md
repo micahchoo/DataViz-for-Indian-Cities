@@ -1,11 +1,8 @@
 ---
-title: What Vehicles are being registered - 2000 to 2018
+title: What Vehicles are being registered
+description: This data offers a great look at the different vehicle types being registered with RTO from 2008 to 2018
 ---
-
-
-
-
-
+This data offers a great look at the different vehicle types being registered with RTO from 2008 to 2018
 
 ```sql view_options
 SELECT 'Overall' as view 
@@ -111,6 +108,7 @@ ORDER BY display_year ASC, subcategory
  title="Select Vehicle Category View"
  defaultValue="Overall"
  display=buttons
+ colorScale=custom
 />
 
 
@@ -118,80 +116,84 @@ ORDER BY display_year ASC, subcategory
 {#if inputs.selected_view === "Overall"}
 ### Overall Vehicle Registration Distribution
 <AreaChart
-     data={all_categories}
-     x=display_year
-     y=count
-     series=category
-     type=stacked
-     title="Vehicle Registrations"
-     subtitle="Distribution across major vehicle categories"
-     xAxisTitle="Year"
-     fillOpacity=0.9
-     connectGroup="vehicles"
-     chartAreaHeight=300
-     sort=false
-     handleMissing=gap
+    data={all_categories}
+    x=display_year
+    y=count
+    series=category
+    type=stacked
+    title="Vehicle Registrations"
+    subtitle="Distribution across major vehicle categories"
+    xAxisTitle="Year"
+    fillOpacity=0.9
+    connectGroup="vehicles"
+    chartAreaHeight=300
+    sort=false
+    handleMissing=gap
     xLabelWrap=true
     xGridlines=true
     xTickMarks=true
+    colorScale=custom
  />
 <AreaChart
-     data={all_categories}
-     x=display_year
-     y=count
-     series=category
-     type=stacked100
-     title="Vehicle Registrations"
-     subtitle="As a share of all Vehicles on Road"
-     xAxisTitle="Year"
-     fillOpacity=0.9
-     connectGroup="vehicles"
-     chartAreaHeight=300
-     yGridLines=true
-     sort=false
+    data={all_categories}
+    x=display_year
+    y=count
+    series=category
+    type=stacked100
+    title="Vehicle Registrations"
+    subtitle="As a share of all Vehicles on Road"
+    xAxisTitle="Year"
+    fillOpacity=0.9
+    connectGroup="vehicles"
+    chartAreaHeight=300
+    yGridLines=true
+    sort=false
     xLabelWrap=true
     xGridlines=true
     xTickMarks=true
+    colorScale=custom
  />
 
  {:else if inputs.selected_view === "Two Wheelers"}
 ### Two Wheeler Registration Distribution
 <AreaChart
-     data={detailed_two_wheelers}
-     x=display_year
-     y=Count
-     series=subcategory
-     type=stacked
-     title="Two Wheeler Registrations"
-     subtitle="Distribution of motorcycles, scooters, and mopeds"
-     xAxisTitle="Year"
-     fillOpacity=0.9
-     connectGroup="vehicles"
-     chartAreaHeight=300
-     yGridLines=true
-      sort=false
-        xLabelWrap=true
+    data={detailed_two_wheelers}
+    x=display_year
+    y=Count
+    series=subcategory
+    type=stacked
+    title="Two Wheeler Registrations"
+    subtitle="Distribution of motorcycles, scooters, and mopeds"
+    xAxisTitle="Year"
+    fillOpacity=0.9
+    connectGroup="vehicles"
+    chartAreaHeight=300
+    yGridLines=true
+    sort=false
+    xLabelWrap=true
     xGridlines=true
     xTickMarks=true
+    colorScale=custom
  />
 
  <AreaChart
-     data={detailed_two_wheelers}
-     x=display_year
-     y=Count
-     series=subcategory
-     type=stacked100
-     title="Two Wheeler Registrations"
-     subtitle="As a share of other Two Wheelers on Road"
-     xAxisTitle="Year"
-     fillOpacity=0.9
-     connectGroup="vehicles"
-     chartAreaHeight=300
-     yGridLines=true
-      sort=false
-        xLabelWrap=true
+    data={detailed_two_wheelers}
+    x=display_year
+    y=Count
+    series=subcategory
+    type=stacked100
+    title="Two Wheeler Registrations"
+    subtitle="As a share of other Two Wheelers on Road"
+    xAxisTitle="Year"
+    fillOpacity=0.9
+    connectGroup="vehicles"
+    chartAreaHeight=300
+    yGridLines=true
+    sort=false
+    xLabelWrap=true
     xGridlines=true
     xTickMarks=true
+    colorScale=custom
  />
 
  {:else if inputs.selected_view === "Personal Vehicles"}
