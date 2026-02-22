@@ -1,8 +1,8 @@
 ---
 title: What Vehicles are being registered
-description: This data offers a great look at the different vehicle types being registered with RTO from 2008 to 2018
+description: Cumulative vehicle registrations by type with the RTO from 2000 to 2018
 ---
-This data offers a great look at the different vehicle types being registered with RTO from 2008 to 2018
+This data shows the cumulative vehicle registrations by type with the Pimpri-Chinchwad RTO from 2000 to 2018. These are total on-road fleet counts (not annual new registrations), so rising numbers reflect the growing vehicle population over time.
 
 ```sql view_options
 SELECT 'Overall' as view 
@@ -30,8 +30,8 @@ categorized AS (
             WHEN Vehicle_Type IN ('Auto_rickshaw') THEN 'Auto Rickshaws'
             WHEN Vehicle_Type IN ('Stage_carriages', 'Mini_Bus') THEN 'Public Transport'
             WHEN Vehicle_Type IN ('School_Buses') THEN 'School Transport'
-            WHEN Vehicle_Type IN ('Private Service Vehicles', 'Ambulances') THEN 'Service Vehicles'
-            WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated/Multi.') THEN 'Heavy Transport'
+            WHEN Vehicle_Type IN ('Private_Service_Vehicles', 'Ambulances') THEN 'Service Vehicles'
+            WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi_') THEN 'Heavy Transport'
             WHEN Vehicle_Type IN ('Tanker') THEN 'Tankers'
             WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers_', 'Delivery_Van_3_wheelers_') THEN 'Delivery Vehicles'
             WHEN Vehicle_Type IN ('Tractors', 'Trailers') THEN 'Agricultural Vehicles'
@@ -84,19 +84,21 @@ SELECT
         WHEN Vehicle_Type = 'Auto_rickshaw' THEN 'Auto Rickshaw'
         WHEN Vehicle_Type = 'Taxi_w_meter' THEN 'Metered Taxis'
         WHEN Vehicle_Type = 'Luxury_Tourist_Cabs' THEN 'Tourist Cabs'
-        WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated/Multi.') THEN 'Heavy Transport'
+        WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi_') THEN 'Heavy Transport'
         WHEN Vehicle_Type IN ('Tanker') THEN 'Tankers'
         WHEN Vehicle_Type = 'Delivery_Van_4_wheelers_' THEN '4-Wheeler Delivery Vans'
         WHEN Vehicle_Type = 'Delivery_Van_3_wheelers_' THEN '3-Wheeler Delivery Vans'
         WHEN Vehicle_Type = 'School_Buses' THEN 'School Buses'
-        WHEN Vehicle_Type IN ('Private Service Vehicles', 'Ambulances') THEN 'Service Vehicles'
+        WHEN Vehicle_Type IN ('Private_Service_Vehicles', 'Ambulances') THEN 'Service Vehicles'
         WHEN Vehicle_Type IN ('Tractors', 'Trailers') THEN 'Agricultural Vehicles'
         ELSE 'Others'
     END as subcategory,
     Count
 FROM vehicle_registrations_by_type_and_year
 WHERE Vehicle_Type IN ('Auto_rickshaw', 'Taxi_w_meter', 'Luxury_Tourist_Cabs',
-                      'Trucks/Lorries', 'Tanker', 'Delivery_Van_4_wheelers_', 'Delivery_Van_3_wheelers_')
+                      'Trucks/Lorries', 'Articulated_Multi_', 'Tanker', 'Delivery_Van_4_wheelers_',
+                      'Delivery_Van_3_wheelers_', 'Private_Service_Vehicles', 'Ambulances',
+                      'Tractors', 'Trailers', 'School_Buses')
 ORDER BY display_year ASC, subcategory
 ```
 

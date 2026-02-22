@@ -280,8 +280,8 @@ ORDER BY revenue_crores DESC
     x=category
     y=revenue_crores
     swapXY=true
-    title="Total Revenue by Source (₹ crores)"
-    yAxisTitle="Revenue (₹M)"
+    title="Total Revenue by Source (₹ Crores)"
+    yAxisTitle="Revenue (₹ Crores)"
 />
 
 ---
@@ -292,10 +292,11 @@ ORDER BY revenue_crores DESC
 
 ```sql fuel_kms
 -- Monthly KMs by fuel type (sum across all depots)
-SELECT 
+SELECT
         Date as month_date,
     STRPTIME(Date, '%b %Y') as date_parsed,  -- Add this for proper sorting
     STRFTIME(STRPTIME(Date, '%b %Y'), '%b %Y') as month_year,
+    SUM(TRY_CAST("Total Eff;km.Diesel (Own+PPP)" AS DOUBLE)) / 1000000 as diesel_kms_millions,
     SUM(TRY_CAST("Total Eff.km CNG (Own+PPP)" AS DOUBLE)) / 1000000 as cng_kms_millions,
     SUM(TRY_CAST("Total Eff.km E-Bus (Own)" AS DOUBLE)) / 1000000 as ebus_kms_millions
 FROM extracted
@@ -596,5 +597,5 @@ WHERE Date IS NOT NULL
 
 ---
 
-*Dashboard last updated: October 2025*  
-*Data structure: Monthly aggregated reports per depot (22 months × ~15-17 depots = 335 records)*
+*Dashboard last updated: January 2025*
+*Data structure: Monthly aggregated reports per depot (Jan 2023 – Jan 2025, ~15-17 depots per month, 397 records)*

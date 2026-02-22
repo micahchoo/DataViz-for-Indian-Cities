@@ -2,7 +2,7 @@
 title: The Story of Pimpri-Chinchwad's Bus Fleet Before PMPML
 description: The Comprehensive Mobility Plan (CMP) from 2008 gives us a fascinating glimpse into Pimpri Chinchwad Municipal Transport's (PCMT) operations right during a major transition.
 ---
- Looking at the data visualization above, we can trace PCMT's journey from 1995 to 2007.
+ Looking at the data visualization below, we can trace PCMT's journey from 1995 to 2007.
 
 The most striking aspect is how PCMT managed its fleet efficiency. In 1995-96, with 248 buses in total, they kept 158 on the road daily serving about 130,000 passengers. Fast forward to 2006-07, they were operating with a smaller fleet of 212 buses but maintained 160 buses on the road - a notable improvement in fleet utilization from 63.7% to 75.5%.
 
@@ -29,9 +29,10 @@ ORDER BY Sort_Year
     y=Active_Buses
     y2=Daily_Passengers
     y2SeriesType=bar
-    yAxisTitle="Number of Buses / Passengers"
+    yAxisTitle="Active Buses"
+    y2AxisTitle="Avg Daily Passengers"
     title="Bus Fleet Performance Over Time"
-    subtitle="Tracking fleet size, utilization and passenger volume"
+    subtitle="Tracking active fleet (line) and daily passengers (bars)"
     sort=Sort_Year
 />
 
@@ -56,8 +57,8 @@ The transformation of PMPML's fleet size over the years tells an interesting sto
 - 2012: 1,745 buses (including 327 hired from private operators) serving 12.3 lakh daily passengers
 - 2014: Fleet size of 1,523 with 1,198 buses on the road (78.66% Fleet Utilisation)
 - 2015: Fleet size of 2,100 
-- 2023: Fleet size of 2,066 with 1,658 buses in actual utilization (77.27% Fleet Utilisation) serving 387
-- 2024: Fleet size of 1,880 with 1,602 buses in actual utilization (77.27% Fleet Utilisation) serving 11,47,702 Daily Passengers
+- 2023: Fleet size of 2,066 with 1,658 buses in actual utilization (80.25% Fleet Utilisation) serving 3,87,000 Daily Passengers
+- 2024: Fleet size of 1,880 with 1,602 buses in actual utilization (85.21% Fleet Utilisation) serving 11,47,702 Daily Passengers
 
 ## Gaps in Understanding
 

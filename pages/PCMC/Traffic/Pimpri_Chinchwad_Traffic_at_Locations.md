@@ -35,7 +35,8 @@ select
     total_vehicles as vehicles,
     -- Category aggregations
     four_wheelers as cars,
-    (two_wheelers + cycles) as motorcycles,
+    two_wheelers as two_wheelers,
+    cycles as cycles,
     auto_rickshaws as autos,
     (minibuses + local_buses + intercity_buses) as total_buses
 from Pimpri_Chinchwad_Traffic_at_Locations
@@ -58,7 +59,8 @@ tooltipType=hover
 tooltip={[
 {id: 'pointName', showColumnName: false, valueClass: 'text-l font-semibold'},
 {id: 'cars', title: '4-Wheelers', fmt: 'num0'},
-{id: 'motorcycles', title: '2-Wheelers', fmt: 'num0'},
+{id: 'two_wheelers', title: '2-Wheelers', fmt: 'num0'},
+{id: 'cycles', title: 'Cycles', fmt: 'num0'},
 {id: 'autos', title: 'Auto Rickshaws', fmt: 'num0'},
 {id: 'total_buses', title: 'Buses', fmt: 'num0'},
 {id: 'vehicles', title: 'Total Vehicles', fmt: 'num0'},

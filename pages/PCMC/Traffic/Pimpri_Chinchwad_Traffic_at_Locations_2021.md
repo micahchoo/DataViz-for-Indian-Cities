@@ -1,7 +1,11 @@
 ---
-title: Traffic Chokepoints across Pune 2021
-description: Traffic intensity mapped accross different spots in the PCMC region
+title: Traffic Chokepoints across Pune Metro 2021
+description: Traffic intensity mapped across different spots in the Pune metropolitan region including PCMC, PMC, and surrounding areas
 ---
+
+The 2021 traffic survey covered 83 locations across the Pune metropolitan area as part of the Metro Rail DPR update. Unlike the [2008 PCMC-only survey](/PCMC/Traffic/Pimpri_Chinchwad_Traffic_at_Locations), this dataset includes locations across PMC, PCMC, and outlying areas.
+
+The PCU/Vehicle ratio reveals the vehicle mix at each location - ratios above 1.0 indicate heavier vehicles (trucks, buses), while ratios below 0.85 indicate two-wheeler dominant traffic.
 
 
 
