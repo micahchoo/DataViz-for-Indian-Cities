@@ -20,6 +20,7 @@ Pimpri-Chinchwad grew from 10 lakh residents in 2001 to over 17 lakh by 2011, ma
 - **[Depot Performance](/PCMC/Public%20Transport/Depot_Performance)** — Efficiency, fleet composition, and ridership by depot
 - **[Ridership and Fares](/PCMC/Public%20Transport/Ridership_and_Fares)** — Pass types, fare tiers, and revenue mix
 - **[BRT Corridor Demand](/PCMC/Public%20Transport/BRT_Corridors)** — CMP 2008 projections vs 2021 reality, with proposed route map
+- **[COVID-Era Operations](/PCMC/Public%20Transport/COVID_Era)** — FY 2020-21: fleet utilization collapsed to 32%, ridership at 2.83 lakh/day
 - **[Annual Performance Report](/PCMC/Public%20Transport/Annual_Statistics)** — FY 2023-24 vs 2024-25: fuel efficiency by propulsion type, accidents, workshop data
 
 ### Traffic

@@ -62,6 +62,7 @@ PMPML now operates across 17 depots with a fleet of ~2,000 buses. Monthly depot-
 - **[Ridership and Fares](/PCMC/Public%20Transport/Ridership_and_Fares)** — Pass types, fare tiers, student ridership, and the shifting revenue mix
 - **[BRT Service Statistics](/PCMC/Public%20Transport/BRT)** — Dedicated B.R.T. corridor operations: fleet, ridership, and efficiency across 15–17 depots
 - **[BRT Corridor Demand](/PCMC/Public%20Transport/BRT_Corridors)** — CMP 2008 projections vs 2021 observed corridor traffic, with proposed route map
+- **[COVID-Era Operations](/PCMC/Public%20Transport/COVID_Era)** — FY 2020-21: 32% fleet utilization, 2.83 lakh daily passengers, 13-depot breakdown
 - **[Annual Performance Report](/PCMC/Public%20Transport/Annual_Statistics)** — FY 2023-24 vs FY 2024-25: fleet, ridership, revenue, fuel efficiency by propulsion type, safety, workshop
 - **[E-Bus Service Statistics](/PCMC/Public%20Transport/EBus)** — Electric bus operations at dedicated depots, including KMPU energy efficiency tracking
 
