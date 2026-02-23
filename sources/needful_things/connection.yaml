@@ -1,8 +1,0 @@
-# This file was automatically generated
-type: duckdb
-name: needful_things
-options:
-  filename: needful_things.duckdb
-# Advanced Options, you probably don't want to change this
-buildOptions:
-  batchSize: 1000000

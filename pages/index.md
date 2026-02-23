@@ -8,6 +8,7 @@ Pimpri-Chinchwad grew from 10 lakh residents in 2001 to over 17 lakh by 2011, ma
 ## Pimpri-Chinchwad
 
 - **[City Overview](/PCMC)** — Ward map, zone structure, and data coverage
+- **[City Growth Context](/PCMC/City_Context)** — Population, urban expansion, land use, and CMP 2008 transport demand projections
 - **[Vehicle Registrations](/PCMC/Registered_Vehicles_2000_2018)** — Cumulative RTO registrations by type, 2000-2018
 - **[Fleet Composition Trends](/PCMC/Fleet_Composition_Trends)** — Growth rates, market share shifts, and indexed comparisons
 - **[Road Safety](/PCMC/Road_Accident_Statistics)** — Accident trends 2000-2007 and PMPML bus safety 2023-2025
@@ -18,6 +19,7 @@ Pimpri-Chinchwad grew from 10 lakh residents in 2001 to over 17 lakh by 2011, ma
 - **[PMPML Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly fleet data across 17 depots, 2023-2025
 - **[Depot Performance](/PCMC/Public%20Transport/Depot_Performance)** — Efficiency, fleet composition, and ridership by depot
 - **[Ridership and Fares](/PCMC/Public%20Transport/Ridership_and_Fares)** — Pass types, fare tiers, and revenue mix
+- **[BRT Corridor Demand](/PCMC/Public%20Transport/BRT_Corridors)** — CMP 2008 projections vs 2021 reality, with proposed route map
 
 ### Traffic
 - **[Overview](/PCMC/Traffic)** — Traffic volume surveys in 2008 and 2021

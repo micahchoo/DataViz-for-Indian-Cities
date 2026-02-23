@@ -61,6 +61,7 @@ PMPML now operates across 17 depots with a fleet of ~2,000 buses. Monthly depot-
 - **[Depot Performance](/PCMC/Public%20Transport/Depot_Performance)** — How depots compare on efficiency, schedule adherence, fleet ownership, and revenue patterns
 - **[Ridership and Fares](/PCMC/Public%20Transport/Ridership_and_Fares)** — Pass types, fare tiers, student ridership, and the shifting revenue mix
 - **[BRT Service Statistics](/PCMC/Public%20Transport/BRT)** — Dedicated B.R.T. corridor operations: fleet, ridership, and efficiency across 15–17 depots
+- **[BRT Corridor Demand](/PCMC/Public%20Transport/BRT_Corridors)** — CMP 2008 projections vs 2021 observed corridor traffic, with proposed route map
 - **[E-Bus Service Statistics](/PCMC/Public%20Transport/EBus)** — Electric bus operations at dedicated depots, including KMPU energy efficiency tracking
 
 ---
