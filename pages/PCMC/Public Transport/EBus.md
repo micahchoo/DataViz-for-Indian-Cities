@@ -235,11 +235,11 @@ E-bus accidents are categorized as "Hired Bus" accidents because the fleet is op
 >
     <Column id=Depot title="Depot"/>
     <Column id=months_present title="Months"/>
-    <Column id=avg_utilization title="Avg Utilization %" fmt='#0.0' contentType=colorscale colorScale=green/>
-    <Column id=avg_km_per_bus title="Km/Bus/Day" fmt='#,##0.0' contentType=colorscale colorScale=blue/>
-    <Column id=avg_passengers_per_bus title="Pass/Bus/Day" fmt='#,##0' contentType=colorscale colorScale=blue/>
-    <Column id=avg_kmpu title="Avg KMPU" fmt='#0.00' contentType=colorscale colorScale=green/>
-    <Column id=avg_epk title="EPK (₹/Km)" fmt='#,##0.00' contentType=colorscale colorScale=green/>
+    <Column id=avg_utilization title="Avg Utilization %" fmt='#0.0' contentType=colorscale colorScale="#16a34a"/>
+    <Column id=avg_km_per_bus title="Km/Bus/Day" fmt='#,##0.0' contentType=colorscale colorScale="#3b82f6"/>
+    <Column id=avg_passengers_per_bus title="Pass/Bus/Day" fmt='#,##0' contentType=colorscale colorScale="#3b82f6"/>
+    <Column id=avg_kmpu title="Avg KMPU" fmt='#0.00' contentType=colorscale colorScale="#16a34a"/>
+    <Column id=avg_epk title="EPK (₹/Km)" fmt='#,##0.00' contentType=colorscale colorScale="#16a34a"/>
 </DataTable>
 
 ---

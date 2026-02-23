@@ -61,10 +61,10 @@ How depots compare on the metrics that matter most: fleet utilization, earning p
     <Column id=Depot />
     <Column id=months_data title="Months" />
     <Column id=avg_fleet_size title="Fleet Size" fmt='#,##0' />
-    <Column id=avg_utilization_pct title="Utilization %" fmt='#0.0' contentType=colorscale colorScale=green/>
-    <Column id=avg_epk title="₹/KM (EPK)" fmt='#,##0.00' contentType=colorscale colorScale=blue/>
-    <Column id=avg_passengers_per_bus title="Pass/Bus/Day" fmt='#,##0' contentType=colorscale colorScale=blue/>
-    <Column id=avg_revenue_per_bus title="₹/Bus/Day" fmt='#,##0' contentType=colorscale colorScale=green/>
+    <Column id=avg_utilization_pct title="Utilization %" fmt='#0.0' contentType=colorscale colorScale="#16a34a"/>
+    <Column id=avg_epk title="₹/KM (EPK)" fmt='#,##0.00' contentType=colorscale colorScale="#3b82f6"/>
+    <Column id=avg_passengers_per_bus title="Pass/Bus/Day" fmt='#,##0' contentType=colorscale colorScale="#3b82f6"/>
+    <Column id=avg_revenue_per_bus title="₹/Bus/Day" fmt='#,##0' contentType=colorscale colorScale="#16a34a"/>
 </DataTable>
 
 <BarChart
@@ -111,8 +111,8 @@ Each depot has a sanctioned schedule — the number of daily trips it is expecte
     <Column id=Depot />
     <Column id=avg_sanctioned title="Sanctioned/Day" fmt='#,##0' />
     <Column id=avg_operated title="Operated/Day" fmt='#,##0' />
-    <Column id=adherence_pct title="Adherence %" fmt='#0.0' contentType=colorscale colorScale=green/>
-    <Column id=avg_schedule_gap title="Daily Gap" fmt='#,##0' contentType=colorscale colorScale=red/>
+    <Column id=adherence_pct title="Adherence %" fmt='#0.0' contentType=colorscale colorScale="#16a34a"/>
+    <Column id=avg_schedule_gap title="Daily Gap" fmt='#,##0' contentType=colorscale colorScale="#ef4444"/>
 </DataTable>
 
 Depots at the bottom of the adherence ranking are chronically missing their scheduled trips. When a depot's adherence is below 80%, it means riders on those routes are regularly experiencing cancelled services — longer waits, crowded buses on surviving trips, and eventual mode shift to private vehicles. The schedule gap is a leading indicator of service deterioration.
@@ -143,8 +143,8 @@ PMPML's fleet is not a single entity. Depots operate a mix of PMPML-owned buses,
     <Column id=avg_ppp_on_road title="PPP" fmt='#,##0' />
     <Column id=avg_hired_on_road title="Hired" fmt='#,##0' />
     <Column id=avg_total_on_road title="Total" fmt='#,##0' />
-    <Column id=ppp_share_pct title="PPP %" fmt='#0.0' contentType=colorscale colorScale=blue/>
-    <Column id=hired_share_pct title="Hired %" fmt='#0.0' contentType=colorscale colorScale=blue/>
+    <Column id=ppp_share_pct title="PPP %" fmt='#0.0' contentType=colorscale colorScale="#3b82f6"/>
+    <Column id=hired_share_pct title="Hired %" fmt='#0.0' contentType=colorscale colorScale="#3b82f6"/>
 </DataTable>
 
 Some depots run almost entirely on hired or PPP vehicles. This creates a dependency: when private operators pull back (contract disputes, fleet age-outs), these depots have no fallback. Depots with a high own-fleet share have more direct control over service reliability, but also bear the full maintenance burden. The ideal balance depends on route economics — high-revenue trunk routes justify owned fleet investment; low-ridership peripheral routes may be better served through flexible hire arrangements.
@@ -180,9 +180,9 @@ Not all passengers are equal in revenue terms. A depot with high ridership but l
     search=true
 >
     <Column id=Depot />
-    <Column id=avg_passengers_per_bus title="Pass/Bus/Day" fmt='#,##0' contentType=colorscale colorScale=blue/>
-    <Column id=avg_revenue_per_bus title="₹/Bus/Day" fmt='#,##0' contentType=colorscale colorScale=green/>
-    <Column id=avg_fare_per_passenger title="₹/Passenger" fmt='#,##0.00' contentType=colorscale colorScale=green/>
+    <Column id=avg_passengers_per_bus title="Pass/Bus/Day" fmt='#,##0' contentType=colorscale colorScale="#3b82f6"/>
+    <Column id=avg_revenue_per_bus title="₹/Bus/Day" fmt='#,##0' contentType=colorscale colorScale="#16a34a"/>
+    <Column id=avg_fare_per_passenger title="₹/Passenger" fmt='#,##0.00' contentType=colorscale colorScale="#16a34a"/>
     <Column id=avg_epk title="₹/KM (EPK)" fmt='#,##0.00' />
     <Column id=avg_fleet_size title="Fleet Size" fmt='#,##0' />
 </DataTable>

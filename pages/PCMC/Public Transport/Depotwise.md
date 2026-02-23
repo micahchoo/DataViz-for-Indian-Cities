@@ -577,9 +577,9 @@ ORDER BY avg_utilization DESC
     <Column id=months_data title="Months"/>
     <Column id=avg_fleet_size title="Avg Fleet" fmt='#,##0'/>
     <Column id=avg_km_per_bus title="KM/Bus/Day" fmt='#,##0.0'/>
-    <Column id=avg_utilization title="Util %" fmt='#0.0' contentType=colorscale colorScale=green/>
-    <Column id=passengers_per_bus title="Pass/Bus" fmt='#,##0' contentType=colorscale colorScale=blue/>
-    <Column id=revenue_per_bus title="₹/Bus" fmt='#,##0' contentType=colorscale colorScale=blue/>
+    <Column id=avg_utilization title="Util %" fmt='#0.0' contentType=colorscale colorScale="#16a34a"/>
+    <Column id=passengers_per_bus title="Pass/Bus" fmt='#,##0' contentType=colorscale colorScale="#3b82f6"/>
+    <Column id=revenue_per_bus title="₹/Bus" fmt='#,##0' contentType=colorscale colorScale="#3b82f6"/>
 </DataTable>
 
 ---
@@ -640,8 +640,8 @@ ORDER BY date_parsed
     <Column id=date_parsed title="Month"/>
     <Column id=system_avg_fleet title="Fleet Size" fmt='#,##0'/>
     <Column id=total_kms_thousands title="KMs (000s)" fmt='#,##0'/>
-    <Column id=revenue_crores title="Revenue (₹Cr)" fmt='#,##0.00' contentType=colorscale colorScale=green/>
-    <Column id=daily_passengers_system title="Daily Pass" fmt='#,##0' contentType=colorscale colorScale=blue/>
+    <Column id=revenue_crores title="Revenue (₹Cr)" fmt='#,##0.00' contentType=colorscale colorScale="#16a34a"/>
+    <Column id=daily_passengers_system title="Daily Pass" fmt='#,##0' contentType=colorscale colorScale="#3b82f6"/>
     <Column id=avg_utilization_pct title="Util %" fmt='#0.0'/>
 </DataTable>
 
