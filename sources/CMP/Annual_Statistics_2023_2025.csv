@@ -1,0 +1,100 @@
+Category,Particular,Unit,FY2023_24,FY2024_25
+Fleet,Total Vehicles Held PMPML+Hired,Nos.,2066,1933
+Fleet,Avg PMPML Own Vehicles Held,Nos.,944,951
+Fleet,PPP Vehicles Held,Nos.,50,50
+Fleet,Hire Vehicles Per Day,Nos.,1071,932
+Fleet,Avg PMPML Own Vehicles On Road,Nos.,662,680
+Fleet,PPP Vehicles On Road,Nos.,37,31
+Fleet,Total OWN+PPP On Road,Nos.,699,711
+Fleet,Hire Vehicles On Road,Nos.,959,847
+Fleet,Total Avg Vehicles On Road,Nos.,1658,1558
+Fleet,Avg PMPML Vehicles Off Road,Nos.,282,271
+Fleet,PPP Vehicles Off Road,Nos.,13,19
+Fleet,Hire Vehicles Off Road,Nos.,112,85
+Fleet,Total Vehicles Off Road,Nos.,407,375
+Fleet,Spare Vehicles Per Day,Nos.,79,95
+Fleet,Pct Spare Vehicles,%,8.40,9.99
+Fleet,Workshop Vehicles Per Day,Nos.,202,176
+Fleet,Pct Workshop Vehicles,%,21.33,18.51
+Fleet,Fleet Utilization PMPML+PPP,%,74.44,71.03
+Operations,Schedules Sanctioned Per Day PMPML+PPP,Nos.,831,916
+Operations,Hire Schedules Sanctioned Per Day,Nos.,992,868
+Operations,Total Schedules Sanctioned Per Day,Nos.,1823,1784
+Operations,Schedules Operated Per Day PMPML+PPP,Nos.,648,634
+Operations,Hire Schedules Operated Per Day,Nos.,959,847
+Operations,Total Schedules Operated Per Day,Nos.,1607,1481
+Operations,Schedules Sanctioned KMs,Nos.,136943684,134218803
+Operations,Daily Average Effective KM,Nos.,338576,319892
+Operations,Effective KM Per Bus Per Day,Nos.,204.20,205.32
+Operations,Total Cancelled KM,Nos.,13024708,17458277
+Operations,Total Routes,Nos.,387,382
+Operations,Avg Route Length KM,Nos.,21.19,21.78
+KMs,Effective KM Diesel Own,Nos.,4802465,6026797
+KMs,Effective KM CNG Own,Nos.,42290350,40721780
+KMs,Effective KM CNG PPP,Nos.,1719672,1520206
+KMs,Total Effective KM CNG Own+PPP,Nos.,44010022,42241986
+KMs,Effective KM E-Bus Own,Nos.,8512,30114
+KMs,Total Effective KM OWN+PPP,Nos.,48820999,48298897
+KMs,Hired Vehicle CNG Effective KM,Nos.,41416303,32960238
+KMs,Hired E-Bus Effective KM,Nos.,33681673,35501391
+KMs,Total Hired Vehicle Effective KM,Nos.,75097976,68461629
+KMs,Total Effective KM Own+Hire,Nos.,123918976,116760526
+KMs,Total Dead KMs,Nos.,1306194,1314045
+Revenue,Passenger Earning Ticket,Rs.,4360491893,3984305702
+Revenue,All Traffic Earning,Rs.,6119344790,5721864849
+Revenue,Total Earning incl Concessional Passes,Rs.,6697438782,6252251153
+Revenue,Average Daily Earning,Rs.,182990130,171294550
+Revenue,Earning Per Passenger,Rs.,15.15,15.22
+Revenue,EPK Ticket Only,Rs.,35.19,34.12
+Revenue,EPK All Traffic,Rs.,54.05,53.55
+Revenue,Earning Per Bus Per Day Traffic,Rs.,11036.24,10994.52
+Revenue,Load Factor Sale of Tickets,%,51.35,49.24
+Revenue,Load Factor Total Traffic Receipts,%,78.87,77.28
+Ridership,Avg Ticket Passengers Per Day,Nos.,834764,770353
+Ridership,Ticket Passengers Per Bus Per Day,Nos.,503,494
+Ridership,Total Avg Passengers Per Day,Nos.,1207737,1125440
+Ridership,Total Passengers Per Bus Per Day,Nos.,728,722
+Ridership,Pass Passengers Per Day,Nos.,372973,355087
+Ridership,Pct Pass Passengers,%,30.88,31.55
+Ridership,Student Passes Issued,Nos.,280447,234587
+Ridership,Student Pass Earning,Rs.,219340800,188049950
+Ridership,Commuter Passes Issued,Nos.,31469075,29465131
+Ridership,Commuter Pass Earning,Rs.,1486201290,1424989150
+Safety,PMPML Accidents Fatal,Nos.,12,11
+Safety,PMPML Accidents Major,Nos.,7,3
+Safety,PMPML Accidents Minor,Nos.,8,6
+Safety,PMPML Accidents Insignificant,Nos.,14,0
+Safety,PMPML Accidents Total,Nos.,41,20
+Safety,PMPML Accident Rate Per Lakh KM,per lakh km,0.08,0.04
+Safety,Hired Accidents Fatal,Nos.,19,14
+Safety,Hired Accidents Major,Nos.,24,11
+Safety,Hired Accidents Minor,Nos.,16,7
+Safety,Hired Accidents Insignificant,Nos.,18,1
+Safety,Hired Accidents Total,Nos.,77,33
+Safety,Hired Accident Rate Per Lakh KM,per lakh km,0.10,0.05
+Fuel,Diesel Consumption Own,Litres,1460457,1824382
+Fuel,Diesel Consumption Per Day Own,Litres,3990,4998
+Fuel,Diesel Per Bus Per Day Own,Litres,52.87,51.74
+Fuel,CNG Consumption PMPML Own,Kg,14859782,14674618
+Fuel,CNG Consumption PPP,Kg,606467,544590
+Fuel,Total CNG PMPML+PPP,Kg,15466249,15219209
+Fuel,CNG Per Day PMPML+PPP,Kg,42258,41696
+Fuel,CNG Per Bus Per Day PMPML+PPP,Kg,68.67,68.05
+Fuel,E-Bus Electricity Own,Units,8156,23422
+Fuel,E-Bus Electricity Per Day Own,Units,67,64
+Fuel,E-Bus Per Bus Per Day Own,Units,67.01,64.23
+Fuel,KMPL Diesel Own,km/litre,3.48,3.55
+Fuel,KMPG CNG Own,km/kg,3.05,2.89
+Fuel,KMPG CNG PPP,km/kg,2.83,2.79
+Fuel,KMPG CNG Own+PPP,km/kg,2.96,2.89
+Fuel,KMPU E-Bus Own,km/unit,1.10,1.36
+Workshop,Total Breakdowns PMPML Own,Nos.,7705,6145
+Workshop,Breakdown Rate Per 10000 KMs,,1.51,1.22
+Workshop,New Tyres Removed for Retreading,Nos.,2290,2241
+Workshop,Avg KMs Per New Tyre,KMs,65595,72864
+Workshop,Retreaded Tyres Removed,Nos.,3091,2924
+Workshop,Avg KMs Per Retreaded Tyre,KMs,33104,44292
+Staff,Bus Staff Ratio,,4.71,4.56
+Staff,Avg Salary Per Employee Per Day,Rs.,1732.99,1752.41
+Staff,Total Default Cases DEO,Nos.,18902,17134
+Staff,Total Passenger Complaints,Nos.,14842,26359
