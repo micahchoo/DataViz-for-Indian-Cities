@@ -380,18 +380,20 @@ def check_series_color_order(path, content):
     Flag if a page uses the same data in both wide and series= formats with different orderings.
     This rule specifically checks the known fuel-type pattern (CNG/Diesel/E-Bus).
     """
-    # Find wide-format fuel charts and series-format fuel charts on the same page
-    wide_fuel = re.findall(
-        r"y=\{\[(['\"]?(?:cng|diesel|ebus|e.bus)[^'\"]*['\"]?,\s*)+['\"]?(?:cng|diesel|ebus|e.bus)[^'\"]*['\"]?\]\}",
-        content, re.IGNORECASE
-    )
+    # Find wide-format fuel charts and series-format fuel charts on the same page.
+    # Extract y={[...]} blocks first (simple character-class quantifier, no nesting),
+    # then filter to blocks containing fuel-type column names.
+    y_blocks = re.findall(r'y=\{(\[[^\]]+\])\}', content, re.IGNORECASE)
+    fuel_kw = re.compile(r'\b(?:cng|diesel|ebus|e[-_]bus)\b', re.IGNORECASE)
+    wide_fuel = [b for b in y_blocks if fuel_kw.search(b)]
     series_fuel = re.search(r"series=fuel_type", content, re.IGNORECASE)
 
     if wide_fuel and series_fuel:
         for yval in wide_fuel:
-            # The series= chart sorts alphabetically: CNG first, Diesel second
-            # The wide chart should match: cng first, diesel second
-            if re.search(r"diesel[^,]*,\s*['\"]?cng", yval, re.IGNORECASE):
+            # The series= chart sorts alphabetically: CNG first, Diesel second.
+            # The wide chart should match: cng first, diesel second.
+            # [^,\]]* is safe (no nested quantifiers — simple class with *).
+            if re.search(r"diesel[^,\]]*,\s*['\"]?cng", yval, re.IGNORECASE):
                 warn("COMPONENT_COLOR_ORDER", path,
                      "Wide-format chart has diesel before CNG, but series= chart sorts "
                      "alphabetically (CNG first). Colors will be swapped between charts. "
