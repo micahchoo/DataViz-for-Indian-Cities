@@ -20,7 +20,7 @@ theme:
         - "#1e5b71" 
         - "#db76d2"
         - "#bf3154" 
-colorScales:
+  colorScales:
     custom:
       light:
         - "#FAF0FA"  # Lightest (soft periwinkle)
@@ -42,7 +42,7 @@ colorScales:
         - "#a67682"  # Deep-warm (deep rose)
         - "#9d6a85"  # Deeper-warm (rich pink)
         - "#6b4d5e"  # Darkest (deepest tone)
-colors:
+  colors:
     primary:
       light: "#2563eb"
       dark: "#3b82f6"

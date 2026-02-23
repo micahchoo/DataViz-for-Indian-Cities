@@ -1,9 +1,9 @@
 ---
-title: Vehicle Registration Insights - Market Dynamics
-description: Revealing the interesting stories hidden in vehicle registration data through growth rates, market share shifts, and emerging trends
+title: Vehicle Registration Insights - Fleet Composition Trends
+description: Exploring how the composition of registered vehicles in Pimpri-Chinchwad shifted between 2000 and 2018 through growth rates, share changes, and emerging categories
 ---
 
-This analysis reveals market dynamics and compositional changes in vehicle registrations from 2000 to 2018, going beyond simple growth to uncover the real stories in the data.
+This analysis explores how the composition of the registered vehicle fleet changed from 2000 to 2018. Note: these are cumulative active registrations (the total stock on the RTO's books), not annual new sales. Growth rates here reflect net fleet expansion, and "share" means share of the total registered fleet — not share of new purchases in a given year.
 
 ```sql view_options
 SELECT 'Growth Rates' as value
@@ -12,7 +12,7 @@ UNION ALL SELECT 'Indexed Growth'
 UNION ALL SELECT 'Emerging Categories'
 UNION ALL SELECT 'Two-Wheeler Battle'
 UNION ALL SELECT 'Commercial vs Personal'
-UNION ALL SELECT 'Declining Categories'
+UNION ALL SELECT 'Stagnating & Displaced'
 ```
 
 ```sql year_range_options
@@ -64,9 +64,9 @@ WITH yearly_data AS (
       WHEN Vehicle_Type IN ('Stage_carriages', 'Mini_Bus') THEN 'Public Transport'
       WHEN Vehicle_Type IN ('School_Buses') THEN 'School Transport'
       WHEN Vehicle_Type IN ('Private_Service_Vehicles', 'Ambulances') THEN 'Service Vehicles'
-      WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi_') THEN 'Heavy Transport'
+      WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi') THEN 'Heavy Transport'
       WHEN Vehicle_Type IN ('Tanker') THEN 'Tankers'
-      WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers_', 'Delivery_Van_3_wheelers_') THEN 'Delivery Vehicles'
+      WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers', 'Delivery_Van_3_wheelers') THEN 'Delivery Vehicles'
       WHEN Vehicle_Type IN ('Tractors', 'Trailers') THEN 'Agricultural Vehicles'
       ELSE 'Others'
     END as category,
@@ -123,9 +123,9 @@ categorized AS (
       WHEN Vehicle_Type IN ('Stage_carriages', 'Mini_Bus') THEN 'Public Transport'
       WHEN Vehicle_Type IN ('School_Buses') THEN 'School Transport'
       WHEN Vehicle_Type IN ('Private_Service_Vehicles', 'Ambulances') THEN 'Service Vehicles'
-      WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi_') THEN 'Heavy Transport'
+      WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi') THEN 'Heavy Transport'
       WHEN Vehicle_Type IN ('Tanker') THEN 'Tankers'
-      WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers_', 'Delivery_Van_3_wheelers_') THEN 'Delivery Vehicles'
+      WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers', 'Delivery_Van_3_wheelers') THEN 'Delivery Vehicles'
       WHEN Vehicle_Type IN ('Tractors', 'Trailers') THEN 'Agricultural Vehicles'
       ELSE 'Others'
     END as category,
@@ -162,9 +162,9 @@ WITH base_year AS (
       WHEN Vehicle_Type IN ('Stage_carriages', 'Mini_Bus') THEN 'Public Transport'
       WHEN Vehicle_Type IN ('School_Buses') THEN 'School Transport'
       WHEN Vehicle_Type IN ('Private_Service_Vehicles', 'Ambulances') THEN 'Service Vehicles'
-      WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi_') THEN 'Heavy Transport'
+      WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi') THEN 'Heavy Transport'
       WHEN Vehicle_Type IN ('Tanker') THEN 'Tankers'
-      WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers_', 'Delivery_Van_3_wheelers_') THEN 'Delivery Vehicles'
+      WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers', 'Delivery_Van_3_wheelers') THEN 'Delivery Vehicles'
       WHEN Vehicle_Type IN ('Tractors', 'Trailers') THEN 'Agricultural Vehicles'
       ELSE 'Others'
     END as category,
@@ -185,9 +185,9 @@ all_years AS (
       WHEN Vehicle_Type IN ('Stage_carriages', 'Mini_Bus') THEN 'Public Transport'
       WHEN Vehicle_Type IN ('School_Buses') THEN 'School Transport'
       WHEN Vehicle_Type IN ('Private_Service_Vehicles', 'Ambulances') THEN 'Service Vehicles'
-      WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi_') THEN 'Heavy Transport'
+      WHEN Vehicle_Type IN ('Trucks/Lorries', 'Articulated_Multi') THEN 'Heavy Transport'
       WHEN Vehicle_Type IN ('Tanker') THEN 'Tankers'
-      WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers_', 'Delivery_Van_3_wheelers_') THEN 'Delivery Vehicles'
+      WHEN Vehicle_Type IN ('Delivery_Van_4_wheelers', 'Delivery_Van_3_wheelers') THEN 'Delivery Vehicles'
       WHEN Vehicle_Type IN ('Tractors', 'Trailers') THEN 'Agricultural Vehicles'
       ELSE 'Others'
     END as category,
@@ -211,14 +211,14 @@ SELECT
   SPLIT_PART(Year, '-', 1) as display_year,
   CASE 
     WHEN Vehicle_Type = 'Luxury_Tourist_Cabs' THEN 'Luxury Tourist Cabs'
-    WHEN Vehicle_Type = 'Delivery_Van_3_wheelers_' THEN '3-Wheeler Delivery Vans'
-    WHEN Vehicle_Type = 'Delivery_Van_4_wheelers_' THEN '4-Wheeler Delivery Vans'
+    WHEN Vehicle_Type = 'Delivery_Van_3_wheelers' THEN '3-Wheeler Delivery Vans'
+    WHEN Vehicle_Type = 'Delivery_Van_4_wheelers' THEN '4-Wheeler Delivery Vans'
     WHEN Vehicle_Type = 'Ambulances' THEN 'Ambulances'
   END as subcategory,
   Count
 FROM vehicle_registrations_by_type_and_year
-WHERE Vehicle_Type IN ('Luxury_Tourist_Cabs', 'Delivery_Van_3_wheelers_', 
-                       'Delivery_Van_4_wheelers_', 'Ambulances')
+WHERE Vehicle_Type IN ('Luxury_Tourist_Cabs', 'Delivery_Van_3_wheelers', 
+                       'Delivery_Van_4_wheelers', 'Ambulances')
 ORDER BY display_year ASC, subcategory
 ```
 
@@ -272,18 +272,18 @@ ORDER BY display_year
 
 ```sql declining_categories
 WITH yearly_data AS (
-  SELECT 
+  SELECT
     SPLIT_PART(Year, '-', 1) as display_year,
     Vehicle_Type,
     Count
   FROM vehicle_registrations_by_type_and_year
-  WHERE Vehicle_Type IN ('Moped', 'Stage_carriages', 'Stn_Wagons')
+  WHERE Vehicle_Type IN ('Moped', 'Taxi_w_meter', 'Stn_Wagons')
 )
-SELECT 
+SELECT
   display_year,
-  CASE 
+  CASE
     WHEN Vehicle_Type = 'Moped' THEN 'Mopeds'
-    WHEN Vehicle_Type = 'Stage_carriages' THEN 'Stage Carriages'
+    WHEN Vehicle_Type = 'Taxi_w_meter' THEN 'Metered Taxis'
     WHEN Vehicle_Type = 'Stn_Wagons' THEN 'Station Wagons'
   END as subcategory,
   Count
@@ -302,9 +302,9 @@ ORDER BY display_year ASC, subcategory
 
 {#if inputs.selected_view === "Growth Rates"}
 
-### Year-over-Year Growth Rates
+### Year-over-Year Fleet Growth Rates
 
-Understanding market dynamics through growth velocity rather than absolute size.
+How fast each category's registrations grew compared to the previous year.
 
 <Dropdown
   name=growth_year_filter
@@ -335,7 +335,7 @@ Understanding market dynamics through growth velocity rather than absolute size.
 ```sql filtered_growth
 SELECT *
 FROM ${yoy_growth_by_category}
-WHERE display_year >= '${inputs.growth_year_filter}'
+WHERE display_year >= '${inputs.growth_year_filter.value || '2000'}'
   AND (
     ${!inputs.growth_categories || inputs.growth_categories.length === 0 || inputs.growth_categories.includes('All Categories') ? '1=1' : 
       'category IN (' + inputs.growth_categories.map(c => "'" + c + "'").join(',') + ')'
@@ -343,7 +343,7 @@ WHERE display_year >= '${inputs.growth_year_filter}'
   )
 ```
 
-{#if inputs.growth_chart_type === "Line Chart"}
+{#if inputs.growth_chart_type.value === "Line Chart"}
 <LineChart
      data={filtered_growth}
      x=display_year
@@ -360,7 +360,7 @@ WHERE display_year >= '${inputs.growth_year_filter}'
      xGridlines=true
      xTickMarks=true
  />
-{:else if inputs.growth_chart_type === "Area Chart"}
+{:else if inputs.growth_chart_type.value === "Area Chart"}
 <AreaChart
      data={filtered_growth}
      x=display_year
@@ -403,13 +403,13 @@ WHERE display_year >= '${inputs.growth_year_filter}'
   rows=10
 />
 
-**Key Insights:** This chart shows the velocity of change rather than just size. Categories with volatile growth rates may indicate market disruption, while steady growth suggests mature, stable markets.
+**Key Insights:** Motorcycles and Cars consistently show the highest absolute growth rates (15-25% annually in early years, tapering to 6-10% by 2017). Smaller categories like School Buses or Ambulances show volatile spikes but from tiny bases. Note the across-the-board growth slowdown around 2008-09, coinciding with the global financial crisis.
 
 {:else if inputs.selected_view === "Market Share"}
 
-### Market Share Evolution
+### Fleet Composition Share
 
-How the composition of vehicle registrations has shifted over time.
+How each category's share of the total registered fleet has shifted over time. Note: this reflects the accumulated stock of registrations, not the share of new vehicles being registered each year.
 
 <Dropdown
   name=share_year_filter
@@ -441,7 +441,7 @@ How the composition of vehicle registrations has shifted over time.
 ```sql filtered_share
 SELECT *
 FROM ${market_share_evolution}
-WHERE display_year >= '${inputs.share_year_filter}'
+WHERE display_year >= '${inputs.share_year_filter.value || '2000'}'
   AND (
     ${!inputs.share_categories || inputs.share_categories.length === 0 || inputs.share_categories.includes('All Categories') ? '1=1' : 
       'category IN (' + inputs.share_categories.map(c => "'" + c + "'").join(',') + ')'
@@ -449,7 +449,7 @@ WHERE display_year >= '${inputs.share_year_filter}'
   )
 ```
 
-{#if inputs.share_metric === "Percentage"}
+{#if inputs.share_metric.value === "Percentage"}
 <LineChart
      data={filtered_share}
      x=display_year
@@ -509,7 +509,7 @@ WHERE display_year >= '${inputs.share_year_filter}'
   rows=10
 />
 
-**Key Insights:** Market share reveals winners and losers. Even if absolute numbers are growing, a declining market share indicates relative underperformance.
+**Key Insights:** A category's share of the fleet can shrink even while its absolute numbers grow, if other categories are growing faster. Two-wheelers dominate the fleet (~70%), but their share has been slowly eroded by the growth in Cars.
 
 {:else if inputs.selected_view === "Indexed Growth"}
 
@@ -547,8 +547,8 @@ Compare growth trajectories across categories of different sizes.
 ```sql filtered_index
 SELECT *
 FROM ${indexed_growth}
-WHERE display_year >= '${inputs.index_year_filter}'
-  AND index_value >= ${inputs.index_threshold}
+WHERE display_year >= '${inputs.index_year_filter.value || '2000'}'
+  AND index_value >= ${inputs.index_threshold || 0}
   AND (
     ${!inputs.index_categories || inputs.index_categories.length === 0 || inputs.index_categories.includes('All Categories') ? '1=1' : 
       'category IN (' + inputs.index_categories.map(c => "'" + c + "'").join(',') + ')'
@@ -579,7 +579,7 @@ WHERE display_year >= '${inputs.index_year_filter}'
   rows=10
 />
 
-**Key Insights:** Indexed growth makes it easy to compare percentage growth regardless of category size. A small category growing from 100 to 500 (5x) is more impressive than a large category growing from 100 to 150 (1.5x).
+**Key Insights:** Cars grew to ~17x their 2000 base by 2018, outpacing even Motorcycles (~11x). The fastest-growing categories by index (Ambulances, School Transport) started from negligible bases. Use the threshold slider to filter out slow-growing categories and focus on the high-growth ones.
 
 {:else if inputs.selected_view === "Emerging Categories"}
 
@@ -607,7 +607,7 @@ Small but potentially high-growth categories that tell economic stories.
 ```sql filtered_emerging
 SELECT *
 FROM ${emerging_categories}
-WHERE display_year >= '${inputs.emerging_year_filter}'
+WHERE display_year >= '${inputs.emerging_year_filter.value || '2000'}'
 ```
 
 {#if inputs.emerging_chart_type === "Line Chart"}
@@ -671,9 +671,9 @@ WHERE display_year >= '${inputs.emerging_year_filter}'
 />
 
 **Key Insights:**
-- **Luxury Tourist Cabs:** Reflects growth in tourism industry
-- **Delivery Vans:** Early signals of e-commerce and logistics growth
-- **Ambulances:** Healthcare infrastructure development
+- **Luxury Tourist Cabs:** Appears in 2007-08 exactly when Metered Taxis drops to zero — this is an RTO reclassification, not organic tourism growth. Subsequent growth reflects the broader taxi/cab market expansion
+- **Delivery Vans:** Steady growth tracks Pimpri-Chinchwad's industrial and commercial expansion (auto manufacturing, IT parks). Late-period acceleration may partly reflect e-commerce logistics
+- **Ambulances:** Growth from 206 to 1,693 likely reflects the 108 emergency service rollout and private hospital expansion
 
 {:else if inputs.selected_view === "Two-Wheeler Battle"}
 
@@ -702,10 +702,10 @@ Who's winning the battle for two-wheeler dominance?
 ```sql filtered_twowheeler
 SELECT *
 FROM ${two_wheeler_composition}
-WHERE display_year >= '${inputs.twowheeler_year_filter}'
+WHERE display_year >= '${inputs.twowheeler_year_filter.value || '2000'}'
 ```
 
-{#if inputs.twowheeler_metric === "Percentage"}
+{#if inputs.twowheeler_metric.value === "Percentage"}
 <LineChart
      data={filtered_twowheeler}
      x=display_year
@@ -765,13 +765,13 @@ WHERE display_year >= '${inputs.twowheeler_year_filter}'
   rows=10
 />
 
-**Key Insights:** The shift between motorcycles and scooters can indicate changing consumer preferences, urbanization patterns, or demographic shifts (scooters are often preferred by women and in urban areas).
+**Key Insights:** Motorcycles dominated throughout, but scooters staged a dramatic comeback around 2013-14 (from 93,528 to 2,79,645 by 2017-18). This coincides with the gearless automatic scooter revolution (Honda Activa, TVS Jupiter) which broadened scooter appeal across demographics. Meanwhile, Mopeds flatlined entirely after 2011 — a category that simply stopped growing.
 
 {:else if inputs.selected_view === "Commercial vs Personal"}
 
 ### Commercial vs Personal Vehicle Balance
 
-How the ratio of commercial to personal vehicles reveals economic activity.
+A simplified split: "Personal" includes cars, two-wheelers, jeeps, and station wagons. "Commercial" groups everything else — passenger transport (autos, taxis, buses), goods transport (trucks, delivery vans, tankers), agricultural (tractors, trailers), and service vehicles (ambulances). This binary view shows the broad balance but masks very different economic activities within "commercial."
 
 <Dropdown
   name=ratio_year_filter
@@ -795,10 +795,10 @@ How the ratio of commercial to personal vehicles reveals economic activity.
 ```sql filtered_ratio
 SELECT *
 FROM ${commercial_personal_ratio}
-WHERE display_year >= '${inputs.ratio_year_filter}'
+WHERE display_year >= '${inputs.ratio_year_filter.value || '2000'}'
 ```
 
-{#if inputs.ratio_display === "Percentage"}
+{#if inputs.ratio_display.value === "Percentage"}
 <LineChart
      data={filtered_ratio}
      x=display_year
@@ -813,7 +813,7 @@ WHERE display_year >= '${inputs.ratio_year_filter}'
      xGridlines=true
      xTickMarks=true
  />
-{:else if inputs.ratio_display === "Split"}
+{:else if inputs.ratio_display.value === "Split"}
 <AreaChart
      data={filtered_ratio}
      x=display_year
@@ -867,13 +867,13 @@ WHERE display_year >= '${inputs.ratio_year_filter}'
   rows=10
 />
 
-**Key Insights:** Rising commercial vehicle share indicates increased economic activity, logistics growth, and business expansion. Personal vehicle dominance suggests consumer-driven growth.
+**Key Insights:** The commercial share stays relatively stable at ~10-12%, suggesting personal vehicle growth (especially motorcycles and cars) is the dominant driver of fleet expansion. To understand what's happening within the commercial segment, use the Growth Rates or Emerging Categories views to compare specific vehicle types.
 
 {:else}
 
-### Declining Categories
+### Stagnating & Displaced Categories
 
-Categories losing ground in the modern vehicle landscape.
+Vehicle types that plateaued or were displaced by regulatory or market shifts.
 
 <Dropdown
   name=decline_year_filter
@@ -895,7 +895,7 @@ Categories losing ground in the modern vehicle landscape.
 ```sql filtered_decline
 SELECT *
 FROM ${declining_categories}
-WHERE display_year >= '${inputs.decline_year_filter}'
+WHERE display_year >= '${inputs.decline_year_filter.value || '2000'}'
 ```
 
 {#if inputs.decline_chart_type === "Line Chart"}
@@ -904,8 +904,8 @@ WHERE display_year >= '${inputs.decline_year_filter}'
      x=display_year
      y=Count
      series=subcategory
-     title="Categories in Decline"
-     subtitle="Traditional vehicle types being replaced by modern alternatives"
+     title="Stagnating & Displaced Categories"
+     subtitle="Vehicle types that plateaued or were displaced by regulatory/market shifts"
      xAxisTitle="Year"
      yAxisTitle="Registrations"
      chartAreaHeight=450
@@ -921,8 +921,8 @@ WHERE display_year >= '${inputs.decline_year_filter}'
      x=display_year
      y=Count
      series=subcategory
-     title="Categories in Decline"
-     subtitle="Traditional vehicle types being replaced by modern alternatives"
+     title="Stagnating & Displaced Categories"
+     subtitle="Vehicle types that plateaued or were displaced by regulatory/market shifts"
      xAxisTitle="Year"
      yAxisTitle="Registrations"
      chartAreaHeight=450
@@ -942,42 +942,15 @@ WHERE display_year >= '${inputs.decline_year_filter}'
 />
 
 **Key Insights:**
-- **Mopeds:** Being replaced by motorcycles and scooters with better performance
-- **Stage Carriages:** Traditional public transport losing to private vehicles and modern buses
-- **Station Wagons:** Shifting preference toward SUVs and crossovers
+- **Mopeds:** Plateau at ~37,600 from 2011 onward — no new registrations, suggesting the category was fully superseded by motorcycles and gearless scooters
+- **Metered Taxis:** Drops to zero in 2007-08 — not a market decline but an RTO reclassification to "Luxury Tourist Cabs" (see Emerging Categories view)
+- **Station Wagons:** Negligible numbers throughout (60-78 vehicles) — essentially a legacy category on the books, not a meaningful market segment
 
 {/if}
 
-## Interactive Features Guide
+## About This Data
 
-This dashboard includes several interactive controls to help you explore the data:
-
-**Time Period Filters:** Select different time ranges to focus on specific periods of interest. Compare early growth (2000-2005) vs recent trends (2010-2017).
-
-**Chart Type Selectors:** Switch between line charts, area charts, and bar charts to see which visualization best reveals patterns.
-
-**Category Filters:** Use multi-select dropdowns to compare specific categories of interest. Great for benchmarking or competitive analysis.
-
-**Metric Toggles:** Switch between percentages and absolute numbers to see both relative and absolute performance.
-
-**Range Sliders:** Filter data based on growth thresholds to focus on high performers or outliers.
-
-**Data Tables:** Every view includes a searchable data table below the charts for detailed exploration and validation.
-
-## Why These Views Matter
-
-Traditional stacked area charts showing absolute growth can be misleading because they:
-- Make large categories dominate visually
-- Hide relative performance and market dynamics
-- Miss acceleration/deceleration patterns
-- Obscure interesting stories in smaller categories
-
-These alternative views reveal:
-- **Market momentum** through growth rates
-- **Competitive dynamics** through market share shifts
-- **Relative performance** through indexed comparisons
-- **Economic signals** through commercial/personal ratios
-- **Emerging opportunities** through small but fast-growing categories
+This page uses the same cumulative registration data as [the overview page](/PCMC/Registered_Vehicles_2000_2018) but slices it differently — growth rates, fleet composition shares, and indexed comparisons reveal patterns that absolute stacked charts obscure. Use the dropdowns and filters above to compare specific categories and time periods.
 
 ## Sources
 - [Open City Urban Data Portal](https://data.opencity.in/dataset/maharashtra-vehicles-registration-data/resource/maharashtra-vehicles-registration-data---2001-2018)

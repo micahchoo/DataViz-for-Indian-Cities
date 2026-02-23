@@ -1,16 +1,31 @@
 ---
 title: DataViz for Indian Cities
+description: Urban mobility data for Pimpri-Chinchwad — vehicles, buses, traffic, and road safety from 2000 to 2025
 ---
 
-I started this project with Pimpri Chinchwad but am open to data submissions from other cities as well. 
+Pimpri-Chinchwad grew from 10 lakh residents in 2001 to over 17 lakh by 2011, making it one of India's fastest-growing urban areas. As the city expanded, its transport infrastructure — buses, roads, vehicle registrations — strained to keep pace. This project visualizes that story through public data.
 
-# Tools: 
-- [Evidence](https://docs.evidence.dev/) as the static site generator
-- [gmft](https://github.com/conjuncts/gmft) to extract tables from old PDF reports from city agencies. You can find the script [here](https://github.com/micahchoo/Jenga-Block-Archiving-Tools/tree/main/Extract%20tables%20from%20PDFs)
-- [RKward](https://github.com/KDE/rkward) to transform data from the reports into something usable
+## Pimpri-Chinchwad
 
-# Content Plan
-- Clean up content in pieces
-- Add PMPML per depot data as published by PMPML's Chief Statistician as a dynamic data source updated every month
-- Add https://pcpc.gov.in/ncrb crime data per month
-- https://www.pcmcindia.gov.in/financial_L2_E.php per year
+- **[City Overview](/PCMC)** — Ward map, zone structure, and data coverage
+- **[Vehicle Registrations](/PCMC/Registered_Vehicles_2000_2018)** — Cumulative RTO registrations by type, 2000-2018
+- **[Fleet Composition Trends](/PCMC/Fleet_Composition_Trends)** — Growth rates, market share shifts, and indexed comparisons
+- **[Road Safety](/PCMC/Road_Accident_Statistics)** — Accident trends 2000-2007 and PMPML bus safety 2023-2025
+
+### Public Transport
+- **[Overview](/PCMC/Public%20Transport)** — Three eras of bus transit: PCMT, the merger, and PMPML today
+- **[PCMT Before PMPML](/PCMC/Public%20Transport/PCMT_before_PMPML)** — Bus fleet operations 1995-2007
+- **[PMPML Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly fleet data across 17 depots, 2023-2025
+- **[Depot Performance](/PCMC/Public%20Transport/Depot_Performance)** — Efficiency, fleet composition, and ridership by depot
+- **[Ridership and Fares](/PCMC/Public%20Transport/Ridership_and_Fares)** — Pass types, fare tiers, and revenue mix
+
+### Traffic
+- **[Overview](/PCMC/Traffic)** — Traffic volume surveys in 2008 and 2021
+- **[2008 Traffic Survey](/PCMC/Traffic/Pimpri_Chinchwad_Traffic_at_Locations)** — 15 locations across PCMC
+- **[2021 Traffic Survey](/PCMC/Traffic/Pimpri_Chinchwad_Traffic_at_Locations_2021)** — 82 locations across Pune metro
+
+---
+
+## About
+
+Built with [Evidence](https://docs.evidence.dev/) for data visualization and static site generation. Tables extracted from PDF reports using [gmft](https://github.com/conjuncts/gmft) ([extraction scripts](https://github.com/micahchoo/Jenga-Block-Archiving-Tools/tree/main/Extract%20tables%20from%20PDFs)), cleaned with [RKward](https://github.com/KDE/rkward). Data sourced from PCMC's Comprehensive Mobility Plan (2008), Open City Urban Data Portal, PMPML monthly statistical reports, and Pune Metro DPR traffic surveys. Open to data submissions from other Indian cities.

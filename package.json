@@ -5,6 +5,8 @@
     "build": "EVIDENCE_BUILD_DIR=./build/DataViz-for-Indian-Cities evidence build",
     "build:strict": "evidence build:strict",
     "dev": "evidence dev --open /",
+    "lint": "python3 lint.py",
+    "lint:strict": "python3 lint.py --strict",
     "test": "evidence build",
     "sources": "evidence sources",
     "sources:strict": "evidence sources --strict",

@@ -1,28 +1,18 @@
 ---
-title: Traffic Chokepoints across PCMC 2008
-description: The 2008 traffic survey across Pimpri Chinchwad revealed significant variations in traffic patterns across 15 key locations. Here are the main insights
+title: Traffic Volume Survey across PCMC 2008
+description: Traffic volumes measured at 15 locations across Pimpri-Chinchwad as part of the 2008 Comprehensive Mobility Plan
 ---
-The 2008 traffic survey across Pimpri Chinchwad revealed significant variations in traffic patterns across 15 key locations. Here are the main insights:
+The 2008 CMP traffic survey measured daily vehicle volumes at 15 locations across Pimpri-Chinchwad. This data predates the 2021 metro-wide survey by 13 years and covers only PCMC (not PMC).
 
-### High Traffic Corridors
-Dapodi Bridge emerged as the busiest corridor with 120,527 vehicles daily, also handling the highest passenger volume (466,672 passengers)
-Aundh Bridge recorded the second-highest traffic with 87,087 vehicles and 413,078 passengers
-Between Pimpri Junction & Kasarwadi Junction saw 79,216 vehicles, highlighting its importance as a major transit point
+### Key Patterns
 
-### Moderate Traffic Areas
-The Mumbai-Pune Expressway point recorded 28,935 vehicles
-Nashik Highway before the toll plaza showed moderate vehicle count (41,495) but significant passenger movement (149,451)
-The corridor Between Nigdi Junction & Chinchwad Junction handled 66,439 vehicles
+**NH-4 corridor dominates**: Dapodi Bridge (1,20,527 vehicles, 4,66,672 passengers) and the parallel Bopodi bridge (46,540 vehicles) together carried the heaviest traffic, serving as the primary north-south connector between PCMC and Pune. The 3.87 passengers-per-vehicle ratio at Dapodi — compared to ~1.3 on local roads — reflects the heavy bus and shared-vehicle traffic on this arterial.
 
-### Lower Traffic Zones
-Dehu-Alandi Road showed the lowest traffic volumes with 9,228 vehicles
-The connection from Nigdi Junction to Dehu-Alandi Road recorded 12,595 vehicles
-These areas primarily serve local traffic rather than major transit routes
+**Two-wheeler dominance on internal roads**: Locations like KSB Chowk–NH-50 (28,096 two-wheelers out of 51,843 vehicles = 54%) and Kalewadi–Dange Chowk (19,183 of 37,266 = 51%) show how internal PCMC roads were overwhelmingly two-wheeler territory in 2008, consistent with the [vehicle registration data](/PCMC/Registered_Vehicles_2000_2018) showing two-wheelers as ~70% of the fleet.
 
-### Passenger-to-Vehicle Ratio Analysis
-Major highways and bridges show higher passenger-to-vehicle ratios, indicating greater use of public transport and shared vehicles
-Dapodi Bridge shows approximately 3.87 passengers per vehicle
-Local roads show lower ratios, suggesting more private vehicle usage
+**Expressway is car-heavy**: The Mumbai-Pune Expressway point (21,784 four-wheelers out of 28,935 = 75%) has a completely different vehicle mix from the rest of PCMC — very few two-wheelers or autos, reflecting its limited-access design.
+
+**Sparse northern periphery**: Dehu-Alandi Road (9,228 vehicles) and Nigdi–Dehu connector (12,595) show the low-density northern edge of PCMC in 2008 — areas that have since seen significant development.
 
 
 
@@ -76,6 +66,48 @@ borderColor=#00000000
 selectedBorderColor=#00ffff
 />
 
+
+## Aggregate Mode Share
+
+```sql mode_share
+SELECT 'Two-Wheelers' as mode, SUM(two_wheelers) as vehicles,
+    ROUND(SUM(two_wheelers) * 100.0 / SUM(total_vehicles), 1) as share_pct,
+    ROUND(SUM(total_passengers) * 1.0 / SUM(total_vehicles), 2) as pax_per_vehicle
+FROM Pimpri_Chinchwad_Traffic_at_Locations
+UNION ALL
+SELECT 'Four-Wheelers', SUM(four_wheelers),
+    ROUND(SUM(four_wheelers) * 100.0 / SUM(total_vehicles), 1), null
+FROM Pimpri_Chinchwad_Traffic_at_Locations
+UNION ALL
+SELECT 'Auto Rickshaws', SUM(auto_rickshaws),
+    ROUND(SUM(auto_rickshaws) * 100.0 / SUM(total_vehicles), 1), null
+FROM Pimpri_Chinchwad_Traffic_at_Locations
+UNION ALL
+SELECT 'Buses', SUM(minibuses + local_buses + intercity_buses),
+    ROUND(SUM(minibuses + local_buses + intercity_buses) * 100.0 / SUM(total_vehicles), 1), null
+FROM Pimpri_Chinchwad_Traffic_at_Locations
+UNION ALL
+SELECT 'Cycles', SUM(cycles),
+    ROUND(SUM(cycles) * 100.0 / SUM(total_vehicles), 1), null
+FROM Pimpri_Chinchwad_Traffic_at_Locations
+ORDER BY vehicles DESC
+```
+
+<BarChart
+    data={mode_share}
+    x=mode
+    y=share_pct
+    swapXY=true
+    title="Vehicle Mode Share Across All 15 Locations"
+    subtitle="Two-wheelers dominate at 43%, followed by four-wheelers at 31%"
+    yAxisTitle="Share of Total Vehicles (%)"
+/>
+
+Across all 15 survey points, the overall passengers-per-vehicle ratio was 2.97 — meaning each vehicle carried about 3 people on average. But this varies enormously: the Mumbai-Pune Expressway averaged just 3.0 (cars with drivers), while Aundh Bridge hit 4.74 (heavy bus traffic inflating the ratio). Buses made up only 6% of vehicles but carried a disproportionate share of passengers.
+
+## See Also
+
+- **[Vehicle Registrations](/PCMC/Registered_Vehicles_2000_2018)** — The vehicle fleet growth behind these traffic volumes
 
 ## Sources
 - [PCMC CMP 2008](https://www.pcmcindia.gov.in/admin/cms_upload/submission/2388046091386320509.pdf)
