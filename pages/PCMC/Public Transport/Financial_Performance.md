@@ -7,7 +7,7 @@ PMPML's finances follow a structural pattern: bus revenue has held roughly flat 
 
 The eight-year record captures the COVID collapse (FY20-21: revenue down 70%, employees still 97% paid), the recovery (FY22-23: first net profit in years), and the FY24-25 return to loss as employee costs outran both revenue and the reimbursement ceiling.
 
-**Note on data quality:** Financial figures for FY17-18 to FY20-21 are extracted from text-embedded PDFs using Ghostscript. FY21-22 to FY24-25 are from OCR of scanned balance sheets, cross-validated using consecutive-year previous-column matching. The `notes` column in the source CSV documents the extraction method and any discrepancies for each year.
+**Note on data quality:** P&L figures for FY17-18 to FY20-21 are from text-embedded PDFs via Ghostscript; FY21-22 to FY24-25 from OCR of scanned statements. Balance sheet figures for FY17-18 to FY20-21 are manually transcribed from Canon-scanned PDFs (raw rupees converted to lakhs); FY21-22 to FY22-23 from iLovePDF scans. FY21-22 introduced an Ind-AS reclassification — roughly ₹40 Cr of deposits/advances moved from current assets to "Other Non-Current Assets" — creating a structural break; pre-FY21-22 figures are as originally reported. The `notes` column in the source CSV documents extraction method and any discrepancies per item.
 
 ---
 
@@ -159,6 +159,53 @@ After accounting for all reimbursements received, PMPML posted net profits in FY
 
 ---
 
+## Balance Sheet: Eight-Year Trends
+
+PMPML entered this period with no short-term debt and a strong cash position. The FY2019-20 surge in net fixed assets — from ₹82 Cr to ₹214 Cr in a single year — reflects large-scale capital investment, likely the BRT fleet expansion and early electric bus procurement. Since then, annual depreciation has outpaced new additions: net PPE has fallen 85% over six years to ₹32.8 Cr in FY2024-25, suggesting the 2019-20 vintage fleet is approaching full depreciation without comparable replacement. Cash reserves tracked an opposite arc — peaking at ₹93 Cr in FY2019-20, collapsing to ₹9.9 Cr by FY2022-23, and partially recovering since. Short-term borrowings were zero through FY2019-20, then rose as cash fell, reaching ₹34.3 Cr by FY2024-25.
+
+*Note: FY2021-22 introduced an Ind-AS reclassification that moved ~₹40 Cr from current to non-current assets. Pre-FY2021-22 figures are as originally reported — the structural break appears most clearly in the "Other Non-Current Assets" line.*
+
+```sql bs_trend
+SELECT fiscal_year, item, ROUND(value_lakhs / 100, 1) as value_cr
+FROM (
+    SELECT 'FY2017-18' as fiscal_year, item, fy2017_18_lakhs as value_lakhs FROM PMPML_Balance_Sheet
+    UNION ALL
+    SELECT 'FY2018-19', item, fy2018_19_lakhs FROM PMPML_Balance_Sheet
+    UNION ALL
+    SELECT 'FY2019-20', item, fy2019_20_lakhs FROM PMPML_Balance_Sheet
+    UNION ALL
+    SELECT 'FY2020-21', item, fy2020_21_lakhs FROM PMPML_Balance_Sheet
+    UNION ALL
+    SELECT 'FY2021-22', item, fy2021_22_lakhs FROM PMPML_Balance_Sheet
+    UNION ALL
+    SELECT 'FY2022-23', item, fy2022_23_lakhs FROM PMPML_Balance_Sheet
+    UNION ALL
+    SELECT 'FY2023-24', item, fy2023_24_lakhs FROM PMPML_Balance_Sheet
+    UNION ALL
+    SELECT 'FY2024-25', item, fy2024_25_lakhs FROM PMPML_Balance_Sheet
+) t
+WHERE item IN (
+    'Property Plant & Equipment (Net)',
+    'Cash & Cash Equivalents',
+    'Short-Term Borrowings',
+    'Inventories'
+)
+ORDER BY fiscal_year, item
+```
+
+<LineChart
+    data={bs_trend}
+    x=fiscal_year
+    y=value_cr
+    series=item
+    title="Key Balance Sheet Items — FY2017-18 to FY2024-25 (₹ Crores)"
+    subtitle="PPE, cash, borrowings, and inventories over eight fiscal years"
+    yAxisTitle="₹ Crores"
+    yFmt='#,##0.0'
+/>
+
+---
+
 ## Balance Sheet Snapshot
 
 *FY2024-25 with FY2023-24 comparatives. Values extracted from the annual balance sheet by OCR and cross-validated using consecutive-year previous-column matching. Figures in ₹ Crores.*
@@ -253,7 +300,7 @@ ORDER BY subcategory DESC, item, fiscal_year
 
 ---
 
-*Data covers FY 2017-18 to FY 2024-25 (8 fiscal years). All figures in ₹ Crores (1 Cr = 10 lakhs). Source: [PMPML Annual Financial Statements](https://pmpml.org/financial_performance), Chief Accounts Officer. Extraction via Ghostscript (FY17-21) and EasyOCR (FY21-25); cross-validated across consecutive annual reports.*
+*Data covers FY 2017-18 to FY 2024-25 (8 fiscal years). All figures in ₹ Crores (1 Cr = 10 lakhs). Source: [PMPML Annual Financial Statements](https://pmpml.org/financial_performance), Chief Accounts Officer. P&L extraction via Ghostscript (FY17-21) and EasyOCR (FY21-25); balance sheet FY17-21 manually transcribed from scanned documents, FY21-23 via OCR; all cross-validated across consecutive annual reports.*
 
 ---
 

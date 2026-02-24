@@ -1,10 +1,10 @@
-item,category,subcategory,fy2023_24_lakhs,fy2024_25_lakhs,notes
-Property Plant & Equipment (Net),Assets,Non-Current,4664.58,3277.11,OCR cross-validated
-Other Non-Current Assets,Assets,Non-Current,12265.70,11277.44,OCR cross-validated
-Inventories,Assets,Current,882.41,2021.12,OCR cross-validated
-Trade Receivables,Assets,Current,1260.33,1393.35,OCR cross-validated
-Cash & Cash Equivalents,Assets,Current,2113.09,2012.08,OCR cross-validated
-Loans & Advances,Assets,Current,855.87,786.89,OCR cross-validated
-Other Current Assets,Assets,Current,7.39,3.13,OCR cross-validated
-Short-Term Borrowings,Liabilities,Current,2520.92,3434.43,OCR cross-validated
-Other Non-Current Liabilities,Liabilities,Non-Current,60.76,131.52,OCR cross-validated
+item,category,subcategory,fy2017_18_lakhs,fy2018_19_lakhs,fy2019_20_lakhs,fy2020_21_lakhs,fy2021_22_lakhs,fy2022_23_lakhs,fy2023_24_lakhs,fy2024_25_lakhs,notes
+Property Plant & Equipment (Net),Assets,Non-Current,4398.16,8248.59,21390.65,15016.68,10186.87,6654.34,4664.58,3277.11,OCR cross-validated; FY19-20 peak reflects major fleet/depot capital investment
+Other Non-Current Assets,Assets,Non-Current,4843.38,0.00,0.00,0.00,4284.76,4864.03,12265.70,11277.44,Structural break at FY21-22 (Ind-AS reclassification); FY17-18 = CWIP only; FY18-21 = 0 as-reported
+Inventories,Assets,Current,901.09,738.18,865.80,790.21,940.39,943.51,882.41,2021.12,OCR cross-validated; FY17-21 Canon scan FY21-23 iLovePDF scan
+Trade Receivables,Assets,Current,529.71,515.91,624.66,591.38,579.73,868.28,1260.33,1393.35,OCR cross-validated; FY17-21 Canon scan FY21-23 iLovePDF scan
+Cash & Cash Equivalents,Assets,Current,8457.43,7578.86,9280.59,7666.98,2909.78,985.17,2113.09,2012.08,OCR cross-validated; FY20-21 as-reported (FY21-22 doc restates FY20-21 as 3631 due to reclassification)
+Loans & Advances,Assets,Current,225.50,1723.74,71.93,137.59,20.95,12.74,855.87,786.89,OCR cross-validated; FY17-21 Canon scan FY21-23 iLovePDF scan
+Other Current Assets,Assets,Current,1097.03,582.11,469.67,334.28,425.24,506.19,7.39,3.13,OCR cross-validated; FY17-21 Canon scan FY21-23 iLovePDF scan
+Short-Term Borrowings,Liabilities,Current,0.00,0.00,0.00,298.89,2460.30,2635.37,2520.92,3434.43,OCR cross-validated; zero through FY19-20; borrowings first appear FY20-21 (COVID year)
+Other Non-Current Liabilities,Liabilities,Non-Current,49.94,66.23,78.29,77.35,76.76,69.63,60.76,131.52,Deferred tax liability; OCR cross-validated

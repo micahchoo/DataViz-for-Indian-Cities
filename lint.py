@@ -873,6 +873,41 @@ def check_data_files():
             warn("DATA_PVR", p_pvr,
                  "pune_vehicle_registrations.csv should cover 2000-2001 to 2017-2018")
 
+    # ── PMPML_Balance_Sheet.csv integrity ────────────────────────────────────
+
+    rows_bs, p_bs = load_csv("PMPML_Balance_Sheet.csv")
+    if rows_bs is None:
+        error("DATA_BS", p_bs,
+              "PMPML_Balance_Sheet.csv not found")
+    else:
+        required_year_cols = {
+            "fy2017_18_lakhs", "fy2018_19_lakhs", "fy2019_20_lakhs", "fy2020_21_lakhs",
+            "fy2021_22_lakhs", "fy2022_23_lakhs", "fy2023_24_lakhs", "fy2024_25_lakhs",
+        }
+        missing_year_cols = required_year_cols - set(rows_bs[0].keys())
+        if missing_year_cols:
+            error("DATA_BS", p_bs,
+                  f"PMPML_Balance_Sheet.csv missing year columns: {sorted(missing_year_cols)}")
+        required_items = {
+            "Property Plant & Equipment (Net)",
+            "Other Non-Current Assets",
+            "Inventories",
+            "Trade Receivables",
+            "Cash & Cash Equivalents",
+            "Loans & Advances",
+            "Other Current Assets",
+            "Short-Term Borrowings",
+            "Other Non-Current Liabilities",
+        }
+        actual_items = {r.get("item", "") for r in rows_bs}
+        missing_items = required_items - actual_items
+        if missing_items:
+            error("DATA_BS", p_bs,
+                  f"PMPML_Balance_Sheet.csv missing items: {sorted(missing_items)}")
+        if len(rows_bs) != 9:
+            warn("DATA_BS", p_bs,
+                 f"PMPML_Balance_Sheet.csv has {len(rows_bs)} rows — expected 9")
+
     # ── Date format consistency ─────────────────────────────────────────────
 
     for label, rows, path in [
