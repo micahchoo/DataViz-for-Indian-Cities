@@ -183,7 +183,7 @@ SELECT
     "Sub Type" as sub_type,
     TRY_CAST(Developed_Area_Sq_Km AS DOUBLE) as Developed_Area_Sq_Km,
     TRY_CAST(Percent_of_Total AS DOUBLE) as Percent_of_Total
-FROM "Landuse_Type_by_Developed_Area_(2008)"
+FROM Landuse_Type_by_Developed_Area_2008
 ORDER BY Developed_Area_Sq_Km DESC
 ```
 
