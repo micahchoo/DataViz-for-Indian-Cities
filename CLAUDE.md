@@ -10,7 +10,9 @@ Evidence.dev static site for urban mobility data visualization focused on Pimpri
 
 - `npm run dev` — Start dev server (opens browser)
 - `npm run build` — Static build to `./build/DataViz-for-Indian-Cities/`
-- `npm run sources` — Validate data source connections
+- `npm run sources` — Validate data source connections (run after adding any new CSV)
+- `npm run lint` — Report errors and warnings
+- `npm run lint:strict` — Exit 1 on warnings (equivalent to `python3 lint.py --strict`)
 
 ## Architecture
 

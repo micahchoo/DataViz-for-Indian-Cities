@@ -64,6 +64,9 @@ The e-bus fleet has been exceptionally stable: 458 buses from launch through mid
     yAxisTitle="Number of Buses"
     connectGroup="ebus-monthly"
 >
+    <ReferenceLine x='2023-10-01' label="Fleet: 458→473" hideValue=true color=base-content-muted/>
+    <ReferenceLine x='2024-08-01' label="Fleet: 473→490" hideValue=true color=base-content-muted/>
+    <ReferenceLine x='2025-04-01' label="Fleet change" hideValue=true color=base-content-muted/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
@@ -79,6 +82,9 @@ The e-bus fleet has been exceptionally stable: 458 buses from launch through mid
     yMin=80
     connectGroup="ebus-monthly"
 >
+    <ReferenceLine x='2023-10-01' label="Fleet: 458→473" hideValue=true color=base-content-muted/>
+    <ReferenceLine x='2024-08-01' label="Fleet: 473→490" hideValue=true color=base-content-muted/>
+    <ReferenceLine x='2025-04-01' label="Fleet change" hideValue=true color=base-content-muted/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
@@ -133,6 +139,9 @@ KMPU (kilometers per unit of electricity) is the e-bus equivalent of fuel effici
     yAxisTitle="Km/Unit"
     connectGroup="ebus-monthly"
 >
+    <Callout x='2023-01-01' y=0.81 labelPosition=right>
+        Jan 2023: initial calibration period — settled to 0.64–0.75 by Feb 2023
+    </Callout>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
