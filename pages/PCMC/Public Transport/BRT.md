@@ -18,7 +18,7 @@ Between 2023 and 2025, the BRT network expanded from 759 to 927 buses (by late 2
 ```sql brt_summary
 SELECT
     COUNT(DISTINCT Date) as total_months,
-    SUM(TRY_CAST(buses_held AS DOUBLE)) / COUNT(DISTINCT Date) as avg_buses_held,
+    SUM(TRY_CAST(buses_held AS DOUBLE)) / NULLIF(COUNT(DISTINCT Date), 0) as avg_buses_held,
     ROUND(AVG(TRY_CAST(fleet_utilization_pct AS DOUBLE)), 1) as avg_utilization_pct,
     ROUND(SUM(TRY_CAST(all_traffic_earning AS DOUBLE)) / 10000000, 1) as total_revenue_cr
 FROM brt_extracted

@@ -71,24 +71,24 @@ selectedBorderColor=#00ffff
 
 ```sql mode_share
 SELECT 'Two-Wheelers' as mode, SUM(two_wheelers) as vehicles,
-    ROUND(SUM(two_wheelers) * 100.0 / SUM(total_vehicles), 1) as share_pct,
-    ROUND(SUM(total_passengers) * 1.0 / SUM(total_vehicles), 2) as pax_per_vehicle
+    ROUND(SUM(two_wheelers) * 100.0 / NULLIF(SUM(total_vehicles), 0), 1) as share_pct,
+    ROUND(SUM(total_passengers) * 1.0 / NULLIF(SUM(total_vehicles), 0), 2) as pax_per_vehicle
 FROM Pimpri_Chinchwad_Traffic_at_Locations
 UNION ALL
 SELECT 'Four-Wheelers', SUM(four_wheelers),
-    ROUND(SUM(four_wheelers) * 100.0 / SUM(total_vehicles), 1), null
+    ROUND(SUM(four_wheelers) * 100.0 / NULLIF(SUM(total_vehicles), 0), 1), null
 FROM Pimpri_Chinchwad_Traffic_at_Locations
 UNION ALL
 SELECT 'Auto Rickshaws', SUM(auto_rickshaws),
-    ROUND(SUM(auto_rickshaws) * 100.0 / SUM(total_vehicles), 1), null
+    ROUND(SUM(auto_rickshaws) * 100.0 / NULLIF(SUM(total_vehicles), 0), 1), null
 FROM Pimpri_Chinchwad_Traffic_at_Locations
 UNION ALL
 SELECT 'Buses', SUM(minibuses + local_buses + intercity_buses),
-    ROUND(SUM(minibuses + local_buses + intercity_buses) * 100.0 / SUM(total_vehicles), 1), null
+    ROUND(SUM(minibuses + local_buses + intercity_buses) * 100.0 / NULLIF(SUM(total_vehicles), 0), 1), null
 FROM Pimpri_Chinchwad_Traffic_at_Locations
 UNION ALL
 SELECT 'Cycles', SUM(cycles),
-    ROUND(SUM(cycles) * 100.0 / SUM(total_vehicles), 1), null
+    ROUND(SUM(cycles) * 100.0 / NULLIF(SUM(total_vehicles), 0), 1), null
 FROM Pimpri_Chinchwad_Traffic_at_Locations
 ORDER BY vehicles DESC
 ```
@@ -111,3 +111,5 @@ Across all 15 survey points, the overall passengers-per-vehicle ratio was 2.97 â
 
 ## Sources
 - [PCMC CMP 2008](https://www.pcmcindia.gov.in/admin/cms_upload/submission/2388046091386320509.pdf)
+
+## Data Queries

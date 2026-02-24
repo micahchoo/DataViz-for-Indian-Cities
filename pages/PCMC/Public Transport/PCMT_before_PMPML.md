@@ -19,8 +19,8 @@ SELECT
     "No. of Buses" as Total_Fleet_Size,
     "Buses on Road" as Active_Buses,
     "Avg No. of Passengers / Day" as Daily_Passengers,
-    ROUND(CAST("Buses on Road" AS FLOAT) / "No. of Buses" * 100, 1) as Fleet_Utilization_Rate,
-    ROUND(CAST("Avg No. of Passengers / Day" AS FLOAT) / "Buses on Road", 0) as Passengers_Per_Bus
+    ROUND(TRY_CAST("Buses on Road" AS DOUBLE) / "No. of Buses" * 100, 1) as Fleet_Utilization_Rate,
+    ROUND(TRY_CAST("Avg No. of Passengers / Day" AS DOUBLE) / "Buses on Road", 0) as Passengers_Per_Bus
 FROM Bus_Fleet_Statistics
 ORDER BY Sort_Year
 ```

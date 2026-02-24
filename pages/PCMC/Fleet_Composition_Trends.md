@@ -954,3 +954,5 @@ This page uses the same cumulative registration data as [the overview page](/PCM
 
 ## Sources
 - [Open City Urban Data Portal](https://data.opencity.in/dataset/maharashtra-vehicles-registration-data/resource/maharashtra-vehicles-registration-data---2001-2018)
+
+## Data Queries

@@ -840,3 +840,5 @@ ORDER BY date_parsed
 
 *Dashboard last updated: June 2025*
 *Data structure: Monthly aggregated reports per depot (22 months across Jan 2023 – Jun 2025, 15-17 depots per month, 334 records). Note: coverage has gaps — Jan–Mar 2024 and Nov 2024–Mar 2025 are missing.*
+
+## Data Queries
