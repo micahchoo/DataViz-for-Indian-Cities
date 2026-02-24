@@ -55,7 +55,7 @@ WHERE Date IS NOT NULL
 />
 </Grid>
 
-PMPML now operates across 17 depots with a fleet of ~2,000 buses. Monthly depot-level data from January 2023 to June 2025 (with some coverage gaps) provides granular insight into fleet operations, revenue, ridership, and safety.
+PMPML now operates across 17 depots with a fleet of ~2,000 buses. Monthly depot-level data from January 2023 to December 2025 (with some coverage gaps) provides granular insight into fleet operations, revenue, ridership, and safety.
 
 - **[Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly fleet dashboard: vehicle deployment, kilometers, revenue, fuel efficiency, safety, and depot comparisons
 - **[Depot Performance](/PCMC/Public%20Transport/Depot_Performance)** — How depots compare on efficiency, schedule adherence, fleet ownership, and revenue patterns
@@ -68,4 +68,4 @@ PMPML now operates across 17 depots with a fleet of ~2,000 buses. Monthly depot-
 
 ---
 
-*Data covers Jan 2023 – Jun 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025 missing). Source: PMPML Chief Statistician monthly reports.*
+*Data covers Jan 2023 – Dec 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025, Jul–Sep 2025 missing). Source: [PMPML Chief Statistician monthly reports](https://pmpml.org/statistics).*

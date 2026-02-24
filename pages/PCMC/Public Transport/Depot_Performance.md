@@ -227,6 +227,7 @@ Select a depot to see its utilization and ridership trends over time. Seasonal p
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ### {inputs.selected_depot.value} — Passengers per Bus per Day
@@ -242,6 +243,7 @@ Select a depot to see its utilization and ridership trends over time. Seasonal p
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ### {inputs.selected_depot.value} — Revenue per Bus per Day
@@ -257,6 +259,7 @@ Select a depot to see its utilization and ridership trends over time. Seasonal p
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ### {inputs.selected_depot.value} — KMs per Bus per Day
@@ -272,6 +275,7 @@ Select a depot to see its utilization and ridership trends over time. Seasonal p
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 <DataTable
@@ -448,4 +452,4 @@ ORDER BY date_parsed
 
 ---
 
-*Data covers Jan 2023 – Jun 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025 missing). Source: PMPML Chief Statistician monthly reports.*
+*Data covers Jan 2023 – Dec 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025, Jul–Sep 2025 missing). Source: [PMPML Chief Statistician monthly reports](https://pmpml.org/statistics).*

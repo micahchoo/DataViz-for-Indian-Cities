@@ -66,6 +66,7 @@ The e-bus fleet has been exceptionally stable: 458 buses from launch through mid
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </BarChart>
 
 <LineChart
@@ -80,6 +81,7 @@ The e-bus fleet has been exceptionally stable: 458 buses from launch through mid
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -98,6 +100,7 @@ The e-bus fleet has been exceptionally stable: 458 buses from launch through mid
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </AreaChart>
 
 <LineChart
@@ -111,6 +114,7 @@ The e-bus fleet has been exceptionally stable: 458 buses from launch through mid
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -130,6 +134,7 @@ KMPU (kilometers per unit of electricity) is the e-bus equivalent of fuel effici
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 <LineChart
@@ -144,6 +149,7 @@ KMPU (kilometers per unit of electricity) is the e-bus equivalent of fuel effici
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -161,6 +167,7 @@ KMPU (kilometers per unit of electricity) is the e-bus equivalent of fuel effici
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 <LineChart
@@ -174,6 +181,7 @@ KMPU (kilometers per unit of electricity) is the e-bus equivalent of fuel effici
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -191,6 +199,7 @@ KMPU (kilometers per unit of electricity) is the e-bus equivalent of fuel effici
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 <LineChart
@@ -203,6 +212,7 @@ KMPU (kilometers per unit of electricity) is the e-bus equivalent of fuel effici
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -222,6 +232,7 @@ E-bus accidents are categorized as "Hired Bus" accidents because the fleet is op
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </BarChart>
 
 ---
@@ -252,7 +263,7 @@ E-bus accidents are categorized as "Hired Bus" accidents because the fleet is op
 
 ---
 
-*Data covers Jan 2023 – Jun 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025 missing). Source: PMPML E-Bus Service Statistical Reports (monthly), Chief Statistician.*
+*Data covers Jan 2023 – Dec 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025, Jul–Sep 2025 missing). Source: [PMPML E-Bus Service Statistical Reports](https://pmpml.org/statistics) (monthly), Chief Statistician.*
 
 ---
 

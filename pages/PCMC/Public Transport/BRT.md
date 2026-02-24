@@ -9,7 +9,7 @@ Between 2023 and 2025, the BRT network expanded from 759 to 927 buses (by late 2
 
 **Note on depot naming:** The M.Yard depot appears in 2023 data. From April 2024 onward, this operational base is listed as Upper Depot. Both refer to the same location.
 
-**Note on data coverage:** BRT data runs February 2023 – June 2025. January 2023 is absent because the source report was not available for download — the BRT service existed but the monthly PDF was not published online. The same two coverage gaps affect all PMPML report types: January–March 2024 and November 2024–March 2025.
+**Note on data coverage:** BRT data runs February 2023 – December 2025. January 2023 is absent — the report for that month was not retrieved. Three coverage gaps affect all PMPML report types: January–March 2024, November 2024–March 2025, and July–September 2025.
 
 ---
 
@@ -69,6 +69,7 @@ The BRT fleet expanded through 2023 — reaching 927 buses by November — befor
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </BarChart>
 
 <LineChart
@@ -84,6 +85,7 @@ The BRT fleet expanded through 2023 — reaching 927 buses by November — befor
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -105,6 +107,7 @@ Planned kilometers represent what PMPML scheduled — effective kilometers are w
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </AreaChart>
 
 <LineChart
@@ -119,6 +122,7 @@ Planned kilometers represent what PMPML scheduled — effective kilometers are w
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -139,6 +143,7 @@ BRT revenue peaked in late 2023 before declining into 2025. The earning per kilo
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 <LineChart
@@ -153,6 +158,7 @@ BRT revenue peaked in late 2023 before declining into 2025. The earning per kilo
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -173,6 +179,7 @@ BRT ridership peaked at over 600,000 passengers per day in August 2023, then dec
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 <LineChart
@@ -187,6 +194,7 @@ BRT ridership peaked at over 600,000 passengers per day in August 2023, then dec
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -207,6 +215,7 @@ BRT accident data is reported by severity: fatal, major, minor, and insignifican
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </BarChart>
 
 <LineChart
@@ -220,6 +229,7 @@ BRT accident data is reported by severity: fatal, major, minor, and insignifican
     <ReferenceArea xMin='2023-01-01' xMax='2023-01-31' label="Jan 2023 missing" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ---
@@ -259,7 +269,7 @@ BRT accident data is reported by severity: fatal, major, minor, and insignifican
 
 ---
 
-*Data covers Feb 2023 – Jun 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025 missing). Source: PMPML B.R.T. Bus Service Statistical Reports (monthly), Chief Statistician.*
+*Data covers Feb 2023 – Dec 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025, Jul–Sep 2025 missing). Source: [PMPML B.R.T. Bus Service Statistical Reports](https://pmpml.org/statistics) (monthly), Chief Statistician.*
 
 ---
 

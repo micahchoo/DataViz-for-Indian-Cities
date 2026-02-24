@@ -25,6 +25,7 @@ Who buys which pass? PMPML's daily pass structure maps onto income and geography
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </AreaChart>
 
 <DataTable
@@ -139,6 +140,7 @@ Where does the money come from? PMPML earns revenue from three primary streams: 
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </AreaChart>
 
 <AreaChart
@@ -304,4 +306,4 @@ ORDER BY date_parsed
 
 ---
 
-*Data covers Jan 2023 – Jun 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025 missing). Source: PMPML Chief Statistician monthly reports.*
+*Data covers Jan 2023 – Dec 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025, Jul–Sep 2025 missing). Source: [PMPML Chief Statistician monthly reports](https://pmpml.org/statistics).*

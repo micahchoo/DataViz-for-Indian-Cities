@@ -210,7 +210,7 @@ Breakdowns fell from 7,705 to 6,145 (−20%) and the breakdown rate improved fro
 
 ## See Also
 
-- **[Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly system-wide dashboard, Jan 2023–Jun 2025
+- **[Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly system-wide dashboard, Jan 2023–Dec 2025
 - **[Depot Performance](/PCMC/Public%20Transport/Depot_Performance)** — How individual depots compare on efficiency
 - **[Ridership and Fares](/PCMC/Public%20Transport/Ridership_and_Fares)** — Monthly pass type breakdown and revenue mix
 - **[E-Bus Statistics](/PCMC/Public%20Transport/EBus)** — KMPU energy efficiency tracked monthly

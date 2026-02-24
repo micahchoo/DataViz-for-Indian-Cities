@@ -131,7 +131,7 @@ Schedules sanctioned but not operated reflect both reduced demand and COVID-era 
 ## See Also
 
 - **[Annual Performance Report](/PCMC/Public%20Transport/Annual_Statistics)** — FY 2023-24 vs 2024-25: the post-COVID recovery baseline
-- **[Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly depot data from Jan 2023–Jun 2025
+- **[Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly depot data from Jan 2023–Dec 2025
 - **[PCMT Before PMPML](/PCMC/Public%20Transport/PCMT_before_PMPML)** — Pre-merger bus operations 1995-2007
 
 ---

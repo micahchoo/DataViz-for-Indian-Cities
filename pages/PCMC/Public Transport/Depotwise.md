@@ -108,6 +108,7 @@ connectGroup="system-monthly"
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </BarChart>
 
 <LineChart
@@ -121,6 +122,7 @@ connectGroup="system-monthly"
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
 </LineChart>
 
 ---
@@ -211,6 +213,7 @@ ORDER BY date_parsed
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
 </LineChart>
 
 <LineChart
@@ -261,6 +264,7 @@ ORDER BY date_parsed
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 <LineChart
@@ -370,6 +374,7 @@ ORDER BY date_parsed
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </AreaChart>
 
 ```sql fuel_kms_long
@@ -411,6 +416,7 @@ ORDER BY date_parsed, fuel_type
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </AreaChart>
 
 Counter to typical "green fleet" expectations, PMPML's own fleet is shifting *toward* diesel and *away* from CNG. Diesel's share grew from ~5% in early 2023 to ~16% by mid-2025. The source reports stopped including a direct diesel-km column after December 2023; 2024–2025 figures are estimated as `KMPL × diesel consumption (own fleet)` — a proxy that agreed within ~20% of the direct values in 2023. E-Bus km reads as zero here because the contracted e-bus fleet (Olectra Greentech) runs under a separate reporting stream — see the [E-Bus page](/PCMC/Public%20Transport/EBus).
@@ -868,7 +874,6 @@ ORDER BY date_parsed
 
 ---
 
-*Dashboard last updated: June 2025*
-*Data structure: Monthly aggregated reports per depot (22 months across Jan 2023 – Jun 2025, 15-17 depots per month, 334 records). Note: coverage has gaps — Jan–Mar 2024 and Nov 2024–Mar 2025 are missing.*
+*Data covers Jan 2023 – Dec 2025 with gaps (Jan–Mar 2024, Nov 2024–Mar 2025, Jul–Sep 2025 missing). 25 months of data, 15–17 depots per month, 385 records. Source: [PMPML Chief Statistician monthly reports](https://pmpml.org/statistics).*
 
 ## Data Queries
