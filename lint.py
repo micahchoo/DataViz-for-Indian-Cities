@@ -23,7 +23,8 @@ COMPONENT_QUERY_REF, all CHART/MAP/UX/narrative rules, SQL safety patterns).
 They can be kept verbatim.
 
 About 30% are PMPML-specific data integrity rules (SQL_UTIL_CAP, SQL_GROSS_KM,
-SQL_SCHEDULE_SWAP, DATA_PNL, DATA_PVR, DATA_BS, DATA_EARNINGS, META_CITATION).
+SQL_SCHEDULE_SWAP, DATA_PNL, DATA_PVR, DATA_BS, DATA_EARNINGS, META_CITATION,
+REFERENCELINE_EBUS_FLEET, REFERENCELINE_DIESEL_EST).
 Delete these and replace with your own city's data quality checks — the structure
 (KNOWN_DATA_ISSUES dict, per-file schema validators) is the pattern to follow.
 
@@ -39,6 +40,7 @@ The main() loop, findings collector, _tag_bodies() helper, and all rule
 function signatures are fully reusable without modification.
 """
 
+import calendar
 import csv
 import datetime
 import re
@@ -71,6 +73,50 @@ KNOWN_GAPS = [
     ("ebus_extracted", "Nov 2024", "Mar 2025", "Reports not retrieved for partial FY2024-25"),
     ("ebus_extracted", "Jul 2025", "Sep 2025", "Reports not retrieved; PMPML publishes quarterly batches"),
 ]
+
+def _gap_iso_ranges() -> list[tuple[str, str, str]]:
+    """Convert KNOWN_GAPS month strings to ISO date ranges for component checks.
+
+    Derives *cross-cutting* gap periods from KNOWN_GAPS and returns them as
+    (xMin, xMax, human_label) tuples for ReferenceArea annotation checks.
+
+    "Cross-cutting" means the gap appears for at least 2 distinct file labels
+    (e.g., extracted + brt_extracted + ebus_extracted). Table-specific gaps
+    (e.g., BRT Jan 2023 only in brt_extracted) are excluded — they should be
+    annotated only on the pages that use that table, not enforced site-wide.
+
+    Update KNOWN_GAPS to add or remove gaps — this derives the ISO dates and
+    filtering automatically so the rule stays in sync with no extra maintenance.
+    """
+    from collections import defaultdict
+    pair_labels: dict[tuple[str, str], set[str]] = defaultdict(set)
+    pair_info: dict[tuple[str, str], str] = {}
+    for file_label, start_mon, end_mon, _ in KNOWN_GAPS:
+        try:
+            s_dt = datetime.datetime.strptime(start_mon, '%b %Y')
+            e_dt = datetime.datetime.strptime(end_mon, '%b %Y')
+        except ValueError:
+            continue
+        xmin = f"{s_dt.year:04d}-{s_dt.month:02d}-01"
+        last = calendar.monthrange(e_dt.year, e_dt.month)[1]
+        xmax = f"{e_dt.year:04d}-{e_dt.month:02d}-{last:02d}"
+        pair_labels[(xmin, xmax)].add(file_label)
+        if (xmin, xmax) not in pair_info:
+            label = f"{start_mon}–{end_mon}" if start_mon != end_mon else start_mon
+            pair_info[(xmin, xmax)] = label
+    # Only include gaps shared across 2+ file labels (universal annotation obligation)
+    result: list[tuple[str, str, str]] = [
+        (xmin, xmax, pair_info[(xmin, xmax)])
+        for (xmin, xmax), labels in pair_labels.items()
+        if len(labels) >= 2
+    ]
+    return sorted(result)
+
+
+# ISO date ranges derived from KNOWN_GAPS for use in COMPONENT_GAPS checks.
+# Each entry is (xMin_iso, xMax_iso, human_label). Gaps that appear for multiple
+# file labels are de-duplicated — one annotation is enough per chart.
+_GAP_RANGES: list[tuple[str, str, str]] = _gap_iso_ranges()
 
 # Known data quality issues in source CSVs that have been handled in SQL/notes.
 # Adding an entry here suppresses the linter check and documents the known issue.
@@ -318,32 +364,25 @@ def check_components(path, content):
              f"{len(charts_with_connect)} use connectGroup= — "
              "add connectGroup to synchronize tooltip hover across charts")
 
-    # Rule: Pages using PMPML monthly data should annotate the three known gaps:
-    #   1. Jan–Mar 2024  (Q4 FY2023-24 reports not retrieved)
-    #   2. Nov 2024–Mar 2025  (partial FY2024-25 reports not retrieved)
-    #   3. Jul–Sep 2025  (Q2 FY2025-26 reports not retrieved; PMPML publishes quarterly)
+    # Rule: Pages using PMPML monthly data should annotate all known data gaps.
+    # Gap date ranges are derived from KNOWN_GAPS (top of file) — update KNOWN_GAPS
+    # to add or remove gaps and this check automatically stays in sync.
     blocks = extract_sql_blocks(content)
     all_sql = "\n".join(sql for _, sql in blocks)
     if uses_pmpml_table(all_sql):
         has_charts = bool(re.search(r"<(?:LineChart|BarChart|AreaChart)\b", content))
         if has_charts:
             if "ReferenceArea" not in content:
+                gap_summary = ", ".join(label for _, _, label in _GAP_RANGES)
                 warn("COMPONENT_GAPS", path,
                      "PMPML time-series page has no ReferenceArea gap annotations — "
-                     "add for Jan–Mar 2024, Nov 2024–Mar 2025, and Jul–Sep 2025 data gaps")
+                     f"add annotations for: {gap_summary}")
             else:
-                if "2024-01-01" not in content or "2024-03-31" not in content:
-                    warn("COMPONENT_GAPS", path,
-                         "Missing Jan–Mar 2024 gap annotation "
-                         "(xMin='2024-01-01' xMax='2024-03-31')")
-                if "2024-11-01" not in content or "2025-03-31" not in content:
-                    warn("COMPONENT_GAPS", path,
-                         "Missing Nov 2024–Mar 2025 gap annotation "
-                         "(xMin='2024-11-01' xMax='2025-03-31')")
-                if "2025-07-01" not in content or "2025-09-30" not in content:
-                    warn("COMPONENT_GAPS", path,
-                         "Missing Jul–Sep 2025 gap annotation "
-                         "(xMin='2025-07-01' xMax='2025-09-30')")
+                for xmin, xmax, gap_label in _GAP_RANGES:
+                    if xmin not in content or xmax not in content:
+                        warn("COMPONENT_GAPS", path,
+                             f"Missing {gap_label} gap annotation "
+                             f"(xMin='{xmin}' xMax='{xmax}')")
             # Sub-rule: self-closing LineChart with x=date_parsed cannot contain
             # ReferenceArea children (mdsvex silently drops them). Flag any that
             # exist so authors convert them to open/close tags.
@@ -514,8 +553,8 @@ def check_series_color_order(path, content):
 # ── Per-diagram affordance rules ──────────────────────────────────────────────
 
 def check_chart_affordances(path, content):
-    """CHART_XFMT_YEAR / BARCHART_MULTITYPE / AREACHART_MISSING / REFERENCELINE_ZERO:
-    per-diagram-type affordances.
+    """CHART_XFMT_YEAR / BARCHART_MULTITYPE / AREACHART_MISSING / REFERENCELINE_ZERO
+    / REFERENCELINE_EBUS_FLEET / REFERENCELINE_DIESEL_EST: per-diagram-type affordances.
 
     CHART_XFMT_YEAR
         DuckDB infers Year, census_year, year_num as INTEGER. On chart axes these
@@ -543,6 +582,18 @@ def check_chart_affordances(path, content):
         baseline that separates surplus from deficit. A zero-baseline line is the clearest
         possible encoding of "profit vs. loss" in a line or bar chart. Covers column names
         containing: pl_cr, net_pl, operating_pl, profit_loss, deficit, net_position.
+
+    REFERENCELINE_EBUS_FLEET  [PMPML-specific]
+        EBus.md fleet charts (y=avg_on_road or fleet_utilization_pct) should annotate
+        the three known fleet expansion events: Oct 2023 (458→473), Aug 2024 (473→490),
+        and Apr 2025 (Hadapsar depot exit + Charholi/Maan additions). Without these
+        markers, step-changes in fleet size and ridership are unexplained.
+
+    REFERENCELINE_DIESEL_EST  [PMPML-specific]
+        Pages that use the diesel km back-calculation (COALESCE/NULLIF with "Total
+        Eff;km.Diesel") should mark x='2024-04-01' as the estimation boundary. From
+        April 2024, extracted.csv diesel km is null — all values are computed from
+        KMPL × consumption. Readers need a visible boundary to trust the data.
     """
     for tag, attrs in _tag_bodies(content, _CHART_TAGS):
         # CHART_XFMT_YEAR
@@ -603,6 +654,38 @@ def check_chart_affordances(path, content):
                          "Use: <ReferenceLine y=0 label=\"Breakeven\" color=base-content-muted "
                          "hideValue=true/>")
                     break  # one warning per page is enough
+
+    # REFERENCELINE_EBUS_FLEET: EBus fleet charts should annotate expansion events.
+    # Fleet step-changes: Oct 2023 (458→473), Aug 2024 (473→490), Apr 2025 (depot change).
+    _EBUS_FLEET_COLS: frozenset[str] = frozenset(["avg_on_road", "avg_off_road", "fleet_utilization_pct"])
+    if "EBus" in path.name or "ebus" in path.name.lower():
+        has_fleet_chart = any(
+            any(kw in attrs for kw in _EBUS_FLEET_COLS)
+            for _tag, attrs in _tag_bodies(content, _CHART_TAGS)
+        )
+        has_fleet_refline = bool(re.search(r"<ReferenceLine\b[^>]*x='2023-10-01'", content))
+        if has_fleet_chart and not has_fleet_refline:
+            warn("REFERENCELINE_EBUS_FLEET", path,
+                 "EBus fleet chart is missing fleet expansion markers. "
+                 "The e-bus fleet stepped up Oct 2023 (458→473), Aug 2024 (473→490), "
+                 "and changed Apr 2025. Add: "
+                 "<ReferenceLine x='2023-10-01' label=\"Fleet: 458→473\" hideValue=true color=base-content-muted/> "
+                 "(and similarly for 2024-08-01 and 2025-04-01).")
+
+    # REFERENCELINE_DIESEL_EST: diesel km back-calculation pages should mark the
+    # estimation boundary at April 2024 (where extracted.csv diesel column goes null).
+    _DIESEL_BACKCALC_PAT: re.Pattern[str] = re.compile(
+        r'COALESCE\s*\(\s*NULLIF.*?Total Eff;km\.Diesel', re.DOTALL | re.IGNORECASE
+    )
+    if _DIESEL_BACKCALC_PAT.search(content):
+        has_est_marker = bool(re.search(r"<ReferenceLine\b[^>]*x='2024-04-01'", content))
+        if not has_est_marker:
+            warn("REFERENCELINE_DIESEL_EST", path,
+                 "Page uses diesel km back-calculation (COALESCE/NULLIF on 'Total Eff;km.Diesel') "
+                 "but has no estimation-boundary marker. From April 2024, diesel km values are "
+                 "estimated from KMPL × consumption — add: "
+                 "<ReferenceLine x='2024-04-01' label=\"Diesel km estimated\" "
+                 "hideValue=true color=base-content-muted lineType=dashed/>")
 
 
 def check_map_props(path, content):
@@ -1122,7 +1205,7 @@ def main():
     if not findings:
         print("  ✓  All checks passed\n")
     else:
-        by_file = {}
+        by_file: dict[str, list[tuple[str, str, str]]] = {}
         for sev, rule, file, msg in findings:
             by_file.setdefault(file, []).append((sev, rule, msg))
 
@@ -1135,6 +1218,8 @@ def main():
                 prefix = f"    {icon} [{rule}] "
                 wrap = 68 - len(prefix)
                 words = msg.split()
+                lines: list[str]
+                cur: list[str]
                 lines, cur = [], []
                 for w in words:
                     if sum(len(x) + 1 for x in cur) + len(w) > wrap and cur:

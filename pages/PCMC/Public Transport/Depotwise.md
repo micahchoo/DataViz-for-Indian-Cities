@@ -399,6 +399,7 @@ ORDER BY date_parsed
     yAxisTitle="Kilometers (Millions)"
     connectGroup="system-monthly"
 >
+    <ReferenceLine x='2024-04-01' label="Diesel km estimated" hideValue=true color=base-content-muted lineType=dashed/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
@@ -442,6 +443,7 @@ ORDER BY date_parsed, fuel_type
     yAxisTitle="Share of Total KMs"
     connectGroup="system-monthly"
 >
+    <ReferenceLine x='2024-04-01' label="Diesel km estimated" hideValue=true color=base-content-muted lineType=dashed/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
