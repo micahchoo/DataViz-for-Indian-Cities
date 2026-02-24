@@ -519,6 +519,36 @@ ORDER BY date_parsed
     connectGroup="system-monthly"
 />
 
+### Tyre Life
+
+Average kilometers per new tyre measures how hard the fleet is being worked and how good the road/driving conditions are. Lower tyre life = more demanding routes or harder driving. Annual_Statistics shows tyre life improved from 65,595 km to 72,864 km (FY 2023-24 → 2024-25); the monthly view shows whether that improvement was gradual or step-change.
+
+```sql tyre_life
+SELECT
+    Date,
+    STRPTIME(Date, '%b %Y') as date_parsed,
+    SUM(TRY_CAST("No.of New Tyres removed for retreading" AS DOUBLE)) as new_tyres_pulled,
+    ROUND(
+        SUM(TRY_CAST("Avg. KMs per New Tyres" AS DOUBLE) * TRY_CAST("No.of New Tyres removed for retreading" AS DOUBLE)) /
+        NULLIF(SUM(TRY_CAST("No.of New Tyres removed for retreading" AS DOUBLE)), 0)
+    , 0) as avg_km_per_new_tyre
+FROM extracted
+WHERE Date IS NOT NULL
+GROUP BY Date, date_parsed
+ORDER BY date_parsed
+```
+
+<LineChart
+    data={tyre_life}
+    x=date_parsed
+    y=avg_km_per_new_tyre
+    title="Monthly Average KMs per New Tyre (System Total)"
+    subtitle="Higher = tyres last longer. Weighted by new tyres pulled per depot."
+    yAxisTitle="Km per Tyre"
+    yFmt='#,##0'
+    connectGroup="system-monthly"
+/>
+
 ---
 
 ## Depot Performance Comparison
