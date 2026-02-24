@@ -141,6 +141,8 @@ The CMP projected total trip demand to grow 7-fold between 2008 and 2031 (from 2
 
 ## Twenty Years Later
 
+The projections above were made in 2008. Eighteen years on, this is what actually happened.
+
 The CMP projected 1.46 crore daily trips across the metro by 2031, with public transport's share growing from 26% to 32% — implying roughly 46 lakh PT trips per day. PMPML today carries 11–12 lakh passengers per day: roughly a quarter of that target, with six years to go. Meanwhile, private vehicle registrations in PCMC alone crossed 2.1 million by 2018, consistent with the demand forecast. The gap between those two growth curves — vehicles multiplying nearly 9-fold while bus ridership grew more slowly — is the central story this site documents.
 
 ## See Also

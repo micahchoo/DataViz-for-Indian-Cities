@@ -113,6 +113,8 @@ Between 2007 and 2023, there is a 16-year gap in this accident data. The Compreh
 
 The own-fleet vs. hired comparison should be read with caution. The hired fleet operates fewer total kilometers, so even small absolute accident counts can produce volatile rate figures. The rate columns in the source data (`Rate of Accidents per 1 Lakh KMs (PMPML)` and `Rate of Accidents per 1 Lakh KMs (HIRED)`) are reported per depot per month, so the weighted averages above smooth out some of that noise — but the hired fleet's smaller denominator means its rate is inherently less stable. What matters most is whether one fleet type shows a consistently higher severity mix (more fatal/major vs. minor) rather than just comparing raw rates.
 
+The direction of travel, despite these caveats, is clear: total bus accident burden across both own and hired fleet roughly halved between FY2023-24 and FY2024-25. The [Annual Performance Report](/PCMC/Public%20Transport/Annual_Statistics) shows the year-on-year figures in full context.
+
 ---
 
 ## Data Queries

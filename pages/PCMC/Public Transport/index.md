@@ -17,6 +17,8 @@ On 15 October 2007, PCMT merged with Pune Municipal Transport (PMT) to form Pune
 
 ## PMPML Today (2023-2025)
 
+PMPML now operates across 17 depots with a fleet of around 2,000 buses. The figures below summarise what the monthly depot data covers.
+
 ```sql summary_metrics
 SELECT
     COUNT(DISTINCT Date) as total_months,
@@ -55,7 +57,9 @@ WHERE Date IS NOT NULL
 />
 </Grid>
 
-PMPML now operates across 17 depots with a fleet of ~2,000 buses. Monthly depot-level data from January 2023 to December 2025 (with some coverage gaps) provides granular insight into fleet operations, revenue, ridership, and safety.
+Fleet utilization of approximately 72% means roughly 1 in 4 buses is off the road on any given day — buses in workshops, awaiting parts, or out of service. Monthly depot-level data from January 2023 to December 2025 (with some coverage gaps) provides granular insight into fleet operations, revenue, ridership, and safety.
+
+One caveat shapes everything on these pages: PMPML did not publish consistent operational data between the 2007 merger and the monthly depot reports beginning in January 2023. The 15-year gap means this site can document PCMT's decline and PMPML's recent performance, but not the decade and a half in between. Fleet expansions, route rationalization, the BRT rollout, and the COVID collapse exist in annual reports and press accounts but have not been systematically digitized.
 
 - **[Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly fleet dashboard: vehicle deployment, kilometers, revenue, fuel efficiency, safety, and depot comparisons
 - **[Depot Performance](/PCMC/Public%20Transport/Depot_Performance)** — How depots compare on efficiency, schedule adherence, fleet ownership, and revenue patterns
@@ -66,8 +70,6 @@ PMPML now operates across 17 depots with a fleet of ~2,000 buses. Monthly depot-
 - **[Annual Performance Report](/PCMC/Public%20Transport/Annual_Statistics)** — FY 2023-24 vs FY 2024-25: fleet, ridership, revenue, fuel efficiency by propulsion type, safety, workshop
 - **[E-Bus Service Statistics](/PCMC/Public%20Transport/EBus)** — Electric bus operations at dedicated depots, including KMPU energy efficiency tracking
 - **[Financial Performance](/PCMC/Public%20Transport/Financial_Performance)** — Annual P&L 2017-18 to 2024-25: operating deficit, employee costs, and municipal reimbursements
-
-One caveat shapes everything on these pages: PMPML did not publish consistent operational data between the 2007 merger and the monthly depot reports beginning in January 2023. The 15-year gap means this site can document PCMT's decline and PMPML's recent performance, but not the decade and a half in between. Fleet expansions, route rationalization, the BRT rollout, and the COVID collapse exist in annual reports and press accounts but have not been systematically digitized.
 
 ---
 

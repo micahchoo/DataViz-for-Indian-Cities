@@ -3,7 +3,7 @@ title: PMPML Ridership and Fare Structure
 description: Pass types, fare tiers, and how the revenue mix is shifting
 ---
 
-PMPML offers a layered fare system with daily passes, monthly passes, and subsidized student passes. Each tier serves a different segment of the city's commuter population. This page breaks down who buys what, how many, and where the money comes from.
+Ticket sales are declining as a share of PMPML's revenue while pass-based income grows — a shift that signals the system is converting occasional users into regular commuters, but at lower per-ride revenue. This page traces that change through the fare structure: who buys which pass, how student ridership tracks the academic calendar, and what the revenue mix reveals about PMPML's evolving financial resilience.
 
 > **Fare revision note:** PMPML revised pass prices during the data period. The column labels in the source data reflect the original (2023) prices. By mid-2025, the Punyadasham pass went from Rs 10 to Rs 20, the combined municipal pass from Rs 50 to Rs 70, the all-route daily pass from Rs 120 to Rs 150, and the monthly both-corporation pass from Rs 1,200 to Rs 1,500. The within-PMC and within-PCMC Rs 40 daily passes were consolidated. Read pass labels as approximate cohort identifiers (low-income daily rider, commuter, long-distance) rather than exact price points — the prices changed partway through the data period.
 

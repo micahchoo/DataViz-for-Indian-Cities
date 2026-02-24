@@ -2,7 +2,9 @@
 title: "A City on Two Wheels: Vehicle Registrations in Pimpri-Chinchwad, 2000–2018"
 description: Cumulative vehicle registrations by type with the RTO from 2000 to 2018
 ---
-This data shows cumulative vehicle registrations by type with the Pimpri-Chinchwad RTO from 2000 to 2018. These are active registrations on the RTO's books — not annual new registrations, and not necessarily vehicles currently on the road (some may be scrapped, idle, or relocated). Rising numbers primarily reflect new registrations outpacing de-registrations. Small drops in some categories (e.g. Scooters, Mopeds) indicate occasional data revisions or de-registrations.
+Between 2000-01 and 2017-18, the number of registered vehicles in Pimpri-Chinchwad grew from 2.38 lakh to 21.27 lakh — a nearly 9-fold increase, crossing one registered vehicle per person by 2017-18. Two-wheelers account for roughly 70% of that fleet throughout the period, a dominance that barely shifted even as cars grew faster in proportional terms. Use the category buttons below to explore who registered what.
+
+These are cumulative active registrations on the RTO's books — not annual new registrations, and not necessarily vehicles currently on the road (some may be scrapped, idle, or relocated). Rising numbers primarily reflect new registrations outpacing de-registrations. Small drops in some categories (e.g. Scooters, Mopeds) indicate occasional data revisions or de-registrations.
 
 <ButtonGroup
  name=selected_view

@@ -3,9 +3,7 @@ title: PMPML Annual Performance Report
 description: Year-on-year comparison for FY 2023-24 and FY 2024-25 — fleet, ridership, revenue, fuel efficiency, safety, and workshop performance
 ---
 
-PMPML's annual statistical reports compress a full year of operations into a single comparable table. This page draws on the FY 2023-24 and FY 2024-25 reports (issued June 2025) to track year-on-year changes and highlight metrics that the monthly depot data doesn't surface at system level: **fuel efficiency by propulsion type**, workshop reliability, tyre life, and staff ratios.
-
-The headline story across both years: ridership and revenue both fell roughly 7%, accidents nearly halved (41 → 20 for PMPML own fleet), and e-bus fuel efficiency improved sharply (KMPU 1.10 → 1.36 km/unit). Hired fleet contraction is the structural trend — hired buses declined from 1,071 to 932 held while PMPML own fleet remained stable.
+Ridership and revenue both fell roughly 7% between FY2023-24 and FY2024-25, yet accidents nearly halved (41 → 20 for PMPML's own fleet) and e-bus energy efficiency improved sharply (KMPU 1.10 → 1.36 km/unit). The hired fleet contracted significantly — from 1,071 to 932 buses held — while PMPML's own fleet held steady. This page tracks those changes using the annual statistical reports, which surface metrics the monthly depot data doesn't: **fuel efficiency by propulsion type**, workshop reliability, tyre life, and staff ratios.
 
 ---
 

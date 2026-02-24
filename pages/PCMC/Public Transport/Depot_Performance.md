@@ -4,7 +4,7 @@ description: Performance patterns across 17 depots — efficiency, fleet composi
 sidebar: show
 ---
 
-Performance patterns across 17 depots — efficiency, fleet composition, ridership, and revenue. Each depot serves a different catchment area with different route profiles, fleet mixes, and rider demographics. These structural differences produce very different outcomes on the same metrics.
+PMPML's 17 depots are not a single system — they divide into three structural clusters, each optimized for different routes and riders. Reading the numbers without knowing which cluster a depot belongs to leads to wrong conclusions: the most dramatic example is a depot showing 0% fleet utilization that is actually putting 46 buses on the road every day, because those buses happen to be hired rather than PMPML-owned. Each depot serves a different catchment area with different route profiles, fleet mixes, and rider demographics — and those structural differences explain most of what looks like performance variation.
 
 This page compares depots against each other. For month-by-month data on a single depot, see [Depotwise Reports](/PCMC/Public%20Transport/Depotwise).
 
@@ -52,6 +52,8 @@ _The map will render once latitude/longitude values are added to `sources/CMP/de
 ## The Efficiency Spectrum
 
 How depots compare on the metrics that matter most: fleet utilization, earning per kilometer, passengers per bus, and fleet size. Small depots sometimes outperform large ones on efficiency — and vice versa.
+
+> **Utilization % caveat:** Depots running exclusively hired vehicles (Balewadi, Maan, Wagholi, Charholi) record 0% utilization — not because they're inactive, but because the formula counts only PMPML-owned and PPP buses in the numerator. A depot with 46 hired buses on the road daily still shows 0%. Read the [Reading the System](#reading-the-system) section before drawing conclusions from this column.
 
 <DataTable
     data={depot_efficiency_spectrum}

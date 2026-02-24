@@ -3,7 +3,7 @@ title: "How the Fleet Changed: Shifting Vehicle Mix, 2000–2018"
 description: "How registered vehicle composition in Pimpri-Chinchwad shifted 2000–2018: growth rates, share changes, and emerging categories"
 ---
 
-The [previous page](/PCMC/Registered_Vehicles_2000_2018) showed total vehicle growth by category. This page asks a different question: is Pimpri-Chinchwad's fleet becoming more or less diverse? The answer matters because a fleet dominated by two-wheelers signals different infrastructure needs than one balanced between two-wheelers and cars. Note: these are cumulative active registrations (the total stock on the RTO's books), not annual new sales — growth rates here reflect net fleet expansion, not single-year purchase patterns.
+The [previous page](/PCMC/Registered_Vehicles_2000_2018) showed total vehicle growth by category. This page asks a different question: is Pimpri-Chinchwad's fleet becoming more or less diverse? The short answer: not meaningfully. Two-wheelers have held roughly 70% of registrations throughout the 18 years, and while cars have grown faster in proportional terms, they haven't broken that dominance. The story is less about changing composition and more about everything expanding together — with two-wheelers setting the pace. Note: these are cumulative active registrations (the total stock on the RTO's books), not annual new sales — growth rates here reflect net fleet expansion, not single-year purchase patterns.
 
 ```sql view_options
 SELECT 'Growth Rates' as value

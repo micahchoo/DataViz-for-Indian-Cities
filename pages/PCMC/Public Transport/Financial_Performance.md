@@ -290,6 +290,12 @@ ORDER BY subcategory DESC, item, fiscal_year
 
 ---
 
+## Reading the Arc
+
+The eight-year trajectory is a story of structural dependency deepening on three fronts. On the revenue side: PMPML cannot cover its payroll from fare revenue alone — employee costs reached 140% of bus income in FY2024-25 — and that gap is widening, not closing. On the liquidity side: short-term borrowings that were zero through FY2019-20 have grown to ₹34 Cr, while cash reserves that peaked at ₹93 Cr in FY2019-20 have not recovered past ₹21 Cr. On the asset side: net fixed assets have depreciated 85% from their FY2019-20 peak without comparable reinvestment, meaning the fleet is aging without replacement capital in sight.
+
+The system continues to function — but only because PMC and PCMC are legally obligated to cover the operating deficit each year, on a schedule set by their own budget cycles. Whether that arrangement scales to cover a deficit now approaching ₹900 Cr annually is a political question that lives outside the financial statements.
+
 ## See Also
 
 - **[Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly operational data: fleet utilization, ridership, and revenue by depot
