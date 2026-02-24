@@ -99,6 +99,7 @@ Planned kilometers represent what PMPML scheduled — effective kilometers are w
     x=date_parsed
     y={['effective_km', 'cancelled_km']}
     type=stacked
+    handleMissing=gap
     title="Effective vs Cancelled Kilometers (System Total)"
     yAxisTitle="Kilometers"
     yFmt='#,##0'

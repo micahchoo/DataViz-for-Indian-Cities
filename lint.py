@@ -9,9 +9,34 @@ Run: python3 lint.py         — report errors and warnings
 Rules are grouped by what they protect:
   SQL        — DuckDB query correctness and safety
   COMPONENT  — Evidence.dev component conventions
+  CHART      — Per-diagram-type affordance enforcement (Evidence.dev)
+  MAP        — Map component prop correctness
   DATA       — CSV source file integrity
   LINK       — Markdown link encoding
   META       — Page frontmatter completeness
+
+─── Adapting this linter for another Indian city ───────────────────────────
+
+About 57% of these rules are purely Evidence.dev + DuckDB conventions that
+apply to any project built with this stack (LINK_ENCODING, COMPONENT_SELF_CLOSE,
+COMPONENT_QUERY_REF, all CHART/MAP/UX/narrative rules, SQL safety patterns).
+They can be kept verbatim.
+
+About 30% are PMPML-specific data integrity rules (SQL_UTIL_CAP, SQL_GROSS_KM,
+SQL_SCHEDULE_SWAP, DATA_PNL, DATA_PVR, DATA_BS, DATA_EARNINGS, META_CITATION).
+Delete these and replace with your own city's data quality checks — the structure
+(KNOWN_DATA_ISSUES dict, per-file schema validators) is the pattern to follow.
+
+About 14% are hybrid rules (COMPONENT_GAPS, SQL_NULL_GUARD, SQL_DEPOT_NAME,
+DATA_COORDS, COMPONENT_COLOR_ORDER, AREACHART_MISSING): the rule logic is general
+but the constants are PMPML-specific. Update:
+  - KNOWN_GAPS         → your city's data gap date ranges
+  - DEPRECATED_DEPOT_NAMES → your agency's renamed stations/depots
+  - BRT_ONLY_DEPOTS    → your city's transit-mode-specific locations
+  - Table name strings ("extracted", "brt_extracted", ...) → your CSV names
+
+The main() loop, findings collector, _tag_bodies() helper, and all rule
+function signatures are fully reusable without modification.
 """
 
 import csv
@@ -132,6 +157,11 @@ def uses_pmpml_table(sql_text):
 
 _CHART_TAGS = ("LineChart", "BarChart", "AreaChart")
 _VIZ_TAGS   = ("LineChart", "BarChart", "AreaChart", "DataTable", "PointMap", "AreaMap")
+
+# Column names that DuckDB infers as INTEGER from this project's CSVs.
+# Charts using these as x= display "2,021" without xFmt='####'.
+# Safe to skip: display_year (SPLIT_PART → string), date_parsed (STRPTIME → date).
+_INT_YEAR_COLS = frozenset(["Year", "census_year", "year_num"])
 
 def _tag_bodies(content, tags):
     """Yield (tag_name, attr_string) for each opening Evidence.dev component tag.
@@ -479,6 +509,131 @@ def check_series_color_order(path, content):
                      "Wide-format chart has diesel before CNG, but series= chart sorts "
                      "alphabetically (CNG first). Colors will be swapped between charts. "
                      "Reorder y=[cng_..., diesel_..., ebus_...] to match.")
+
+
+# ── Per-diagram affordance rules ──────────────────────────────────────────────
+
+def check_chart_affordances(path, content):
+    """CHART_XFMT_YEAR / BARCHART_MULTITYPE / AREACHART_MISSING / REFERENCELINE_ZERO:
+    per-diagram-type affordances.
+
+    CHART_XFMT_YEAR
+        DuckDB infers Year, census_year, year_num as INTEGER. On chart axes these
+        render as "2,021" (thousands-separated) without xFmt='####'. String years
+        from SPLIT_PART (display_year) and STRPTIME dates (date_parsed) are exempt.
+
+    BARCHART_MULTITYPE
+        Multi-series BarCharts (series= or y=[...]) without explicit type= rely on
+        the Evidence.dev default (grouped). Making type= explicit prevents accidental
+        misreads when someone later changes the data shape or Evidence changes its
+        default. Use type=grouped when comparing separate quantities side-by-side,
+        type=stacked when the series are additive parts of a whole.
+
+    AREACHART_MISSING
+        Evidence.dev AreaChart defaults to handleMissing=zero for multi-series charts.
+        On PMPML time-series pages (x=date_parsed) this silently fills the three known
+        data gaps with zero values — showing a real ridership/km drop that did not happen.
+        Multi-series AreaCharts on date_parsed axes must use handleMissing=gap so gaps
+        render as breaks rather than false zeroes. Error-level: this is a data correctness
+        issue, not just cosmetic.
+
+    REFERENCELINE_ZERO
+        Charts showing financial profit/loss, deficit, or net P&L values that can cross
+        zero — without a <ReferenceLine y=0> anywhere on the page — are missing the
+        baseline that separates surplus from deficit. A zero-baseline line is the clearest
+        possible encoding of "profit vs. loss" in a line or bar chart. Covers column names
+        containing: pl_cr, net_pl, operating_pl, profit_loss, deficit, net_position.
+    """
+    for tag, attrs in _tag_bodies(content, _CHART_TAGS):
+        # CHART_XFMT_YEAR
+        x_m = re.search(r'\bx=(\w+)', attrs)
+        if x_m and x_m.group(1) in _INT_YEAR_COLS and 'xFmt=' not in attrs:
+            warn("CHART_XFMT_YEAR", path,
+                 f"<{tag} x={x_m.group(1)}> missing xFmt='####' — "
+                 "integer year column renders with thousands separator ('2,021'). "
+                 "Add xFmt='####'.")
+
+    for tag, attrs in _tag_bodies(content, ["BarChart"]):
+        # BARCHART_MULTITYPE
+        if 'type=' not in attrs:
+            has_multi_y = bool(re.search(r"y=\{?\[", attrs))
+            has_series  = 'series=' in attrs
+            if has_multi_y or has_series:
+                title_m = re.search(r'title="([^"]+)"', attrs)
+                label   = f'"{title_m.group(1)}"' if title_m else "(no title)"
+                warn("BARCHART_MULTITYPE", path,
+                     f"<BarChart {label}> has multiple series but no type= — "
+                     "add type=grouped (side-by-side comparison) or "
+                     "type=stacked (additive parts of a whole) to make intent explicit")
+
+    for tag, attrs in _tag_bodies(content, ["AreaChart"]):
+        # AREACHART_MISSING: multi-series AreaChart on date_parsed without handleMissing=gap
+        x_m = re.search(r'\bx=(\w+)', attrs)
+        if x_m and x_m.group(1) == "date_parsed":
+            has_multi_y = bool(re.search(r"y=\{\[.+?,", attrs, re.DOTALL))
+            has_series  = 'series=' in attrs
+            if (has_multi_y or has_series) and 'handleMissing=' not in attrs:
+                title_m = re.search(r'title="([^"]+)"', attrs)
+                label   = f'"{title_m.group(1)}"' if title_m else "(no title)"
+                error("AREACHART_MISSING", path,
+                      f"<AreaChart {label}> is multi-series on date_parsed but missing "
+                      "handleMissing=gap — Evidence.dev default is handleMissing=zero, "
+                      "which fills PMPML data gaps with false zeroes. "
+                      "Add handleMissing=gap so gaps render as breaks.")
+
+    # REFERENCELINE_ZERO: charts with profit/loss columns should have <ReferenceLine y=0>
+    # Column names that indicate values can go negative (profit vs. loss)
+    _ZERO_CROSS_COLS = frozenset([
+        "pl_cr", "net_pl", "operating_pl", "profit_loss",
+        "deficit", "surplus", "net_position", "net_profit",
+    ])
+    has_zero_refline = bool(re.search(r'<ReferenceLine\b[^/]*/?\s*y=0\b', content))
+    if not has_zero_refline:
+        for tag, attrs in _tag_bodies(content, _CHART_TAGS):
+            y_m = re.search(r'\by=(\w+)', attrs)
+            if y_m:
+                col = y_m.group(1).lower()
+                if any(kw in col for kw in _ZERO_CROSS_COLS):
+                    title_m = re.search(r'title="([^"]+)"', attrs)
+                    label   = f'"{title_m.group(1)}"' if title_m else "(no title)"
+                    warn("REFERENCELINE_ZERO", path,
+                         f"<{tag} {label}> shows profit/loss values (y={y_m.group(1)}) "
+                         "but has no <ReferenceLine y=0> — add a zero baseline to make "
+                         "surplus vs. deficit visually explicit. "
+                         "Use: <ReferenceLine y=0 label=\"Breakeven\" color=base-content-muted "
+                         "hideValue=true/>")
+                    break  # one warning per page is enough
+
+
+def check_map_props(path, content):
+    """MAP_LON_PROP / MAP_VALUE_FMT: PointMap prop correctness and affordances.
+
+    MAP_LON_PROP
+        Evidence.dev PointMap requires long= (not lon=). Using lon= silently omits
+        the required prop, producing a 'long is required' render error. Error-level
+        because it breaks rendering entirely.
+
+    MAP_VALUE_FMT
+        PointMap with value= but no valueFmt= shows raw integers in bubble tooltips
+        (e.g. "12345" instead of "12,345"). Add valueFmt='#,##0' or an appropriate
+        format string so tooltip values are readable at a glance.
+    """
+    for tag, attrs in _tag_bodies(content, ["PointMap"]):
+        # MAP_LON_PROP: lon= is wrong, long= is correct
+        if re.search(r'\blon=', attrs):
+            error("MAP_LON_PROP", path,
+                  "<PointMap> uses lon= but the correct Evidence.dev prop is long= — "
+                  "lon= is silently ignored, causing a 'long is required' render error. "
+                  "Rename to long=.")
+
+        # MAP_VALUE_FMT: value= without valueFmt=
+        if 'value=' in attrs and 'valueFmt=' not in attrs:
+            vm = re.search(r'\bvalue=(\w+)', attrs)
+            col = vm.group(1) if vm else "?"
+            warn("MAP_VALUE_FMT", path,
+                 f"<PointMap value={col}> missing valueFmt= — "
+                 "bubble tooltip shows raw integer; add valueFmt='#,##0' "
+                 "(or currency/pct format) for readable tooltip values")
 
 
 # ── UX / Design rules ─────────────────────────────────────────────────────────
@@ -946,6 +1101,8 @@ def main():
         check_component_self_close(rel, content)
         check_series_color_order(rel, content)
         check_financial_citation(rel, content)
+        check_chart_affordances(rel, content)
+        check_map_props(rel, content)
         check_chart_ux(rel, content)
         check_page_ux(rel, content)
         check_artifact_opener(rel, content)

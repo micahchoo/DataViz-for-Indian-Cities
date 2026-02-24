@@ -18,6 +18,7 @@ Who buys which pass? PMPML's daily pass structure maps onto income and geography
     x=date_parsed
     y={['pass_10_punyadasham', 'pass_40_sr_citizen', 'pass_40_pmc', 'pass_40_pcmc', 'pass_50_both', 'pass_120_all_route']}
     type=stacked
+    handleMissing=gap
     title="Daily Passes Sold by Type (System Total per Month)"
     yAxisTitle="Number of Passes"
     yFmt='#,##0'
@@ -54,11 +55,16 @@ Monthly pass holders are the commuter core — the riders who have made a delibe
     x=date_parsed
     y={['monthly_500_sr_citizen', 'monthly_700_corp_employee', 'monthly_900_one_corp', 'monthly_1200_both_corp', 'monthly_2700_all_route']}
     type=stacked
+    handleMissing=gap
     title="Monthly Pass Subscribers by Type (System Total)"
     yAxisTitle="Number of Pass Holders"
     yFmt='#,##0'
     connectGroup="ridership-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
+</AreaChart>
 
 <AreaChart
     data={monthly_passes_long}
@@ -66,10 +72,15 @@ Monthly pass holders are the commuter core — the riders who have made a delibe
     y=passes
     series=pass_type
     type=stacked100
+    handleMissing=gap
     title="Monthly Pass Mix (Share of Total)"
     yAxisTitle="Share %"
     connectGroup="ridership-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
+</AreaChart>
 
 <DataTable
     data={monthly_passes}
@@ -141,6 +152,7 @@ Where does the money come from? PMPML earns revenue from three primary streams: 
     x=date_parsed
     y={['ticket_earnings_cr', 'pass_earnings_cr', 'student_earnings_cr']}
     type=stacked
+    handleMissing=gap
     title="Monthly Revenue by Source (Rs Crores)"
     yAxisTitle="Revenue (Rs Crores)"
     yFmt='#,##0.00'
@@ -157,11 +169,16 @@ Where does the money come from? PMPML earns revenue from three primary streams: 
     y=revenue_cr
     series=source
     type=stacked100
+    handleMissing=gap
     title="Revenue Mix (Share of Total)"
     subtitle="How the balance between tickets, passes, and student fares is shifting"
     yAxisTitle="Share %"
     connectGroup="ridership-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
+</AreaChart>
 
 <DataTable
     data={revenue_composition}

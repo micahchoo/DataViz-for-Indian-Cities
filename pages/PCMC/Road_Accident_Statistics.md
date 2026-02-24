@@ -14,6 +14,7 @@ As Pimpri-Chinchwad's vehicle fleet more than doubled between 2000 and 2007, roa
     title="Accidents by Severity (2000-2007)"
     subtitle="Fatal and major accidents both trend upward"
     yAxisTitle="Number of Accidents"
+    xFmt='####'
     type=stacked
 />
 
@@ -24,6 +25,7 @@ As Pimpri-Chinchwad's vehicle fleet more than doubled between 2000 and 2007, roa
     title="Casualties Over Time (2000-2007)"
     subtitle="Deaths rose 33% while injuries remained volatile"
     yAxisTitle="Number of People"
+    xFmt='####'
 />
 
 <LineChart
@@ -33,6 +35,7 @@ As Pimpri-Chinchwad's vehicle fleet more than doubled between 2000 and 2007, roa
     title="Fatal Accidents as Share of Total (%)"
     subtitle="Rising from 53% to 56% — a higher proportion of accidents are deadly"
     yAxisTitle="Fatal Accident Share (%)"
+    xFmt='####'
 />
 
 <DataTable
@@ -51,6 +54,7 @@ Absolute accident counts are misleading without accounting for the growing vehic
     title="Accident Rate Per 10,000 Registered Vehicles"
     subtitle="Per-vehicle fatality rate dropped sharply even as absolute deaths rose 33%"
     yAxisTitle="Per 10,000 Vehicles"
+    xFmt='####'
 />
 
 Despite a 33% rise in absolute deaths (118 to 157) between 2000 and 2007, the fatality rate per 10,000 registered vehicles fell sharply as the vehicle fleet more than doubled. Roads were getting safer per vehicle — but the sheer volume growth meant more total deaths. This is a common pattern in rapidly motorizing cities: safety improvements per trip are overwhelmed by the explosion in total trips.

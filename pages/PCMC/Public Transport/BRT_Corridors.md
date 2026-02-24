@@ -77,8 +77,9 @@ The CMP proposed 30 specific route sections across 8 BRT corridors. Each section
 <PointMap
     data={brt_route_sections}
     lat=mid_lat
-    lon=mid_lng
+    long=mid_lng
     value=projected_trips
+    valueFmt='#,##0'
     pointName=section_name
     title="Proposed BRT Sections — CMP 2008 (Bubble = Projected Trips/Day)"
     height=500

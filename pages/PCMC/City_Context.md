@@ -20,6 +20,7 @@ PCMC's population grew from 26,367 in 1951 to over 10 lakh by 2001 — a 38-fold
     subtitle="Actual census data (1951–2001) vs CMP 2008 projections (2011–2031)"
     yAxisTitle="Population"
     yFmt='#,##0'
+    xFmt='####'
     labels=true
 />
 
@@ -30,6 +31,7 @@ PCMC's population grew from 26,367 in 1951 to over 10 lakh by 2001 — a 38-fold
     title="Decadal Population Growth Rate (%)"
     subtitle="Growth rate decelerating from 155% (1971–81) toward more moderate projections"
     yAxisTitle="Growth Rate %"
+    xFmt='####'
     connectGroup="city-context"
 />
 
@@ -44,7 +46,6 @@ Between 1989 and 2007, PCMC's built-up area more than doubled — from 151 sq km
     rows=all
 >
     <Column id=Stage title="Stage"/>
-    <Column id=data_source title="Data Source"/>
     <Column id=area_sq_km title="Area (sq km)" fmt='#,##0.0'/>
     <Column id=pct_increase title="% Increase" fmt='#,##0.0"%"'/>
 </DataTable>
@@ -123,6 +124,7 @@ The CMP projected total trip demand to grow 7-fold between 2008 and 2031 (from 2
     subtitle="CMP 2008 projected demand — all modes vs public transport"
     yAxisTitle="Trips per Day"
     yFmt='#,##0'
+    xFmt='####'
     connectGroup="city-context"
 />
 
@@ -134,6 +136,7 @@ The CMP projected total trip demand to grow 7-fold between 2008 and 2031 (from 2
     subtitle="CMP 2008 target: grow PT share from 26% (2008) to 32% (2031)"
     yAxisTitle="%"
     yFmt='#0.0"%"'
+    xFmt='####'
     connectGroup="city-context"
 />
 
@@ -177,7 +180,6 @@ ORDER BY census_year
 ```sql urban_sprawl
 SELECT
     Stage,
-    "Data Source \nImage" as data_source,
     TRY_CAST("Sq. km" AS DOUBLE) as area_sq_km,
     TRY_CAST(REPLACE(COALESCE(NULLIF("% increase", '-'), '0'), '%', '') AS DOUBLE) as pct_increase
 FROM "PCMC_Urban_Sprawl_Increase_1989_-_2007"

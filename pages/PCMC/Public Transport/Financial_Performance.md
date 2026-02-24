@@ -58,6 +58,7 @@ Bus revenue has remained in the ₹550–650 Cr range across most years, with th
     data={pnl_trend}
     x=fiscal_year
     y={['income_cr', 'expenses_cr']}
+    type=grouped
     title="Total Income vs. Total Expenditure (₹ Crores)"
     yAxisTitle="₹ Crores"
     yFmt='#,##0'
@@ -72,7 +73,9 @@ Bus revenue has remained in the ₹550–650 Cr range across most years, with th
     subtitle="Negative = operating deficit funded by municipal reimbursements"
     yAxisTitle="₹ Crores"
     yFmt='#,##0'
-/>
+>
+    <ReferenceLine y=0 label="Breakeven" color=base-content-muted hideValue=true labelPosition=belowEnd/>
+</LineChart>
 
 ---
 
@@ -94,6 +97,7 @@ PMPML's operating deficit is formally a reimbursable item — PMC and PCMC are l
     data={reimbursements_breakdown}
     x=fiscal_year
     y={['operating_deficit_cr', 'reimbursements_cr']}
+    type=grouped
     title="Operating Deficit vs. Reimbursements Received (₹ Crores)"
     subtitle="Gap between bars = deficit not covered, or surplus coverage from prior-year timing"
     yAxisTitle="₹ Crores"
@@ -114,12 +118,15 @@ PMPML's employee benefit costs — salaries, pensions, provident fund contributi
     subtitle="Above 100% means payroll exceeds fare income — requires subsidy to break even"
     yAxisTitle="% of Bus Revenue"
     yFmt='#0.0"%"'
-/>
+>
+    <ReferenceLine y=100 label="Payroll = fare income" color=negative hideValue=true labelPosition=belowEnd/>
+</LineChart>
 
 <BarChart
     data={emp_ratio}
     x=fiscal_year
     y={['revenue_cr', 'employee_cr']}
+    type=grouped
     title="Bus Revenue vs. Employee Benefits (₹ Crores)"
     yAxisTitle="₹ Crores"
     yFmt='#,##0'
@@ -155,7 +162,9 @@ After accounting for all reimbursements received, PMPML posted net profits in FY
     subtitle="This is the bottom-line figure after all income, expenses, and reimbursements"
     yAxisTitle="₹ Crores"
     yFmt='#,##0.0'
-/>
+>
+    <ReferenceLine y=0 label="Breakeven" color=base-content-muted hideValue=true labelPosition=belowEnd/>
+</BarChart>
 
 ---
 
@@ -281,6 +290,7 @@ ORDER BY subcategory DESC, item, fiscal_year
     x=item
     y=value_cr
     series=fiscal_year
+    type=grouped
     title="Key Balance Sheet Items — FY2023-24 vs FY2024-25 (₹ Crores)"
     subtitle="Inventories +129%, short-term borrowings +36%, PPE net −30%"
     yAxisTitle="₹ Crores"

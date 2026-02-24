@@ -104,6 +104,7 @@ ORDER BY date_parsed
 data={fleet_trends}
 x=date_parsed
 y={['system_avg_on_road', 'system_avg_off_road']}
+type=stacked
 title="Monthly System-Wide Average Daily Vehicle Status"
 yAxisTitle="Number of Vehicles (Daily Average)"
 connectGroup="system-monthly"
@@ -156,14 +157,19 @@ ORDER BY date_parsed
 ```
 
 <AreaChart
-data={km_trends}
-x=date_parsed
-y={['monthly_effective_kms_lakhs', 'monthly_dead_kms_lakhs', 'monthly_cancelled_kms_lakhs']}
-type=stacked
-title="Monthly Kilometers by Type (System Total, lakhs)"
-yAxisTitle="Kilometers (lakhs)"
-connectGroup="system-monthly"
-/>
+    data={km_trends}
+    x=date_parsed
+    y={['monthly_effective_kms_lakhs', 'monthly_dead_kms_lakhs', 'monthly_cancelled_kms_lakhs']}
+    type=stacked
+    handleMissing=gap
+    title="Monthly Kilometers by Type (System Total, lakhs)"
+    yAxisTitle="Kilometers (lakhs)"
+    connectGroup="system-monthly"
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
+</AreaChart>
 
 <LineChart
  data={km_trends}
@@ -388,6 +394,7 @@ ORDER BY date_parsed
     x=date_parsed
     y={['cng_kms_millions', 'diesel_kms_millions', 'ebus_kms_millions']}
     type=stacked
+    handleMissing=gap
     title="Monthly Kilometers by Fuel Type (Millions)"
     yAxisTitle="Kilometers (Millions)"
     connectGroup="system-monthly"
@@ -429,6 +436,7 @@ ORDER BY date_parsed, fuel_type
     y=kms
     series=fuel_type
     type=stacked100
+    handleMissing=gap
     title="Fuel Mix Share (%)"
     subtitle="Diesel share grew from ~5% (Jan 2023) to ~16% (Jun 2025) — 2024+ diesel estimated from consumption × efficiency"
     yAxisTitle="Share of Total KMs"
@@ -518,6 +526,7 @@ ORDER BY date_parsed
     data={safety_metrics}
     x=date_parsed
     y={['fatal_accidents', 'major_accidents', 'minor_accidents']}
+    type=stacked
     title="Monthly Accident Count by Severity (System Total)"
     yAxisTitle="Number of Accidents"
     connectGroup="system-monthly"
@@ -677,6 +686,7 @@ ORDER BY date_parsed
     yFmt='#0.00'
     connectGroup="system-monthly"
 >
+    <ReferenceLine y=9 label="Norm (9.0)" color=warning lineType=dashed hideValue=true labelPosition=belowEnd/>
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
     <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>

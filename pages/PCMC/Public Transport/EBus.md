@@ -93,6 +93,7 @@ The e-bus fleet has been exceptionally stable: 458 buses from launch through mid
     x=date_parsed
     y={['effective_km', 'cancelled_km']}
     type=stacked
+    handleMissing=gap
     title="Effective vs Cancelled Kilometers (System Total)"
     yAxisTitle="Kilometers"
     yFmt='#,##0'
