@@ -54,6 +54,7 @@ Only 3 depots exceeded 40% utilization. The peri-urban depots with large hired f
   y=utilization_pct
   title="Fleet Utilization by Depot — FY 2020-21"
   subtitle="Buses on road ÷ total buses held"
+  yAxisTitle="Fleet Utilization %"
   swapXY=true
   yFmt='#0.0"%"'
   colorPalette={['#cd4063']}
@@ -63,21 +64,24 @@ Only 3 depots exceeded 40% utilization. The peri-urban depots with large hired f
 
 ## Daily Ridership by Depot
 
+Ridership distribution during COVID did not simply mirror fleet size. Nigadi led despite low own-fleet utilization because it had 182 hired buses providing peri-urban Pune coverage. Balewadi, running only its 83 PMPML-owned buses with zero hired vehicles, had the lowest ridership.
+
 <BarChart
   data={covid_by_depot}
   x=Depot
   y=Ridership_Daily
   title="Daily Ridership by Depot — FY 2020-21"
   subtitle="Sorted by ridership descending"
+  yAxisTitle="Daily Passengers"
   swapXY=true
   yFmt='#,##0'
 />
 
-Nigadi led despite low own-fleet utilization, because it had 182 hired buses providing peri-urban Pune coverage. Balewadi, running only its 83 PMPML-owned buses with zero hired vehicles, had the lowest ridership.
-
 ---
 
 ## Own vs. Hired Buses On Road
+
+System-wide, hired buses were 26% of all vehicles on road — far lower than their 65%+ share in FY 2023-24. Balewadi and Swargate operated with zero hired vehicles during this period.
 
 <BarChart
   data={covid_fleet_stack}
@@ -86,11 +90,10 @@ Nigadi led despite low own-fleet utilization, because it had 182 hired buses pro
   type=stacked
   title="Fleet Composition by Depot — FY 2020-21"
   subtitle="Own on road, Hired on road, and total idle (held but not deployed)"
+  yAxisTitle="Buses"
   swapXY=true
   yFmt='#,##0'
 />
-
-System-wide, hired buses were 26% of all vehicles on road — far lower than their 65%+ share in FY 2023-24. Balewadi and Swargate operated with zero hired vehicles during this period.
 
 ---
 
@@ -104,6 +107,7 @@ Schedules sanctioned but not operated reflect both reduced demand and COVID-era 
   y={['Total_Schedules_Sanctioned', 'Total_Schedules_Operated']}
   type=grouped
   title="Schedules Sanctioned vs. Operated — FY 2020-21"
+  yAxisTitle="Schedules per Day"
   swapXY=true
   yFmt='#,##0'
 />
@@ -136,7 +140,7 @@ Schedules sanctioned but not operated reflect both reduced demand and COVID-era 
 
 ---
 
-*Source: PMPML Annual Statistical Report FY 2020-2021. Covers 13 depots active at the time. Baner, Charholi, Maan, and Wagholi depots were not included. "Upper Depot" is listed as "Marketyard" in the source document.*
+*Source: [PMPML Annual Statistical Report FY 2020-2021](https://pmpml.org/statistics). Covers 13 depots active at the time. Baner, Charholi, Maan, and Wagholi depots were not included. "Upper Depot" is listed as "Marketyard" in the source document.*
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: What Vehicles are being registered
+title: "A City on Two Wheels: Vehicle Registrations in Pimpri-Chinchwad, 2000–2018"
 description: Cumulative vehicle registrations by type with the RTO from 2000 to 2018
 ---
 This data shows cumulative vehicle registrations by type with the Pimpri-Chinchwad RTO from 2000 to 2018. These are active registrations on the RTO's books — not annual new registrations, and not necessarily vehicles currently on the road (some may be scrapped, idle, or relocated). Rising numbers primarily reflect new registrations outpacing de-registrations. Small drops in some categories (e.g. Scooters, Mopeds) indicate occasional data revisions or de-registrations.
@@ -18,6 +18,9 @@ This data shows cumulative vehicle registrations by type with the Pimpri-Chinchw
 
 {#if inputs.selected_view === "Overall"}
 ### Overall Vehicle Registration Distribution
+
+Between 2000-01 and 2017-18, PCMC's registered vehicle fleet grew from 2.38 lakh to 21.27 lakh — a nearly 9-fold increase. Two-wheelers account for around 70% of all registrations throughout the period, a dominance that has barely shifted even as cars have grown faster in proportional terms. Use the category buttons above to explore the composition in detail.
+
 <AreaChart
     data={all_categories}
     x=display_year
@@ -27,6 +30,7 @@ This data shows cumulative vehicle registrations by type with the Pimpri-Chinchw
     title="Vehicle Registrations"
     subtitle="Distribution across major vehicle categories"
     xAxisTitle="Year"
+    yAxisTitle="Registrations"
     fillOpacity=0.9
     connectGroup="vehicles"
     chartAreaHeight=300
@@ -46,6 +50,7 @@ This data shows cumulative vehicle registrations by type with the Pimpri-Chinchw
     title="Vehicle Registrations"
     subtitle="As a share of all Vehicles on Road"
     xAxisTitle="Year"
+    yAxisTitle="Share of All Vehicles (%)"
     fillOpacity=0.9
     connectGroup="vehicles"
     chartAreaHeight=300
@@ -118,6 +123,9 @@ By 2017-18, PCMC had crossed 1,000 registered vehicles per 1,000 people — effe
 
  {:else if inputs.selected_view === "Two Wheelers"}
 ### Two Wheeler Registration Distribution
+
+The six-year scooter plateau (2007–2013) broke sharply in 2013-14 with a 19% jump in one year — the arrival of gearless automatics (Honda Activa, TVS Jupiter) that broadened two-wheeler appeal across age groups and genders. Mopeds, by contrast, simply stopped growing after 2011 and have flatlined since — the category was superseded.
+
 <AreaChart
     data={detailed_two_wheelers}
     x=display_year
@@ -127,6 +135,7 @@ By 2017-18, PCMC had crossed 1,000 registered vehicles per 1,000 people — effe
     title="Two Wheeler Registrations"
     subtitle="Distribution of motorcycles, scooters, and mopeds"
     xAxisTitle="Year"
+    yAxisTitle="Registrations"
     fillOpacity=0.9
     connectGroup="vehicles"
     chartAreaHeight=300
@@ -147,6 +156,7 @@ By 2017-18, PCMC had crossed 1,000 registered vehicles per 1,000 people — effe
     title="Two Wheeler Registrations"
     subtitle="As a share of other Two Wheelers on Road"
     xAxisTitle="Year"
+    yAxisTitle="Share of Two Wheelers (%)"
     fillOpacity=0.9
     connectGroup="vehicles"
     chartAreaHeight=300
@@ -160,6 +170,9 @@ By 2017-18, PCMC had crossed 1,000 registered vehicles per 1,000 people — effe
 
  {:else if inputs.selected_view === "Personal Vehicles"}
 ### Personal Vehicle Registration Distribution
+
+Car registrations accelerated after 2010, growing their share of the total fleet even as two-wheelers also grew in absolute numbers. The shift toward four-wheelers tracks the income growth documented in the CMP 2008 household surveys — what was once aspirational became reachable.
+
 <AreaChart
      data={detailed_personal}
      x=display_year
@@ -169,6 +182,7 @@ By 2017-18, PCMC had crossed 1,000 registered vehicles per 1,000 people — effe
      title="Personal Vehicle Registrations"
      subtitle="Distribution of cars, jeeps, and station wagons"
      xAxisTitle="Year"
+     yAxisTitle="Registrations"
      fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
@@ -187,6 +201,7 @@ By 2017-18, PCMC had crossed 1,000 registered vehicles per 1,000 people — effe
      title="Personal Vehicle Registrations"
      subtitle="As a share of other Personal Vehicles on the Road"
      xAxisTitle="Year"
+     yAxisTitle="Share of Personal Vehicles (%)"
      fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
@@ -199,6 +214,9 @@ By 2017-18, PCMC had crossed 1,000 registered vehicles per 1,000 people — effe
 
 {:else}
 ### Commercial Vehicle Registration Distribution
+
+Metered taxis disappear from the data in 2007-08 — not because taxis vanished, but because the RTO reclassified them as 'Luxury Tourist Cabs.' The rising delivery van count from 2012 onward tracks the expansion of e-commerce logistics alongside Pimpri-Chinchwad's existing industrial supply chains.
+
 <AreaChart
      data={detailed_commercial}
      x=display_year
@@ -208,6 +226,7 @@ By 2017-18, PCMC had crossed 1,000 registered vehicles per 1,000 people — effe
      title="Commercial Vehicle Registrations"
      subtitle="Distribution across transport and goods vehicles"
      xAxisTitle="Year"
+     yAxisTitle="Registrations"
      fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
@@ -226,6 +245,7 @@ By 2017-18, PCMC had crossed 1,000 registered vehicles per 1,000 people — effe
      title="Commercial Vehicle Registrations"
      subtitle="As a share of other commercial vehicles on the road"
      xAxisTitle="Year"
+     yAxisTitle="Share of Commercial Vehicles (%)"
      fillOpacity=0.9
      connectGroup="vehicles"
      chartAreaHeight=300
@@ -436,7 +456,10 @@ ORDER BY display_year
 ## See Also
 
 - **[Fleet Composition Trends](/PCMC/Fleet_Composition_Trends)** — Growth rates, indexed comparisons, and market share analysis of the same registration data
+- **[Pune vs PCMC Vehicles](/PCMC/Pune_PCMC_Comparison)** — PCMC's registered fleet in context: how it compares to Pune across 18 years
 - **[Road Safety](/PCMC/Road_Accident_Statistics)** — How the growing vehicle fleet affected accident rates
 
 ## Sources
 - [Open City Urban Data Portal](https://data.opencity.in/dataset/maharashtra-vehicles-registration-data/resource/maharashtra-vehicles-registration-data---2001-2018)
+
+*Data: cumulative vehicle registrations with the Pimpri-Chinchwad RTO, 2000-2001 to 2017-2018. Source: Maharashtra state RTO registration data.*

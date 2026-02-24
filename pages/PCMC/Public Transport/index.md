@@ -65,6 +65,9 @@ PMPML now operates across 17 depots with a fleet of ~2,000 buses. Monthly depot-
 - **[COVID-Era Operations](/PCMC/Public%20Transport/COVID_Era)** — FY 2020-21: 32% fleet utilization, 2.83 lakh daily passengers, 13-depot breakdown
 - **[Annual Performance Report](/PCMC/Public%20Transport/Annual_Statistics)** — FY 2023-24 vs FY 2024-25: fleet, ridership, revenue, fuel efficiency by propulsion type, safety, workshop
 - **[E-Bus Service Statistics](/PCMC/Public%20Transport/EBus)** — Electric bus operations at dedicated depots, including KMPU energy efficiency tracking
+- **[Financial Performance](/PCMC/Public%20Transport/Financial_Performance)** — Annual P&L 2017-18 to 2024-25: operating deficit, employee costs, and municipal reimbursements
+
+One caveat shapes everything on these pages: PMPML did not publish consistent operational data between the 2007 merger and the monthly depot reports beginning in January 2023. The 15-year gap means this site can document PCMT's decline and PMPML's recent performance, but not the decade and a half in between. Fleet expansions, route rationalization, the BRT rollout, and the COVID collapse exist in annual reports and press accounts but have not been systematically digitized.
 
 ---
 

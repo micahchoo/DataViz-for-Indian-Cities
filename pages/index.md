@@ -3,7 +3,9 @@ title: DataViz for Indian Cities
 description: Urban mobility data for Pimpri-Chinchwad — vehicles, buses, traffic, and road safety from 2000 to 2025
 ---
 
-Pimpri-Chinchwad grew from 10 lakh residents in 2001 to over 17 lakh by 2011, making it one of India's fastest-growing urban areas. As the city expanded, its transport infrastructure — buses, roads, vehicle registrations — strained to keep pace. This project visualizes that story through public data.
+Pimpri-Chinchwad grew from 10 lakh residents in 2001 to over 17 lakh by 2011, making it one of India's fastest-growing urban areas. As the city expanded, its transport infrastructure — buses, roads, vehicle registrations — strained to keep pace. This project visualizes that story through public data. Private vehicle ownership multiplied nearly 9-fold between 2000 and 2018, crossing one registered vehicle per person by 2017-18. Over the same period, bus ridership per capita declined. This site documents that divergence — through vehicle registration records, bus ridership data, traffic surveys, and financial accounts spanning 2000 to 2025.
+
+Narrative pages (City Context, Vehicle Registrations, Financial Performance) argue a point and can be read start to finish. Dashboard pages (Depotwise Reports, Traffic Surveys) let you filter and explore. Both draw from the same underlying data.
 
 ## Pimpri-Chinchwad
 

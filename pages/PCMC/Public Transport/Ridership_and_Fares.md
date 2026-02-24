@@ -5,7 +5,7 @@ description: Pass types, fare tiers, and how the revenue mix is shifting
 
 PMPML offers a layered fare system with daily passes, monthly passes, and subsidized student passes. Each tier serves a different segment of the city's commuter population. This page breaks down who buys what, how many, and where the money comes from.
 
-**Fare revision note:** PMPML revised pass prices during the data period. The column labels in the source data reflect the original (2023) prices. By mid-2025, the Punyadasham pass went from Rs 10 to Rs 20, the combined municipal pass from Rs 50 to Rs 70, the all-route daily pass from Rs 120 to Rs 150, and the monthly both-corporation pass from Rs 1,200 to Rs 1,500. The within-PMC and within-PCMC Rs 40 daily passes were consolidated. Charts below use the original column labels but the actual fares changed partway through.
+> **Fare revision note:** PMPML revised pass prices during the data period. The column labels in the source data reflect the original (2023) prices. By mid-2025, the Punyadasham pass went from Rs 10 to Rs 20, the combined municipal pass from Rs 50 to Rs 70, the all-route daily pass from Rs 120 to Rs 150, and the monthly both-corporation pass from Rs 1,200 to Rs 1,500. The within-PMC and within-PCMC Rs 40 daily passes were consolidated. Read pass labels as approximate cohort identifiers (low-income daily rider, commuter, long-distance) rather than exact price points — the prices changed partway through the data period.
 
 ---
 
@@ -99,7 +99,11 @@ Student passes are a distinct category: subsidized, seasonal, and large in volum
     yAxisTitle="Number of Passes"
     yFmt='#,##0'
     connectGroup="ridership-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 <LineChart
     data={student_ridership}
@@ -109,7 +113,11 @@ Student passes are a distinct category: subsidized, seasonal, and large in volum
     yAxisTitle="Revenue (Rs Lakhs)"
     yFmt='#,##0.0'
     connectGroup="ridership-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 <DataTable
     data={student_ridership}
@@ -182,7 +190,11 @@ PMPML operates two niche tourism services: Pune Darshan Seva (city sightseeing) 
     yAxisTitle="Count"
     yFmt='#,##0'
     connectGroup="ridership-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 Tourism services are a small fraction of PMPML's overall operations, but they indicate institutional ambition beyond basic commuter transport. Pune Darshan in particular is a recognizable brand in the city. Seasonal patterns here — peaks during school holidays and the October-November festival season — would confirm that these services cater primarily to leisure and visiting populations rather than regular commuters.
 

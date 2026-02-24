@@ -105,6 +105,10 @@ ORDER BY vehicles DESC
 
 Across all 15 survey points, the overall passengers-per-vehicle ratio was 2.97 — meaning each vehicle carried about 3 people on average. But this varies enormously: the Mumbai-Pune Expressway averaged just 3.0 (cars with drivers), while Aundh Bridge hit 4.74 (heavy bus traffic inflating the ratio). Buses made up only 6% of vehicles but carried a disproportionate share of passengers.
 
+---
+
+*Data from the 2008 Comprehensive Mobility Plan traffic survey, conducted at 15 locations across PCMC. Source: CMP 2008, Chapter on Traffic and Transportation.*
+
 ## See Also
 
 - **[Vehicle Registrations](/PCMC/Registered_Vehicles_2000_2018)** — The vehicle fleet growth behind these traffic volumes

@@ -35,13 +35,16 @@ BRT_ONLY_DEPOTS = {"M.Yard"}
 # Date ranges where source reports are known to be missing.
 # Format: (file_label, start_inclusive, end_inclusive, note)
 KNOWN_GAPS = [
-    ("extracted",      "Jan 2024", "Mar 2024", "Source reports not published for Q4 FY2023-24"),
-    ("extracted",      "Nov 2024", "Mar 2025", "Source reports not published for partial FY2024-25"),
-    ("brt_extracted",  "Jan 2023", "Jan 2023", "BRT Jan 2023 report was not available for download"),
-    ("brt_extracted",  "Jan 2024", "Mar 2024", "Source reports not published for Q4 FY2023-24"),
-    ("brt_extracted",  "Nov 2024", "Mar 2025", "Source reports not published for partial FY2024-25"),
-    ("ebus_extracted", "Jan 2024", "Mar 2024", "Source reports not published for Q4 FY2023-24"),
-    ("ebus_extracted", "Nov 2024", "Mar 2025", "Source reports not published for partial FY2024-25"),
+    ("extracted",      "Jan 2024", "Mar 2024", "Reports not retrieved for Q4 FY2023-24"),
+    ("extracted",      "Nov 2024", "Mar 2025", "Reports not retrieved for partial FY2024-25"),
+    ("extracted",      "Jul 2025", "Sep 2025", "Reports not retrieved; PMPML publishes quarterly batches"),
+    ("brt_extracted",  "Jan 2023", "Jan 2023", "BRT Jan 2023 report not retrieved"),
+    ("brt_extracted",  "Jan 2024", "Mar 2024", "Reports not retrieved for Q4 FY2023-24"),
+    ("brt_extracted",  "Nov 2024", "Mar 2025", "Reports not retrieved for partial FY2024-25"),
+    ("brt_extracted",  "Jul 2025", "Sep 2025", "Reports not retrieved; PMPML publishes quarterly batches"),
+    ("ebus_extracted", "Jan 2024", "Mar 2024", "Reports not retrieved for Q4 FY2023-24"),
+    ("ebus_extracted", "Nov 2024", "Mar 2025", "Reports not retrieved for partial FY2024-25"),
+    ("ebus_extracted", "Jul 2025", "Sep 2025", "Reports not retrieved; PMPML publishes quarterly batches"),
 ]
 
 # Known data quality issues in source CSVs that have been handled in SQL/notes.
@@ -125,6 +128,33 @@ def uses_pmpml_table(sql_text):
     )
 
 
+# ── UX helpers ─────────────────────────────────────────────────────────────────
+
+_CHART_TAGS = ("LineChart", "BarChart", "AreaChart")
+_VIZ_TAGS   = ("LineChart", "BarChart", "AreaChart", "DataTable", "PointMap", "AreaMap")
+
+def _tag_bodies(content, tags):
+    """Yield (tag_name, attr_string) for each opening Evidence.dev component tag.
+
+    Matches the opening tag and captures all attributes before the closing > or />.
+    Works because Evidence.dev attribute values (single-quoted strings, {[...]}
+    array expressions) never contain the > character.
+    """
+    tag_group = "|".join(re.escape(t) for t in tags)
+    for m in re.finditer(rf'<({tag_group})\b([^>]*)(?:/>|>)', content, re.DOTALL):
+        yield m.group(1), m.group(2)
+
+
+# BigValue value= column name substrings that imply numeric formatting is needed.
+# Plain count columns (total_months, total_depots, years_covered) are intentionally absent.
+_FMT_KEYWORDS = frozenset([
+    "revenue", "earning", "crore", "deficit", "profit", "loss",
+    "reimburse", "income", "expense", "cost", "utiliz", "pct",
+    "rate", "ratio", "passengers", "ridership", "km", "fare",
+    "cumulative", "total_revenue", "avg_fleet",
+])
+
+
 # ── Page rules ─────────────────────────────────────────────────────────────────
 
 def check_meta(path, content):
@@ -138,6 +168,18 @@ def check_meta(path, content):
         error("META_FRONTMATTER", path, "Frontmatter missing 'title:'")
     if "description:" not in body:
         warn("META_FRONTMATTER", path, "Frontmatter missing 'description:'")
+
+    # Rule META_YAML_QUOTE: title/description values containing a colon must be
+    # quoted, otherwise YAML parses them as nested mappings and the dev server
+    # crashes with "Nested mappings are not allowed in compact mappings".
+    # Pattern: bare (unquoted) value — i.e. not starting with " or '
+    for line in body.splitlines():
+        m = re.match(r'^(title|description):\s*([^"\'\s].*)', line)
+        if m and ":" in m.group(2):
+            warn("META_YAML_QUOTE", path,
+                 f"{m.group(1)}: value contains a colon but is not quoted — "
+                 "wrap in double quotes to prevent YAML parse error: "
+                 f"{line.strip()!r}")
 
 
 def check_links(path, content):
@@ -164,7 +206,8 @@ def check_sql(path, content):
 
     # Rule: Fleet utilization column must be wrapped in LEAST(..., 100.0)
     # Reason: Dec 2023 has 200%/116% outliers from source report formula quirk.
-    util_pattern = r'TRY_CAST\("% of Fleet Utilization\(PMPML\+PPP\)" AS DOUBLE\)'
+    # Optional table alias before column name: TRY_CAST(e."% ..." or TRY_CAST("% ...")
+    util_pattern = r'TRY_CAST\((?:\w+\.)?"% of Fleet Utilization\(PMPML\+PPP\)" AS DOUBLE\)'
     for m in re.finditer(util_pattern, all_sql):
         preceding = all_sql[max(0, m.start() - 7): m.start()]
         if "LEAST(" not in preceding:
@@ -245,7 +288,10 @@ def check_components(path, content):
              f"{len(charts_with_connect)} use connectGroup= — "
              "add connectGroup to synchronize tooltip hover across charts")
 
-    # Rule: Pages using PMPML monthly data should annotate the two known gaps
+    # Rule: Pages using PMPML monthly data should annotate the three known gaps:
+    #   1. Jan–Mar 2024  (Q4 FY2023-24 reports not retrieved)
+    #   2. Nov 2024–Mar 2025  (partial FY2024-25 reports not retrieved)
+    #   3. Jul–Sep 2025  (Q2 FY2025-26 reports not retrieved; PMPML publishes quarterly)
     blocks = extract_sql_blocks(content)
     all_sql = "\n".join(sql for _, sql in blocks)
     if uses_pmpml_table(all_sql):
@@ -254,7 +300,7 @@ def check_components(path, content):
             if "ReferenceArea" not in content:
                 warn("COMPONENT_GAPS", path,
                      "PMPML time-series page has no ReferenceArea gap annotations — "
-                     "add for Jan–Mar 2024 and Nov 2024–Mar 2025 data gaps")
+                     "add for Jan–Mar 2024, Nov 2024–Mar 2025, and Jul–Sep 2025 data gaps")
             else:
                 if "2024-01-01" not in content or "2024-03-31" not in content:
                     warn("COMPONENT_GAPS", path,
@@ -264,6 +310,26 @@ def check_components(path, content):
                     warn("COMPONENT_GAPS", path,
                          "Missing Nov 2024–Mar 2025 gap annotation "
                          "(xMin='2024-11-01' xMax='2025-03-31')")
+                if "2025-07-01" not in content or "2025-09-30" not in content:
+                    warn("COMPONENT_GAPS", path,
+                         "Missing Jul–Sep 2025 gap annotation "
+                         "(xMin='2025-07-01' xMax='2025-09-30')")
+            # Sub-rule: self-closing LineChart with x=date_parsed cannot contain
+            # ReferenceArea children (mdsvex silently drops them). Flag any that
+            # exist so authors convert them to open/close tags.
+            for m in re.finditer(
+                r'<LineChart\b([^>]*?)/>',
+                content,
+                re.DOTALL,
+            ):
+                attrs = m.group(1)
+                if "date_parsed" in attrs:
+                    title_m = re.search(r'title="([^"]+)"', attrs)
+                    label = title_m.group(1) if title_m else "(no title)"
+                    warn("COMPONENT_GAPS", path,
+                         f"Self-closing LineChart '{label}' uses date_parsed but cannot "
+                         "contain <ReferenceArea> children — convert to open/close tag "
+                         "and add gap annotations")
 
 
 def check_sql_position(path, content):
@@ -336,6 +402,21 @@ def check_component_query_refs(path, content):
                  "updating the SQL block")
 
 
+def check_financial_citation(path, content):
+    """META_CITATION: Financial_Performance.md must cite pmpml.org/financial_performance.
+
+    The annual P&L data comes from a different source than the monthly statistical
+    reports. Pages using PMPML_Financial_PnL must link to the financial_performance
+    URL, not just the statistics URL.
+    """
+    if "PMPML_Financial_PnL" not in content:
+        return
+    if "pmpml.org/financial_performance" not in content:
+        warn("META_CITATION", path,
+             "Page queries PMPML_Financial_PnL but does not cite "
+             "https://pmpml.org/financial_performance — add to the source footnote")
+
+
 def check_component_self_close(path, content):
     """COMPONENT_SELF_CLOSE: Charts with children must use open/close tags.
 
@@ -398,6 +479,232 @@ def check_series_color_order(path, content):
                      "Wide-format chart has diesel before CNG, but series= chart sorts "
                      "alphabetically (CNG first). Colors will be swapped between charts. "
                      "Reorder y=[cng_..., diesel_..., ebus_...] to match.")
+
+
+# ── UX / Design rules ─────────────────────────────────────────────────────────
+
+def check_chart_ux(path, content):
+    """UX rules for chart components: titles, axis labels, type, invalid props.
+
+    Rules:
+      CHART_TITLE          — every chart needs a title for reader orientation
+      CHART_YAXIS          — every chart should declare yAxisTitle= for unit context
+      CHART_AREA_TYPE      — multi-series AreaChart without type= will overlap
+      COMPONENT_INVALID_PROP — seriesLabels= is not a valid Evidence.dev prop
+      CHART_DATATABLE_ROWS — explicit rows= prevents unpredictable default pagination
+      BIGVALUE_FMT         — monetary/rate BigValues need fmt= for readability
+    """
+
+    # CHART_TITLE — every LineChart/BarChart/AreaChart must have a title
+    for tag, attrs in _tag_bodies(content, _CHART_TAGS):
+        if "title=" not in attrs:
+            warn("CHART_TITLE", path,
+                 f"<{tag}> missing title= — every chart needs a title for reader orientation")
+
+    # CHART_YAXIS — primary charts should declare yAxisTitle= for unit context
+    for tag, attrs in _tag_bodies(content, _CHART_TAGS):
+        if "yAxisTitle=" not in attrs:
+            warn("CHART_YAXIS", path,
+                 f"<{tag}> missing yAxisTitle= — axis label tells readers what units they're reading")
+
+    # CHART_AREA_TYPE — AreaChart with multiple y-series needs type=stacked/stacked100
+    for tag, attrs in _tag_bodies(content, ["AreaChart"]):
+        if re.search(r"y=\{\[.+?,", attrs, re.DOTALL) and "type=" not in attrs:
+            warn("CHART_AREA_TYPE", path,
+                 "<AreaChart> has multiple y-series but no type= — "
+                 "without type=stacked or type=stacked100, series will overlap instead of stack")
+
+    # COMPONENT_INVALID_PROP — seriesLabels= is not a valid Evidence.dev BarChart prop;
+    # it is silently ignored, causing series to display column-name labels instead of
+    # the intended human-readable labels. Rename columns in SQL instead.
+    if "seriesLabels=" in content:
+        warn("COMPONENT_INVALID_PROP", path,
+             "seriesLabels= is not a valid Evidence.dev prop (silently ignored) — "
+             "rename series by aliasing columns in SQL (e.g. revenue AS \"Bus Revenue\")")
+
+    # CHART_DATATABLE_ROWS — DataTable must declare rows= to control pagination
+    for tag, attrs in _tag_bodies(content, ["DataTable"]):
+        if "rows=" not in attrs:
+            warn("CHART_DATATABLE_ROWS", path,
+                 "<DataTable> missing rows= — "
+                 "set rows=all to show all records, or rows=N for explicit page size")
+
+    # BIGVALUE_FMT — monetary/rate BigValues need fmt= so numbers render readably
+    for tag, attrs in _tag_bodies(content, ["BigValue"]):
+        if "fmt=" not in attrs:
+            vm = re.search(r'\bvalue=(\w+)', attrs)
+            if vm and any(kw in vm.group(1).lower() for kw in _FMT_KEYWORDS):
+                warn("BIGVALUE_FMT", path,
+                     f"<BigValue value={vm.group(1)}> missing fmt= — "
+                     "add a format string (e.g. '#,##0' or '\"₹\"#,##0\" Cr\"')")
+
+
+def check_artifact_opener(path, content):
+    """ARTIFACT_OPENER: pages must not open with an artifact-forward sentence.
+
+    Artifact-forward openers ("Looking at the visualization below...", "As we can
+    see in the chart...") lead with the tool, not the story. Every data page must
+    open with a claim about the world, not a pointer to a chart.
+
+    Warning only — some navigation-hub index pages may intentionally begin with
+    a structural description rather than an argumentative claim.
+    """
+    body = re.sub(r"^---\n.*?\n---\n?", "", content, count=1, flags=re.DOTALL)
+    # Find first non-empty, non-heading line
+    for line in body.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        # Check if the first sentence matches artifact-opener patterns
+        if re.match(
+            r"^(?:Looking at|As we can see|As shown|We can see|"
+            r"In this (?:page|visualization|chart|dashboard))",
+            stripped,
+            re.IGNORECASE,
+        ):
+            warn("ARTIFACT_OPENER", path,
+                 f"Page opens with artifact-forward sentence: '{stripped[:80]}...' — "
+                 "lead with a claim about the world, not a pointer to a chart")
+        break  # only check the first non-empty, non-heading line
+
+
+def check_content_ifelse(path, content):
+    """CONTENT_IFELSE: ButtonGroup/conditional views must have prose before first chart.
+
+    Any {#if inputs.} or {:else if inputs.} block that selects a VIEW (not just
+    a chart format) but contains no prose paragraph (20+ characters of non-tag,
+    non-SQL text) before the first chart component is flagged. This prevents
+    ButtonGroup views from being added without explanatory text.
+
+    Chart-type/format switcher blocks are intentionally exempt — they select
+    display format (Line vs Area vs Bar, Percentage vs Absolute) within a
+    section that is already narrated, so prose is expected before the switcher,
+    not inside each branch. These are identified by condition variable names
+    ending in _chart_type, _display, or _metric, or by condition values that
+    are chart format names ("Line Chart", "Area Chart", "Percentage", etc.).
+
+    Warning only.
+    """
+    # Chart-type/format condition patterns to skip (these are display-format switchers,
+    # not view selectors — the prose lives outside the switcher block).
+    FORMAT_VAR_SUFFIXES = ("_chart_type", "_display", "_metric")
+    FORMAT_VALUES = frozenset([
+        '"Line Chart"', '"Area Chart"', '"Bar Chart"',
+        '"Percentage"', '"Split"', '"Both"', '"Absolute"',
+    ])
+
+    # Match {#if inputs.expr} or {:else if inputs.expr}
+    block_pat = re.compile(
+        r'\{(?:#if|:else if)\s+(inputs\.[^}]+)\}(.*?)(?=\{(?:#if|:else if|/if)\b|$)',
+        re.DOTALL
+    )
+    for m in block_pat.finditer(content):
+        condition = m.group(1).strip()  # e.g. inputs.selected_view === "Two Wheelers"
+        block_body = m.group(2)
+
+        # Skip chart-type / format switchers
+        # Check if the input variable name ends with a format-switcher suffix
+        var_m = re.match(r'inputs\.(\w+)', condition)
+        if var_m:
+            var_name = var_m.group(1)
+            if any(var_name.endswith(sfx) for sfx in FORMAT_VAR_SUFFIXES):
+                continue
+        # Check if the condition value is a chart format name
+        val_m = re.search(r'===\s*("[^"]*")', condition)
+        if val_m and val_m.group(1) in FORMAT_VALUES:
+            continue
+
+        # Find first Evidence chart/viz component in this block
+        first_component = re.search(
+            r'<(?:LineChart|BarChart|AreaChart|DataTable|PointMap|AreaMap|BigValue)\b',
+            block_body
+        )
+        if not first_component:
+            continue
+
+        # Check for prose (20+ non-tag, non-SQL chars) before the first component
+        pre_component = block_body[:first_component.start()]
+        pre_clean = re.sub(r"```.*?```", "", pre_component, flags=re.DOTALL)
+        pre_clean = re.sub(r"^#{1,6}\s+.*$", "", pre_clean, flags=re.MULTILINE)
+        # Strip Evidence component open-tags (multi-line) and self-closing tags
+        pre_clean = re.sub(r"<\w[^>]*/?>", "", pre_clean, flags=re.DOTALL)
+        pre_clean = pre_clean.strip()
+
+        if len(pre_clean) < 20:
+            preceding = content[:m.start()]
+            heading_m = re.findall(r"^#{1,6}\s+(.+)$", preceding, re.MULTILINE)
+            section = heading_m[-1] if heading_m else "(unknown section)"
+            warn("CONTENT_IFELSE", path,
+                 f"Conditional view '{section}' contains charts but no prose paragraph "
+                 f"({len(pre_clean)} chars before first component) — "
+                 "add at least one orienting sentence before the first chart")
+
+
+def check_page_ux(path, content):
+    """UX rules for page narrative structure: intro prose, See Also, source footnote.
+
+    Rules:
+      META_DESCRIPTION     — description should be 20–160 chars
+      PAGE_INTRO           — at least 30 words of prose before first visualization
+      PAGE_SEE_ALSO        — data pages should link to related pages
+      PAGE_FOOTER          — data pages should cite their source
+    """
+    path_str = str(path)
+    has_sql = bool(extract_sql_blocks(content))
+    has_viz = bool(re.search(r'<(?:' + '|'.join(_VIZ_TAGS) + r')\b', content))
+
+    # META_DESCRIPTION_LEN — applies to all pages with frontmatter
+    fm = re.match(r"^---\n(.*?)\n---", content, re.DOTALL)
+    if fm:
+        desc_m = re.search(r"description:\s*(.+)", fm.group(1))
+        if desc_m:
+            desc = desc_m.group(1).strip()
+            if len(desc) < 20:
+                warn("META_DESCRIPTION", path,
+                     f"description too short ({len(desc)} chars) — "
+                     "a concise one-liner helps readers and sidebar navigation")
+            elif len(desc) > 160:
+                warn("META_DESCRIPTION", path,
+                     f"description too long ({len(desc)} chars, max 160) — "
+                     "trim for sidebar and link preview readability")
+
+    if not (has_sql and has_viz):
+        return  # remaining structural rules only apply to data visualization pages
+
+    # PAGE_INTRO — at least 30 words of prose should appear before the first chart
+    body = re.sub(r"^---\n.*?\n---\n?", "", content, count=1, flags=re.DOTALL)
+    first_component_m = re.search(
+        r'<(?:' + '|'.join(_VIZ_TAGS + ("Grid", "BigValue")) + r')\b', body
+    )
+    if first_component_m:
+        pre = body[:first_component_m.start()]
+        pre = re.sub(r"```.*?```", "", pre, flags=re.DOTALL)   # strip SQL blocks
+        pre = re.sub(r"^#{1,6}\s+.*$", "", pre, flags=re.MULTILINE)  # strip headings
+        words = pre.split()
+        if len(words) < 30:
+            warn("PAGE_INTRO", path,
+                 f"Only {len(words)} words of prose before first visualization — "
+                 "add a narrative paragraph so readers have context before the charts")
+
+    # PAGE_SEE_ALSO — data pages should have a See Also navigation section
+    # Index pages serve as navigation hubs themselves, so they are exempt
+    if not path_str.endswith("index.md") and "## See Also" not in content:
+        warn("PAGE_SEE_ALSO", path,
+             "Data page missing '## See Also' section — "
+             "add cross-links to help readers discover related pages")
+
+    # PAGE_FOOTER — data pages should have an italicized source footnote or
+    # a dedicated ## Sources section. Accepts:
+    #   *Data covers..., *Data:..., *Data from...   (italic data-coverage note)
+    #   *Source:... / *Sources:...                  (italic source citation)
+    #   ## Sources / ## Source                      (dedicated section heading)
+    if not re.search(
+        r'^\*(?:Data|Source)|^## Source',
+        content, re.MULTILINE | re.IGNORECASE
+    ):
+        warn("PAGE_FOOTER", path,
+             "Data page missing source footnote — "
+             "add *Data covers [period]. Source: [URL].* or a ## Sources section")
 
 
 # ── Data file rules ────────────────────────────────────────────────────────────
@@ -511,6 +818,61 @@ def check_data_files():
                           "suspiciously low (expected ~₹450M). "
                           "Add to KNOWN_DATA_ISSUES if this has been addressed.")
 
+    # ── PMPML_Financial_PnL.csv integrity ───────────────────────────────────
+
+    rows_pnl, p_pnl = load_csv("PMPML_Financial_PnL.csv")
+    if rows_pnl is None:
+        error("DATA_PNL", p_pnl,
+              "PMPML_Financial_PnL.csv not found — run /tmp/build_pnl_csv.py to regenerate")
+    else:
+        required_cols = {
+            "fiscal_year", "revenue_bus_ops", "employee_benefits",
+            "total_expenses", "operating_profit_loss",
+            "total_reimbursements", "net_profit_loss",
+        }
+        missing_cols = required_cols - set(rows_pnl[0].keys())
+        if missing_cols:
+            error("DATA_PNL", p_pnl,
+                  f"PMPML_Financial_PnL.csv missing columns: {sorted(missing_cols)}")
+        expected_years = {
+            "2017-18", "2018-19", "2019-20", "2020-21",
+            "2021-22", "2022-23", "2023-24", "2024-25",
+        }
+        actual_years = {r.get("fiscal_year", "") for r in rows_pnl}
+        missing_years = expected_years - actual_years
+        if missing_years:
+            warn("DATA_PNL", p_pnl,
+                 f"PMPML_Financial_PnL.csv missing fiscal years: {sorted(missing_years)}")
+        if len(rows_pnl) > len(expected_years):
+            warn("DATA_PNL", p_pnl,
+                 f"PMPML_Financial_PnL.csv has {len(rows_pnl)} rows — expected 8 "
+                 "(one per fiscal year 2017-18 to 2024-25)")
+
+    # ── pune_vehicle_registrations.csv integrity ─────────────────────────────
+
+    rows_pvr, p_pvr = load_csv("pune_vehicle_registrations.csv")
+    if rows_pvr is None:
+        error("DATA_PVR", p_pvr,
+              "pune_vehicle_registrations.csv not found — source: "
+              "/media/2TA/DevStuff/Mapping/Publish/maharashtravehicle registrations.csv")
+    else:
+        required_cols_pvr = {"year", "city", "motor_cycles", "cars", "auto_rickshaws"}
+        missing_cols_pvr = required_cols_pvr - set(rows_pvr[0].keys())
+        if missing_cols_pvr:
+            error("DATA_PVR", p_pvr,
+                  f"pune_vehicle_registrations.csv missing columns: {sorted(missing_cols_pvr)}")
+        cities = {r.get("city", "") for r in rows_pvr}
+        if "Pune" not in cities:
+            error("DATA_PVR", p_pvr,
+                  "pune_vehicle_registrations.csv missing Pune city rows")
+        if "Pimpri-Chinchwad" not in cities:
+            error("DATA_PVR", p_pvr,
+                  "pune_vehicle_registrations.csv missing Pimpri-Chinchwad rows")
+        years_pvr = {r.get("year", "") for r in rows_pvr}
+        if "2000-2001" not in years_pvr or "2017-2018" not in years_pvr:
+            warn("DATA_PVR", p_pvr,
+                 "pune_vehicle_registrations.csv should cover 2000-2001 to 2017-2018")
+
     # ── Date format consistency ─────────────────────────────────────────────
 
     for label, rows, path in [
@@ -548,6 +910,11 @@ def main():
         check_component_query_refs(rel, content)
         check_component_self_close(rel, content)
         check_series_color_order(rel, content)
+        check_financial_citation(rel, content)
+        check_chart_ux(rel, content)
+        check_page_ux(rel, content)
+        check_artifact_opener(rel, content)
+        check_content_ifelse(rel, content)
 
     check_data_files()
 

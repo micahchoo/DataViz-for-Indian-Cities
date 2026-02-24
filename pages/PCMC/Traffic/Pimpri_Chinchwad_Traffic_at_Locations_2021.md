@@ -90,6 +90,16 @@ ORDER BY change_pct
 
 Dapodi Bridge's 58% drop is striking — NH-4 traffic has likely redistributed to parallel routes including the adjacent Harris Bridge (+265%) and the wider Aundh-Ravet corridor (+31%). Nashik Phata's +65% growth reflects the general traffic increase in PCMC's developing northern corridor.
 
+---
+
+*Data from the 2021 Traffic and Transportation Study for Pune Metropolitan Region, covering 82 locations across PCMC, PMC, and surrounding areas. Source: PMPML/PMRDA Traffic Study 2021.*
+
+## See Also
+
+- **[2008 Traffic Survey](/PCMC/Traffic/Pimpri_Chinchwad_Traffic_at_Locations)** — 15-location PCMC baseline, 13 years before this survey
+- **[Vehicle Registrations](/PCMC/Registered_Vehicles_2000_2018)** — The growing vehicle fleet that generated this traffic
+- **[Traffic Section Overview](/PCMC/Traffic)** — Both surveys in context
+
 ## Sources
 - [UPDATED DETAILED PROJECT REPORT(PCMC TO NIGDI –Corridor 1A)- 24/08/2021](https://www.punemetrorail.org/download/PCMC-Nigdi_Revised_updated.pdf)
 

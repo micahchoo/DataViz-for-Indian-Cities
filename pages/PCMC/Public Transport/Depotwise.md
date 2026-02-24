@@ -7,6 +7,8 @@ sidebar: show
 ## PMPML Fleet Monthly Depotwise reports
 Fleet data per depot per month across 22 months from January 2023 to June 2025. Coverage is not continuous — Jan–Mar 2024 and Nov 2024–Mar 2025 are missing from the source reports. This period falls during post-COVID ridership recovery — PMPML ridership had collapsed during 2020-21 lockdowns and was still rebuilding toward pre-pandemic levels through 2023-2024.
 
+This page lets you explore individual depot metrics over time. For a cross-depot comparison, see [Depot Performance](/PCMC/Public%20Transport/Depot_Performance).
+
 **Known data quality notes:** February 2023 "All Traffic Earning" was corrupted in the source PDF extraction (tabula column shift); it has been imputed as ticket + pass + student earnings. December 2023 fleet utilization exceeded 100% at Pune Station (200%) and Nigadi (117%) — a source formula quirk; capped at 100% in all SQL. April 2023 ticket-only EPK was corrupted; imputed from earnings/km. January and March 2023: the "Sanctioned" and "Operated" schedule columns are swapped for 8 depots — schedule queries use GREATEST/LEAST to reconstruct the correct values. November 2023 Nigadi "Gross KMs per own bus" is anomalously high (541 km/bus/day vs. typical 150–200); the `Total Gross KMs (Diesel+CNG+E)` column is structurally unreliable and is not used in any visualisation here — use `Total Dead KMs (Diesel+CNG+E)` (which is independently recorded and reliable) if dead-km data is needed.
 ```sql summary_metrics
 -- Each row is MONTHLY data for ONE DEPOT
@@ -157,6 +159,7 @@ ORDER BY date_parsed
 data={km_trends}
 x=date_parsed
 y={['monthly_effective_kms_lakhs', 'monthly_dead_kms_lakhs', 'monthly_cancelled_kms_lakhs']}
+type=stacked
 title="Monthly Kilometers by Type (System Total, lakhs)"
 yAxisTitle="Kilometers (lakhs)"
 connectGroup="system-monthly"
@@ -169,7 +172,11 @@ connectGroup="system-monthly"
  title="Monthly System-Wide Average KMs Per Bus Per Day"
  yAxisTitle="KMs/Bus/Day"
  connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 ---
 
@@ -224,7 +231,11 @@ ORDER BY date_parsed
     yAxisTitle="₹ per KM"
     yFmt='#,##0.00'
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 ### Passenger Metrics
 
@@ -275,7 +286,11 @@ ORDER BY date_parsed
     yAxisTitle="Load Factor %"
     yFmt='#0.0'
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 ### Pass Holder Share
 
@@ -302,7 +317,11 @@ ORDER BY date_parsed
     yAxisTitle="Pass Holder Share (%)"
     yFmt='#0.0'
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 The growing share of non-ticket riders (passes, contracts, mobile app) indicates a maturing commuter base. This is a double-edged trend: regular commuters are good for ridership stability, but passes are typically discounted relative to tickets, compressing per-passenger revenue.
 
@@ -368,6 +387,7 @@ ORDER BY date_parsed
     data={fuel_kms}
     x=date_parsed
     y={['cng_kms_millions', 'diesel_kms_millions', 'ebus_kms_millions']}
+    type=stacked
     title="Monthly Kilometers by Fuel Type (Millions)"
     yAxisTitle="Kilometers (Millions)"
     connectGroup="system-monthly"
@@ -447,7 +467,11 @@ ORDER BY date_parsed
     title="Monthly Average Diesel Efficiency (KMPL)"
     yAxisTitle="Kilometers per Litre"
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 <LineChart
     data={fuel_efficiency}
@@ -456,7 +480,11 @@ ORDER BY date_parsed
     title="Monthly Average CNG Efficiency (KMPG)"
     yAxisTitle="Kilometers per Kg"
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 ---
 
@@ -523,7 +551,11 @@ ORDER BY date_parsed
     title="Monthly System-Wide Breakdowns"
     yAxisTitle="Number of Breakdowns"
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 ### Tyre Life
 
@@ -553,6 +585,129 @@ ORDER BY date_parsed
     yAxisTitle="Km per Tyre"
     yFmt='#,##0'
     connectGroup="system-monthly"
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
+
+### Engine Oil Efficiency
+
+Engine oil km/litre (km operated per litre of engine oil consumed) is a proxy for engine health: degrading engines consume oil faster and return lower km/litre. Higher values indicate better-maintained engines. Coverage is partial (~53% of depot-months have non-null values); months with no oil consumption recorded are excluded from the aggregate.
+
+```sql engine_oil
+SELECT
+    Date,
+    STRPTIME(Date, '%b %Y') as date_parsed,
+    -- Weighted average km/litre weighted by litres consumed (where available)
+    ROUND(
+        SUM(
+            CASE WHEN TRY_CAST("Kilometer per Litre of Engine oil (Total)" AS DOUBLE) > 0
+                      AND TRY_CAST("Engine Oil Cons.in Litres per day (Total)" AS DOUBLE) > 0
+                 THEN TRY_CAST("Kilometer per Litre of Engine oil (Total)" AS DOUBLE) *
+                      TRY_CAST("Engine Oil Cons.in Litres per day (Total)" AS DOUBLE)
+                 ELSE NULL END
+        ) / NULLIF(
+            SUM(
+                CASE WHEN TRY_CAST("Kilometer per Litre of Engine oil (Total)" AS DOUBLE) > 0
+                          AND TRY_CAST("Engine Oil Cons.in Litres per day (Total)" AS DOUBLE) > 0
+                     THEN TRY_CAST("Engine Oil Cons.in Litres per day (Total)" AS DOUBLE)
+                     ELSE NULL END
+            ), 0)
+    , 0) as avg_kmpl_oil,
+    SUM(TRY_CAST("Engine Oil Cons.in Litres per day (Total)" AS DOUBLE)) as total_litres_per_day
+FROM extracted
+WHERE Date IS NOT NULL
+GROUP BY Date, date_parsed
+HAVING avg_kmpl_oil IS NOT NULL
+ORDER BY date_parsed
+```
+
+<LineChart
+    data={engine_oil}
+    x=date_parsed
+    y=avg_kmpl_oil
+    title="Monthly Average Engine Oil Efficiency (Km/Litre)"
+    subtitle="Weighted by litres consumed per depot. Months without oil records excluded."
+    yAxisTitle="Km per Litre of Oil"
+    yFmt='#,##0'
+    connectGroup="system-monthly"
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
+
+---
+
+## Staff & Workforce
+
+PMPML's prescribed staffing norm is 9.0 bus staff per vehicle (1.0 admin + 6.5 traffic + 1.5 workshop). The actual system-wide ratio runs around 4.0 — roughly half the norm. The traffic sub-ratio (drivers, conductors, supervisors) bears the most weight: actual ~3.1 vs norm 6.5. The admin sub-ratio is the most severely understaffed: actual ~0.17 vs norm 1.0. Workshop staffing sits at ~0.6 vs norm 1.5.
+
+This persistent half-norm staffing constrains both operations (fewer drivers = fewer schedules can run) and safety oversight (fewer supervisors per bus). It is partly structural — PMPML relies on PPP and hired fleet whose drivers are not counted in PMPML's own staff ratios — and partly reflects recruitment/retention constraints within a corporation that cannot freely set salaries.
+
+```sql staff_ratio
+SELECT
+    Date,
+    STRPTIME(Date, '%b %Y') as date_parsed,
+    -- Fleet-weighted average actual staff per bus
+    ROUND(
+        SUM(
+            TRY_CAST("Total Bus Staff ratio – Norm Total (A+B+C) - 9.00" AS DOUBLE) *
+            TRY_CAST("Total Vehicles Per Day" AS DOUBLE)
+        ) / NULLIF(
+            SUM(CASE WHEN TRY_CAST("Total Bus Staff ratio – Norm Total (A+B+C) - 9.00" AS DOUBLE) > 0
+                     THEN TRY_CAST("Total Vehicles Per Day" AS DOUBLE) END)
+        , 0)
+    , 2) as actual_ratio
+FROM extracted
+WHERE Date IS NOT NULL
+  AND TRY_CAST("Total Bus Staff ratio – Norm Total (A+B+C) - 9.00" AS DOUBLE) > 0
+GROUP BY Date, date_parsed
+ORDER BY date_parsed
+```
+
+<LineChart
+    data={staff_ratio}
+    x=date_parsed
+    y=actual_ratio
+    title="System-Wide Staff per Bus (Actual vs. Norm 9.0)"
+    subtitle="Norm of 9.0 bus staff per vehicle (admin + traffic + workshop)"
+    yAxisTitle="Staff per Bus"
+    yFmt='#0.00'
+    connectGroup="system-monthly"
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
+
+```sql depot_staff_ratio
+SELECT
+    Depot,
+    ROUND(
+        SUM(TRY_CAST("Total Bus Staff ratio – Norm Total (A+B+C) - 9.00" AS DOUBLE) *
+            TRY_CAST("Total Vehicles Per Day" AS DOUBLE)) /
+        NULLIF(SUM(CASE WHEN TRY_CAST("Total Bus Staff ratio – Norm Total (A+B+C) - 9.00" AS DOUBLE) > 0
+                        THEN TRY_CAST("Total Vehicles Per Day" AS DOUBLE) END), 0)
+    , 2) as avg_actual_ratio,
+    COUNT(*) as months_data
+FROM extracted
+WHERE Date IS NOT NULL AND Depot IS NOT NULL
+  AND TRY_CAST("Total Bus Staff ratio – Norm Total (A+B+C) - 9.00" AS DOUBLE) > 0
+GROUP BY Depot
+ORDER BY avg_actual_ratio DESC
+```
+
+<BarChart
+    data={depot_staff_ratio}
+    x=Depot
+    y=avg_actual_ratio
+    title="Average Staff per Bus by Depot (All-Time)"
+    subtitle="Norm = 9.0 — all depots operate well below prescribed levels"
+    yAxisTitle="Staff per Bus"
+    yFmt='#0.00'
+    swapXY=true
 />
 
 ---
@@ -657,7 +812,11 @@ ORDER BY date_parsed
     title="Monthly System Revenue (₹ Crores)"
     yAxisTitle="Revenue (₹Cr)"
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 <LineChart
     data={monthly_summary}
@@ -667,7 +826,11 @@ ORDER BY date_parsed
     yAxisTitle="Daily Passengers (Avg)"
     yFmt='#,##0'
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 <DataTable
     data={monthly_summary}
@@ -728,8 +891,9 @@ FROM extracted
 WHERE Date IS NOT NULL
 ```
 
-<DataTable 
+<DataTable
     data={kpi_summary}
+    rows=all
 >
     <Column id=avg_depot_fleet_size title="Avg Depot Fleet" fmt='#,##0'/>
     <Column id=fleet_utilization title="Fleet Util %" fmt='#0.0'/>
@@ -783,7 +947,11 @@ ORDER BY date_parsed
     title="Sanctioned vs. Operated Schedules Per Day"
     yAxisTitle="Number of Schedules"
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
+</LineChart>
 
 <LineChart
     data={schedule_ops}
@@ -793,7 +961,11 @@ ORDER BY date_parsed
     yAxisTitle="Adherence %"
     yFmt='#0.0'
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 ---
 
@@ -819,7 +991,11 @@ ORDER BY date_parsed
     title="Monthly Passenger Complaints and Default Cases"
     yAxisTitle="Count"
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
+</LineChart>
 
 <LineChart
     data={complaint_trends}
@@ -829,7 +1005,11 @@ ORDER BY date_parsed
     yAxisTitle="Amount (₹)"
     yFmt='#,##0'
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' color=warning/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' color=warning/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' color=warning/>
+</LineChart>
 
 ---
 
@@ -854,7 +1034,11 @@ ORDER BY date_parsed
     title="Total Number of Routes Over Time"
     yAxisTitle="Number of Routes"
     connectGroup="system-monthly"
-/>
+>
+    <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
+</LineChart>
 
 <DataTable
     data={route_coverage}
@@ -871,6 +1055,7 @@ ORDER BY date_parsed
 
 - **[PCMT Before PMPML](/PCMC/Public%20Transport/PCMT_before_PMPML)** — Historical context: how PCMT operated before the 2007 merger
 - **[Depot Performance](/PCMC/Public%20Transport/Depot_Performance)** — Narrative analysis of depot-level efficiency, schedule adherence, and revenue patterns
+- **[Financial Performance](/PCMC/Public%20Transport/Financial_Performance)** — Annual P&L 2017-18 to 2024-25: the growing structural deficit and municipal reimbursements
 
 ---
 

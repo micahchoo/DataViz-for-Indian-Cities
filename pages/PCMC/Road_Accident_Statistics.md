@@ -71,6 +71,7 @@ Between 2007 and 2023, there is a 16-year gap in this accident data. The Compreh
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </BarChart>
 
 <LineChart
@@ -84,6 +85,7 @@ Between 2007 and 2023, there is a 16-year gap in this accident data. The Compreh
 >
     <ReferenceArea xMin='2024-01-01' xMax='2024-03-31' label="Data gap" color=warning labelPosition=bottom/>
     <ReferenceArea xMin='2024-11-01' xMax='2025-03-31' label="Data gap" color=warning labelPosition=bottom/>
+    <ReferenceArea xMin='2025-07-01' xMax='2025-09-30' label="Data gap" color=warning labelPosition=bottom/>
 </LineChart>
 
 ### Own Fleet vs. Hired Vehicles
@@ -214,6 +216,10 @@ SELECT
 FROM extracted
 WHERE Date IS NOT NULL
 ```
+
+---
+
+*Data covers 2000–2007 (CMP road accidents) and January 2023–December 2025 (PMPML depot safety records, with gaps in Jan–Mar 2024, Nov 2024–Mar 2025, Jul–Sep 2025). Source: [PMPML Chief Statistician monthly reports](https://pmpml.org/statistics); accident data 2000-2007 from the 2008 Comprehensive Mobility Plan.*
 
 ## See Also
 

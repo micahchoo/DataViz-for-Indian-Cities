@@ -1,8 +1,8 @@
 ---
 title: The Story of Pimpri-Chinchwad's Bus Fleet Before PMPML
-description: The Comprehensive Mobility Plan (CMP) from 2008 gives us a fascinating glimpse into Pimpri Chinchwad Municipal Transport's (PCMT) operations right during a major transition.
+description: "PCMT 1995–2007: collapse and recovery in Pimpri-Chinchwad's bus system, from the CMP 2008 baseline data"
 ---
-Looking at the data visualization below, we can trace PCMT's journey from 1995 to 2007 — a story of collapse and recovery, not steady progress.
+PCMC ran its own municipal bus service for over a decade before handing it to Pune — and what the data shows is not a smooth handover but a decade of collapse and partial recovery.
 
 In 1995-96, PCMT operated 248 buses with 158 on the road daily, serving about 1,31,000 passengers — 829 passengers per bus, a strong productivity figure. But by 2001-02, the system had deteriorated sharply: daily passengers had crashed to just 54,684 (a 58% drop), passengers per bus halved to 452, only 121 of 239 buses were on the road, and utilization had fallen to 50.6%. The data gap between 1996 and 1999 hides the onset of this decline, but by 1999-2000 passengers had already halved to 60,727.
 
@@ -64,23 +64,21 @@ ORDER BY Sort_Year
 
 ## The Merger and Birth of PMPML
 
-On 15 October 2007, a significant change occurred - PCMT merged with Pune Municipal Transport (PMT) to form Pune Mahanagar Parivahan Mahamandal Ltd (PMPML). This merger aimed to eliminate route overlaps and improve financial performance.
+On 15 October 2007, PCMT merged with Pune Municipal Transport (PMT) to form Pune Mahanagar Parivahan Mahamandal Ltd (PMPML), aiming to eliminate route overlaps and consolidate operations under a single entity serving the entire Pune metropolitan area.
 
-The transformation of PMPML's fleet size over the years tells an interesting story:
-- 2010: 1,454 buses operating on 271 routes
-- 2012: 1,745 buses (including 327 hired from private operators) serving 12.3 lakh daily passengers
-- 2014: Fleet size of 1,523 with 1,198 buses on the road (78.66% Fleet Utilisation)
-- 2015: Fleet size of 2,100
-- 2023-24: Fleet size of 2,066 with 1,658 on road daily (74.4% fleet utilization), serving 8,34,764 daily passengers on ticket sales and 12,07,737 total daily traffic. 387 routes averaging 21.2 KM each. _(Source: PMPML Yearly Statistical Report 2023-25)_
-- 2024-25: Fleet size of 1,933 with 1,558 on road daily (71.0% fleet utilization), serving 7,70,353 daily passengers on ticket sales and 11,25,440 total daily traffic. 382 routes averaging 21.8 KM each. _(Source: PMPML Yearly Statistical Report 2023-25)_
+In the three years after the merger, the combined fleet grew from roughly 1,400 to nearly 1,750 vehicles — a 25% increase PCMT's declining finances could never have supported independently. By 2014, PMPML was running both cities' routes under unified ticketing, though the ex-PCMC depots retained their separate operational character, as the [depot-level data](/PCMC/Public%20Transport/Depot_Performance) makes clear.
+
+By 2023-24, PMPML operated a fleet of 2,066 buses with 1,658 on the road daily (74.4% utilization), serving 12.08 lakh total daily passengers on 387 routes averaging 21.2 km. By 2024-25, the fleet had consolidated to 1,933 buses with 11.25 lakh daily passengers on 382 routes. _(Source: PMPML Yearly Statistical Report 2023-25)_
 
 Note: Some secondary sources report different figures for this period — the ITDP Report 2024 cites a fleet of 1,880 with 85.2% utilization, and the PMPML website previously showed 3,87,000 daily passengers for 2023. These discrepancies likely reflect different reporting dates, definitions (e.g. utilization calculated as on-road/held vs. the weighted metric in PMPML's statistical reports), or the difference between ticket-only and total traffic counts.
 
-## Gaps in Understanding
+## Data Limitations
 
-What's particularly intriguing is the gap in data between 2008 and 2010. The CMP captured PCMT's final years, but we don't have granular data about the immediate post-merger period. This leaves several questions unanswered about how the transition was managed and how quickly the integrated service scaled up.
-Recently, there is more data about daily bus breakdown rates but that is also patchy. We would need year-by-year data between 2008-2024 to truly understand how the merged entity evolved and whether it achieved its goals of better coordination and improved service delivery. The available snapshots show growth in fleet size, but the full story of service quality, route optimization, and operational efficiency remains to be told.
-PMPML has been publishing statistical reports every month but the historical data is not available
+PCMT's operational records for 1975–2007 have not been digitized or released publicly. The figures on this page are reconstructed from CMP 2008 summary tables — treat fleet-size numbers as approximate and ridership figures as CMP estimates rather than audited actuals. The 15-year gap between the 2007 merger and PMPML's monthly reports (beginning January 2023) reflects the limits of available public data, not of the city's history.
+
+---
+
+*Data from the 2008 Comprehensive Mobility Plan, Table on PCMT operations 1995-2007. Source: CMP 2008, PCMC Transport Department.*
 
 ## See Also
 

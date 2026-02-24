@@ -1,9 +1,9 @@
 ---
-title: Vehicle Registration Insights - Fleet Composition Trends
-description: Exploring how the composition of registered vehicles in Pimpri-Chinchwad shifted between 2000 and 2018 through growth rates, share changes, and emerging categories
+title: "How the Fleet Changed: Shifting Vehicle Mix, 2000–2018"
+description: "How registered vehicle composition in Pimpri-Chinchwad shifted 2000–2018: growth rates, share changes, and emerging categories"
 ---
 
-This analysis explores how the composition of the registered vehicle fleet changed from 2000 to 2018. Note: these are cumulative active registrations (the total stock on the RTO's books), not annual new sales. Growth rates here reflect net fleet expansion, and "share" means share of the total registered fleet — not share of new purchases in a given year.
+The [previous page](/PCMC/Registered_Vehicles_2000_2018) showed total vehicle growth by category. This page asks a different question: is Pimpri-Chinchwad's fleet becoming more or less diverse? The answer matters because a fleet dominated by two-wheelers signals different infrastructure needs than one balanced between two-wheelers and cars. Note: these are cumulative active registrations (the total stock on the RTO's books), not annual new sales — growth rates here reflect net fleet expansion, not single-year purchase patterns.
 
 ```sql view_options
 SELECT 'Growth Rates' as value
@@ -476,6 +476,7 @@ WHERE display_year >= '${inputs.share_year_filter.value || '2000'}'
      title="Market Share Distribution"
      subtitle="100% stacked view of category composition"
      xAxisTitle="Year"
+     yAxisTitle="Share (%)"
      fillOpacity=0.9
      chartAreaHeight=450
      yGridLines=true
@@ -732,6 +733,7 @@ WHERE display_year >= '${inputs.twowheeler_year_filter.value || '2000'}'
      title="Two-Wheeler Market Composition"
      subtitle="100% stacked view"
      xAxisTitle="Year"
+     yAxisTitle="Share (%)"
      fillOpacity=0.9
      chartAreaHeight=450
      yGridLines=true
@@ -822,6 +824,7 @@ WHERE display_year >= '${inputs.ratio_year_filter.value || '2000'}'
      title="Personal vs Commercial Vehicle Split"
      subtitle="Distribution of vehicle registrations by usage type"
      xAxisTitle="Year"
+     yAxisTitle="Share (%)"
      fillOpacity=0.9
      chartAreaHeight=450
      yGridLines=true
@@ -948,9 +951,16 @@ WHERE display_year >= '${inputs.decline_year_filter.value || '2000'}'
 
 {/if}
 
-## About This Data
+## See Also
 
-This page uses the same cumulative registration data as [the overview page](/PCMC/Registered_Vehicles_2000_2018) but slices it differently — growth rates, fleet composition shares, and indexed comparisons reveal patterns that absolute stacked charts obscure. Use the dropdowns and filters above to compare specific categories and time periods.
+- **[Vehicle Registrations](/PCMC/Registered_Vehicles_2000_2018)** — Raw registration counts by category and year
+- **[Pune vs PCMC Vehicles](/PCMC/Pune_PCMC_Comparison)** — How PCMC's fleet size and composition compare to Pune city
+- **[Road Safety](/PCMC/Road_Accident_Statistics)** — Accident trends as the fleet grew 2000-2007
+- **[PCMC Overview](/PCMC)** — City context and data coverage
+
+---
+
+*Data: cumulative vehicle registrations with the Pimpri-Chinchwad RTO, 2000-2001 to 2017-2018. Source: Maharashtra state RTO registration data, as compiled in the CMP baseline.*
 
 ## Sources
 - [Open City Urban Data Portal](https://data.opencity.in/dataset/maharashtra-vehicles-registration-data/resource/maharashtra-vehicles-registration-data---2001-2018)

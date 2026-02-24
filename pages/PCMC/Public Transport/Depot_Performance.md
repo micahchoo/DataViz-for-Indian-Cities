@@ -4,13 +4,13 @@ description: Performance patterns across 17 depots — efficiency, fleet composi
 sidebar: show
 ---
 
-## PMPML Depot Performance
-
 Performance patterns across 17 depots — efficiency, fleet composition, ridership, and revenue. Each depot serves a different catchment area with different route profiles, fleet mixes, and rider demographics. These structural differences produce very different outcomes on the same metrics.
+
+This page compares depots against each other. For month-by-month data on a single depot, see [Depotwise Reports](/PCMC/Public%20Transport/Depotwise).
 
 ---
 
-## 1. Depot Map
+## The Depot Map
 
 {#if depot_metrics_for_map.length > 0}
 
@@ -49,7 +49,7 @@ _The map will render once latitude/longitude values are added to `sources/CMP/de
 
 ---
 
-## 2. The Efficiency Spectrum
+## The Efficiency Spectrum
 
 How depots compare on the metrics that matter most: fleet utilization, earning per kilometer, passengers per bus, and fleet size. Small depots sometimes outperform large ones on efficiency — and vice versa.
 
@@ -81,7 +81,7 @@ Utilization measures the share of a depot's total fleet that is actually running
 
 ---
 
-## 3. Schedule Adherence
+## Schedule Adherence
 
 Each depot has a sanctioned schedule — the number of daily trips it is expected to operate. The gap between sanctioned and actually operated schedules reveals chronic under-delivery. A depot consistently falling short is either short on serviceable buses, short on crew, or both.
 
@@ -119,7 +119,7 @@ Depots at the bottom of the adherence ranking are chronically missing their sche
 
 ---
 
-## 4. Own vs. PPP vs. Hired Fleet
+## Fleet Ownership
 
 PMPML's fleet is not a single entity. Depots operate a mix of PMPML-owned buses, PPP (Public-Private Partnership) vehicles from private operators, and hired buses. The ownership split has direct implications for cost control, service quality, and operational flexibility.
 
@@ -151,7 +151,7 @@ Some depots run almost entirely on hired or PPP vehicles. This creates a depende
 
 ---
 
-## 5. Revenue vs. Ridership
+## Revenue and Ridership
 
 Not all passengers are equal in revenue terms. A depot with high ridership but low per-passenger revenue is carrying mostly pass holders (student passes, monthly commuter passes, senior citizen concessions). A depot with lower ridership but higher fare per head is serving more ticket-buying, longer-distance passengers.
 
@@ -201,7 +201,7 @@ The revenue-per-passenger gap across depots tells us about route mix and rider c
 
 ---
 
-## 6. Monthly Trends by Depot
+## Trends Over Time
 
 Select a depot to see its utilization and ridership trends over time. Seasonal patterns — monsoon dips, festive-season peaks, post-holiday recovery — vary by depot depending on their route mix and catchment area.
 
@@ -294,6 +294,18 @@ Monthly patterns typically show: monsoon months (June-September) see dips in rid
 
 ---
 
+## Reading the System
+
+The six measures above divide PMPML's depots into three structural clusters — not by geography, but by the type of fleet they run.
+
+**Owned-fleet inner-ring depots** (Shewalwadi, N.T.Wadi, Nigadi, Bhosari) consistently lead on utilization (75–79%) and schedule adherence. Bhosari (industrial northeast, MIDC area) tops both earning per km (₹37.65) and passengers per bus (778/day) — long worker-commute routes with high ridership generate strong fare revenue. Shewalwadi leads schedule adherence at 84%, running the most of its sanctioned trips on any given day.
+
+**Hired-fleet peripheral depots** (Balewadi, Baner, Wagholi, Maan, Charholi) appear broken on utilization and adherence — but this is a metric artifact. The utilization formula counts only PMPML-owned and PPP buses in the numerator; a depot running 100% hired vehicles records 0% utilization despite putting 46 buses on the road daily. The same logic applies to schedule adherence. Strip out the metric noise and these depots perform: Balewadi (northwest highway corridor) leads passengers per bus at 845/day; Maan (far-east outskirts) earns the highest revenue per bus in the system at ₹8,897/day on long peripheral routes. The real risk is contractual, not operational — a single dispute can pull every bus overnight.
+
+**Dense-urban terminals** (Swargate, Pimpri, Kothrud) anchor the bottom of revenue metrics. Swargate (old Pune city terminus) earns ₹4,566 per bus per day — less than half Maan's figure — and ₹8.54 per passenger, the lowest fare realization in the system. These depots are not failing; they serve short-hop, monthly-pass-heavy routes in areas where riders have no private-vehicle alternative. The low numbers measure social function, not operational failure.
+
+---
+
 ## Data Queries
 
 *SQL queries powering the visualizations above. Evidence.dev processes these at build time — position in the file does not affect rendering.*
@@ -304,7 +316,7 @@ SELECT
     d.latitude,
     d.longitude,
     ROUND(AVG(TRY_CAST(e."Total Vehicles Per Day" AS DOUBLE)), 0) as avg_fleet_size,
-    ROUND(AVG(TRY_CAST(e."% of Fleet Utilization(PMPML+PPP)" AS DOUBLE)), 1) as avg_utilization_pct,
+    ROUND(AVG(LEAST(TRY_CAST(e."% of Fleet Utilization(PMPML+PPP)" AS DOUBLE), 100.0)), 1) as avg_utilization_pct,
     ROUND(SUM(TRY_CAST(e."All Traffic Earning (₹)" AS DOUBLE)) / 10000000, 2) as total_revenue_crores,
     ROUND(AVG(TRY_CAST(e."Avg Passenger per Bus per day on Traffic" AS DOUBLE)), 0) as avg_passengers_per_bus
 FROM depot_locations d
@@ -449,6 +461,8 @@ ORDER BY date_parsed
 
 - **[Depotwise Reports](/PCMC/Public%20Transport/Depotwise)** — Monthly fleet dashboard: vehicle deployment, kilometers, revenue, fuel efficiency, safety, and depot comparisons
 - **[PCMT Before PMPML](/PCMC/Public%20Transport/PCMT_before_PMPML)** — Historical context: how PCMT operated before the 2007 merger
+- **[BRT Service Statistics](/PCMC/Public%20Transport/BRT)** — Dedicated BRT corridor operations: fleet, ridership, and efficiency
+- **[E-Bus Service Statistics](/PCMC/Public%20Transport/EBus)** — Electric bus operations and KMPU energy efficiency tracking
 
 ---
 

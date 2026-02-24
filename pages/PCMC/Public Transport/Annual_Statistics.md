@@ -46,6 +46,7 @@ The headline story across both years: ridership and revenue both fell roughly 7%
     y=pct_change
     title="Year-on-Year % Change: FY 2023-24 → FY 2024-25"
     subtitle="Negative = declined, positive = improved. Accidents and breakdowns declining is good."
+    yAxisTitle="% Change"
     swapXY=true
     yFmt='#0.0"%"'
     colorPalette={['#cd4063']}
@@ -65,6 +66,7 @@ The PMPML own fleet held steady (~944 → 951 vehicles), while the hired fleet c
     type=grouped
     title="Fleet Composition: FY 2023-24 vs FY 2024-25"
     subtitle="PMPML Own, PPP, and Hired vehicles — held and on road"
+    yAxisTitle="Vehicles"
     swapXY=true
     yFmt='#,##0'
     connectGroup="annual"
@@ -77,6 +79,7 @@ The PMPML own fleet held steady (~944 → 951 vehicles), while the hired fleet c
     type=grouped
     title="Fleet Off-Road Breakdown (%)"
     subtitle="Share of fleet in spare vs workshop maintenance"
+    yAxisTitle="% of Fleet"
     yFmt='#0.0"%"'
     connectGroup="annual"
 />
@@ -94,6 +97,7 @@ Total passengers per day fell from 12.08 lakh to 11.25 lakh (−6.8%). The pass-
     y={['FY2023_24', 'FY2024_25']}
     type=grouped
     title="Ridership Metrics"
+    yAxisTitle="Passengers"
     swapXY=true
     yFmt='#,##0'
     connectGroup="annual"
@@ -104,6 +108,7 @@ Total passengers per day fell from 12.08 lakh to 11.25 lakh (−6.8%). The pass-
     y={['FY2023_24_cr', 'FY2024_25_cr']}
     type=grouped
     title="Revenue (₹ Crores)"
+    yAxisTitle="₹ Crores"
     swapXY=true
     yFmt='"₹"#,##0.0'
     connectGroup="annual"
@@ -131,6 +136,7 @@ The e-bus KMPU jump from 1.10 to 1.36 is notable — as the e-bus fleet expanded
     type=grouped
     title="Fuel Efficiency by Propulsion Type"
     subtitle="KMPL diesel, KMPG CNG (Own+PPP), KMPU E-Bus (Own)"
+    yAxisTitle="km per fuel unit"
     yFmt='#0.0'
     connectGroup="annual"
 />
@@ -142,6 +148,7 @@ The e-bus KMPU jump from 1.10 to 1.36 is notable — as the e-bus fleet expanded
     type=grouped
     title="Fuel Consumption Per Bus Per Day"
     subtitle="Litres (diesel), Kg (CNG), Units (E-Bus) — intensity of use"
+    yAxisTitle="Fuel per Bus per Day"
     yFmt='#0.0'
     connectGroup="annual"
 />
@@ -159,6 +166,7 @@ Accidents fell dramatically in 2024-25: PMPML own fleet down from 41 to 20, hire
     type=grouped
     title="Accidents by Severity: PMPML Own Fleet"
     subtitle="Fatal, Major, Minor, Insignificant"
+    yAxisTitle="Accidents"
     swapXY=true
     yFmt='#,##0'
     connectGroup="annual"
@@ -170,6 +178,7 @@ Accidents fell dramatically in 2024-25: PMPML own fleet down from 41 to 20, hire
     y={['FY2023_24', 'FY2024_25']}
     type=grouped
     title="Accidents by Severity: Hired Fleet (Olectra E-Bus + CNG Hire)"
+    yAxisTitle="Accidents"
     swapXY=true
     yFmt='#,##0'
     connectGroup="annual"
@@ -188,10 +197,29 @@ Breakdowns fell from 7,705 to 6,145 (−20%) and the breakdown rate improved fro
     type=grouped
     title="Workshop Performance"
     subtitle="Breakdowns and tyre life"
+    yAxisTitle="Count"
     swapXY=true
     yFmt='#,##0'
     connectGroup="annual"
 />
+
+---
+
+## Staff and Workforce
+
+Bus staff per vehicle is measured against a prescribed norm of 9.0 (1.0 admin + 6.5 traffic + 1.5 workshop). PMPML's actual ratio of 4.56 is roughly half that norm — and declining. Salary per employee per day grew marginally (₹1,733 → ₹1,752, +1.1%), but total employee benefit costs rose 24% (per Financial_Performance data), driven by headcount growth, not wage growth per person.
+
+Passenger complaints more than doubled (14,842 → 26,359, +77%). This spike warrants caution: PMPML expanded its digital complaint channels during 2024-25, so the jump may reflect better reporting capture rather than a sudden service decline. Read alongside the 7% ridership decline: fewer riders, but proportionally far more complaints per rider than before.
+
+<DataTable
+    data={staff_metrics}
+    rows=all
+>
+    <Column id=Particular title="Metric"/>
+    <Column id=FY2023_24 title="FY 2023-24" fmt='#,##0.##'/>
+    <Column id=FY2024_25 title="FY 2024-25" fmt='#,##0.##'/>
+    <Column id=pct_change title="Change %" fmt='+#0.0;-#0.0'/>
+</DataTable>
 
 ---
 
@@ -219,7 +247,7 @@ Breakdowns fell from 7,705 to 6,145 (−20%) and the breakdown rate improved fro
 
 ---
 
-*Source: PMPML Statistical Report for FY 2023-2024 & 2024-25, STAT Department, dated 18/06/2025. Note: FY 2024-25 Balance Sheet (cost per KM, row 14) not yet finalised at time of report.*
+*Source: [PMPML Statistical Report for FY 2023-2024 & 2024-25](https://pmpml.org/statistics), STAT Department, dated 18/06/2025. Note: FY 2024-25 Balance Sheet (cost per KM, row 14) not yet finalised at time of report.*
 
 ---
 
@@ -416,5 +444,17 @@ WHERE Particular IN (
     'Total Passenger Complaints',
     'Total Default Cases DEO'
 )
+ORDER BY Particular
+```
+
+```sql staff_metrics
+SELECT
+    Particular,
+    TRY_CAST(FY2023_24 AS DOUBLE) as FY2023_24,
+    TRY_CAST(FY2024_25 AS DOUBLE) as FY2024_25,
+    ROUND(100.0 * (TRY_CAST(FY2024_25 AS DOUBLE) - TRY_CAST(FY2023_24 AS DOUBLE)) /
+        NULLIF(TRY_CAST(FY2023_24 AS DOUBLE), 0), 1) as pct_change
+FROM Annual_Statistics_2023_2025
+WHERE Category = 'Staff'
 ORDER BY Particular
 ```
