@@ -13,6 +13,8 @@ Evidence.dev static site for urban mobility data visualization focused on Pimpri
 - `npm run sources` — Validate data source connections (run after adding any new CSV)
 - `npm run lint` — Report errors and warnings
 - `npm run lint:strict` — Exit 1 on warnings (equivalent to `python3 lint.py --strict`)
+- `npm run typecheck` — mypy type-check on lint.py (`--check-untyped-defs`)
+- `npm run check` — Full quality gate: lint:strict + typecheck (run before committing)
 
 ## Architecture
 

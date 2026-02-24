@@ -7,6 +7,8 @@
     "dev": "evidence dev --open /",
     "lint": "python3 lint.py",
     "lint:strict": "python3 lint.py --strict",
+    "typecheck": "python3 -m mypy lint.py --ignore-missing-imports --check-untyped-defs",
+    "check": "npm run lint:strict && npm run typecheck",
     "test": "evidence build",
     "sources": "evidence sources",
     "sources:strict": "evidence sources --strict",
